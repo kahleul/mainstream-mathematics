@@ -1,18 +1,27 @@
-# Arquivos auxiliares do LaTeX (Lixo)
+# Ignorar arquivos auxiliares do LaTeX
 *.aux
-*.fdb_latexmk
-*.fls
-*.log
-*.out
-*.synctex.gz
-*.toc
 *.bbl
 *.blg
-*.xdv
+*.idx
+*.ind
+*.lof
+*.lot
+*.out
+*.toc
+*.acn
+*.acr
+*.alg
+*.glg
+*.glo
+*.gls
+*.ist
+*.fls
+*.log
+*.fdb_latexmk
+*.synctex.gz
 
-# Garante que pastas vazias não sejam ignoradas (opcional, mas bom pra organização)
-!partes/
+# Ignorar arquivos de sistema do VS Code
+.vscode/
 
-# O Git costuma ignorar PDFs compilados por padrão em alguns templates,
-# mas aqui garantimos que ele NÃO ignore o seu PDF final, pois você pediu para subir.
-!*.pdf
+# IMPORTANTE: Normalmente ignoramos PDF, mas você pediu para manter.
+# Portanto, NÃO coloque *.pdf aqui.
