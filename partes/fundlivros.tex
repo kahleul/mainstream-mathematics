@@ -1,0 +1,81 @@
+%!TEX root = main.tex
+
+\chapter{Shoenfield}
+
+\begin{defi}[Linguagens de Primeira Ordem]
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Um \textit{alfabeto} é uma coleção infinita de símbolos distintos, nenhum deles propriamente contido em outro, separados nas seguintes categorias:
+                \begin{enumerate}[label=\roman*.]
+                    \item Conectivos: $\lor$, $\neg$.
+                    \item Quantificador existencial: $\exists$.
+                    \item Variáveis, uma para cada inteiro positivo $n$: $u_1, u_2, \ldots, u_n, \ldots$.
+                    \item Símbolos de função: para cada natural $n$, uma coleção de símbolos de função $n$-ários. Os símbolos de função $0$-ários são chamados de \textit{constantes}.
+                    \item Símbolos de predicado: para cada natural $n$, uma coleção de símbolos de predicado $n$-ários.
+                    \item Símbolo de predicado binário de igualdade $=$.
+                \end{enumerate}
+            Símbolos de função e de predicado distintos de $=$ são chamados de símbolos \textit{não lógicos}. Os demais são chamados de símbolos lógicos. Usamos $\mathbf{x}$, $\mathbf{y}$, $\mathbf{z}$ e $\mathbf{w}$ para denotar variáveis sintáticas que variam entre variáveis, $\mathbf{f}$ e $\mathbf{g}$ para denotar variáveis sintáticas que variam entre símbolos de funções, $\mathbf{p}$ e $\mathbf{q}$ para denotar variáveis sintáticas que variam entre símbolos de predicado e $\mathbf{e}$ para denotar uma variável sintática que varia entre constantes.
+            \item Os \textit{termos} de um alfabeto são definidos do seguinte modo:
+                \begin{enumerate}[label=\roman*.]
+                    \item toda variável é um termo;
+                    \item se $\mathbf{u}_1, \ldots, \mathbf{u}_n$ são termos e $\mathbf{f}$ é $n$-ário, então $\mathbf{f} \mathbf{u}_1 \ldots \mathbf{u}_n$ é um termo.
+                \end{enumerate}
+            Termos são apenas expressões que denotam indivíduos. Note que constantes também são termos. Usamos $\mathbf{a}$, $\mathbf{b}$, $\mathbf{c}$ e $\mathbf{d}$ para denotar variáveis sintáticas que variam entre termos.
+            \item As \textit{fórmulas} de um alfabeto são definidas do seguinte modo:
+                \begin{enumerate}[label=\roman*.]
+                    \item se $\mathbf{u}_1, \ldots, \mathbf{u}_n$ são termos e $\mathbf{p}$ é $n$-ário, então $\mathbf{p} \mathbf{u}_1 \ldots \mathbf{u}_n$ é uma fórmula;
+                    \item se $\mathbf{u}$ é uma fórmula, então $\neg \mathbf{u}$ é uma fórmula;
+                    \item se $\mathbf{u}$ e $\mathbf{v}$ são fórmulas, então $\lor \mathbf{u} \mathbf{v}$ é uma fórmula;
+                    \item se $\mathbf{u}$ é uma fórmula, então $\exists \mathbf{x} \mathbf{u}$ é uma fórmula.
+                \end{enumerate}
+            As fórmulas do tipo i. são chamadas de \textit{atômicas}.
+            \item Uma \textit{linguagem de primeira ordem} $\mathcal{L}$ consiste num alfabeto como descrito no item (a) e termos ($\mathcal{L}$-termos) e fórmulas ($\mathcal{L}$-fórmulas) como descritos nos itens (b) e (c). Uma linguagem de primeira ordem fica então completamente determinada pelos seus símbolos não lógicos.
+        \end{enumerate}
+\end{defi}
+
+\begin{defi}
+    Um \textit{designador} é uma expressão que é um termo ou uma fórmula.
+\end{defi}
+
+\begin{prop}
+    Todo designador tem a forma $\mathbf{u} \mathbf{v}_1 \ldots \mathbf{v}_n$, onde $\mathbf{u}$ é um símbolo do alfabeto, $\mathbf{v}_1, \ldots, \mathbf{v}_n$ são designadores e $n$ é um natural determinado por $\mathbf{u}$.  
+\end{prop}
+
+\begin{proof}
+    Se $\mathbf{d}$ é um designador, então $\mathbf{d}$ 
+\end{proof}
+
+\begin{defi}
+    Diremos que duas expressões são \textit{compatíveis} se uma delas puder ser obtida adicionando alguma expressão (possivelmente a expressão vazia) ao final da outra.
+\end{defi}
+
+\begin{prop}
+    Sejam $\mathbf{u}$, $\mathbf{u}'$, $\mathbf{v}$ e $\mathbf{v}'$ expressões.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se \( \mathbf{u} \mathbf{v} \) e \( \mathbf{u}'\mathbf{v}' \) são compatíveis, então \( \mathbf{u} \) e \( \mathbf{u}' \) são compatíveis; 
+            \item se \( \mathbf{u} \mathbf{v} \) e \( \mathbf{u} \mathbf{v}' \) são compatíveis, então \( \mathbf{v} \) e \( \mathbf{v}' \) são compatíveis.
+        \end{enumerate}
+\end{prop}
+
+\begin{proof}
+\end{proof}
+
+\begin{lem}
+    Seja $n$ um natural. Se $\mathbf{u}_1, \ldots, \mathbf{u}_n$ e $\mathbf{u}'_1, \ldots, \mathbf{u}'_n$ são designadores, e $\mathbf{u}_1 \ldots \mathbf{u}_n$ e $\mathbf{u}'_1 \ldots \mathbf{u}'_n$ são compatíveis, então $\mathbf{u}'_i$ é $\mathbf{u}_i$, para $i = 1, \ldots, n$.
+\end{lem}
+
+\begin{proof}
+    Faremos indução no comprimento de \( \mathbf{u}_1 \ldots \mathbf{u}_n \). Escreva \( \mathbf{u}_1 \) como \( \mathbf{v} \mathbf{v}_1 \ldots \mathbf{v}_k \), onde \( \mathbf{v} \) é um símbolo de índice \( k \) e \( \mathbf{v}_1, \ldots, \mathbf{v}_k \) são designadores. Como \( \mathbf{u}_1' \) começa com \( \mathbf{v} \), ele tem a forma \( \mathbf{v} \mathbf{v}_1' \ldots \mathbf{v}_k' \), onde \( \mathbf{v}_1', \ldots, \mathbf{v}_k' \) são designadores. Com isso, temos que \( \mathbf{u}_1 \) é compatível com \( \mathbf{u}_1' \), donde \( \mathbf{v}_1 \ldots \mathbf{v}_k \) é compatível com \( \mathbf{v}_1' \ldots \mathbf{v}_k' \). Daí, pela hipótese de indução, \( \mathbf{v}_i \) é \(\mathbf{v}_i' \) para \( i = 1, \ldots, k \), donde \( \mathbf{u}_1 \) é \( \mathbf{u}_1' \). Com isso, temos que \( \mathbf{u}_2 \ldots \mathbf{u}_n \) é compatível com \( \mathbf{u}_2' \ldots \mathbf{u}_n' \); assim, pela hipótese de indução, \( \mathbf{u}_i \) é \( \mathbf{u}_i' \) para \( i = 2, \ldots, n \).
+\end{proof}
+
+\begin{teo}[Formação]
+    
+\end{teo}
+
+\begin{lem}
+    
+\end{lem}
+
+\begin{teo}[Ocorrência]
+    
+\end{teo}

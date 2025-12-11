@@ -1,0 +1,18 @@
+# Arquivos auxiliares do LaTeX (Lixo)
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.bbl
+*.blg
+*.xdv
+
+# Garante que pastas vazias não sejam ignoradas (opcional, mas bom pra organização)
+!partes/
+
+# O Git costuma ignorar PDFs compilados por padrão em alguns templates,
+# mas aqui garantimos que ele NÃO ignore o seu PDF final, pois você pediu para subir.
+!*.pdf

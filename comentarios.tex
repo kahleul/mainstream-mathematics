@@ -1,0 +1,711 @@
+%!TEX root = main.tex
+
+\begin{defi} % definições de corpo e corpo ordenado
+    Diremos que um conjunto $\F \neq \emptyset$ é um \textit{corpo} se em $\F$ estiverem definidas duas operações, $+ :\F \times \F \to \F$ e $\cdot: \F \times \F \to \F$, chamadas respectivamente de adição e multiplicação, para as quais valem, para todos $x,y,z \in \F$,
+        \begin{itemize}
+            \item A1: a associatividade da adição, isto é, $x + (y + z) = (x + y) + z$; 
+            \item A2: a comutatividade da adição, isto é, $x + y = y + x$; 
+            \item A3: a existência de um único $0 \in \F$, denominado \textit{elemento neutro} da adição, para o qual $x + 0 = x = 0+x$;
+            \item A4: a existência um único $-x \in \F$, denominado \textit{oposto aditivo} de $x$, para o qual $x + (-x) = 0$;
+            \item M1: a associatividade da multiplicação, isto é, $x \cdot (y \cdot z) = (x \cdot y) \cdot z$; 
+            \item M2: a comutatividade da multiplicação, isto é, $x \cdot y = y \cdot x$; 
+            \item M3: a existência de um único $0 \neq 1 \in \F$, denominado \textit{elemento neutro} da multiplicação, para o qual $x \cdot 1 = x = 1 \cdot x$;
+            \item M4: a existência de um único $x^{-1} \in \F$, denominado \textit{inverso multiplicativo} de $x \neq 0$, para o qual $x \cdot x^{-1} = 1$;
+            \item D: a distributividade da multiplicação em relação à adição, isto é, $x \cdot ( y + z) = x \cdot y + x \cdot z$. 
+        \end{itemize}
+\end{defi}
+
+Diremos que um conjunto $\F$ é um \textit{corpo} se em $\F$ existirem (pelo menos) dois elementos distintos, $0 \in \F$ e $1 \in \F$, e estiverem definidas duas operações, $+ :\F \times \F \to \F$ e $\cdot: \F \times \F \to \F$, para as quais valem
+        \begin{itemize}
+            \item A1: $\forall x \forall y \forall z (x,y,z \in \F \rightarrow x + (y + z) = (x + y) + z)$;
+            \item A2: $\forall x \forall y (x,y \in \F \rightarrow x + y = y + x)$;
+            \item A3: $\forall x(x \in \F \rightarrow x + 0 = x )$;
+            \item A4: $\forall x (x \in \F \rightarrow \exists y ( y \in \F \land x + y = 0))$;
+            \item M1: $\forall x \forall y \forall z (x,y,z \in \F \rightarrow x \cdot (y \cdot z) = (x \cdot y) \cdot z)$;
+            \item M2: $\forall x \forall y (x,y \in \F \rightarrow x \cdot y = y \cdot x)$;
+            \item M3: $\forall x(x \in \F \rightarrow x \cdot 1 = x )$;
+            \item M4: $\forall x (x \in \F \land x \neq 0 \rightarrow \exists  y ( y \in \F \land x \cdot y = 1))$;
+            \item D: $\forall x \forall y \forall z (x,y,z \in \F \rightarrow x \cdot (y + z) = (x \cdot y) + (x \cdot z))$.
+    \end{itemize}
+
+As operações $+$ e $\cdot$ se chamam \textit{adição} e \textit{multiplicação}. As propriedades descritas em A1--A2 e M1--M2 se chamam, respectivamente, \textit{associatividade} e \textit{comutatividade}. Em A3 e M3, existência de um \textit{elemento neutro}. Em A4 e M4, existência de \textit{opostos} e \textit{inversos}, respectivamente. Em D, \textit{distributividade}.
+
+
+
+\begin{obs} \textbf{(a)} Pela proposição \eqref{prop:1}, o conjunto $\N$ dos números naturais é o menor dos conjuntos indutivos, no seguinte sentido: para qualquer conjunto indutivo $X$, temos $\N \subset X$. Em particular, isso significa que se $X \subset \N$ e se $X$ é indutivo, então $X=\N$. \end{obs}
+
+Simbolicamente,
+        \[
+            \forall A (A \subseteq \N \land \forall n (n \in \N \land \forall m (m \in \N \land m<n \to m \in A) \to n \in A ) \to A = \N )
+        \]
+
+Se $\mathcal{A} = \emptyset$, então $\bigcap \mathcal{A} = \bigcap \emptyset = \R$; como $\R$ é indutivo; o resultado segue. Suponha então que $\mathcal{A} \neq \emptyset$.
+
+\begin{defi}
+    Sejam $(\F,+,\cdot)$ um corpo e $x,y \in \F$ quaisquer.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Diremos que $x$ é \textit{negativo} se $-x$ for positivo.
+            \item Escrevemos 
+                \begin{enumerate}[label=\roman*.]
+                    \item $x<y$ quando $y>x$;
+                    \item $x \leq y$ quando $y \geq x$.
+                \end{enumerate}
+        \end{enumerate}
+    Notação $\R_{>0}$ etc.
+\end{defi}
+
+\begin{defi}
+    \textbf{(a)} Sejam $a,b \in \R$ tais que $a<b$. O conjunto $\{ x \in \R : a < x < b \}$ será denotado por $]a,b[$.
+
+    \textbf{(b)} Um conjunto $I \subseteq \R$ é um \textit{intervalo} se para quaisquer $x,y \in I$, com $x< y$, tivermos $a \in I$ sempre que $a \in \left] x,y\right[$.
+
+    \textbf{(c)} Um intervalo $I \subseteq \R$ é \textit{aberto} se para todo $x \in \R$ existir $\delta \in \R_{>0}$ tal que $\left]x-\delta,x+\delta \right[ \subset I$.
+
+    \textbf{(d)} Um intervalo $I \subseteq \R$ é \textit{fechado} se $\R \setminus I$ é aberto.
+\end{defi}
+
+\begin{obs}
+    Nos itens (b) e (c) acima, escrevemos ``um intervalo $I \subseteq \R$'', mas ainda não sabemos se pode ser $I = \R$ pois ainda não sabemos se $\R$ é um intervalo. Isso é resolvido pela seguinte
+\end{obs}
+
+\begin{prop}
+    \textbf{(a)} O conjunto 
+\end{prop}
+
+
+    , para todo $x \in A$, se $| x-a | < \delta$, então $| f(x) - f(a)| < \epsilon$. Em símbolos,
+        \[
+            \forall \epsilon > 0, \exists \delta > 0 : \forall x \in A, |x-a| < \delta \Rightarrow |f(x) - f(a)| < \epsilon,
+        \]
+    ou ainda, 
+        \[
+            \forall \epsilon > 0, \exists \delta > 0 : x \in \left] a - \delta, a + \delta \right[ \cap D_f \Rightarrow f(x) \in \left]f(a) - \epsilon, f(a) + \epsilon \right[.
+        \]
+
+\textbf{(a)} $a \in \R$ é um ponto de acumulação de $A \subseteq \R$ se, e somente se, $0$ é ponto de acumulação de $B := \{h \in \R_{\neq 0} : a+h \in A \}$
+
+\textbf{(a)} ($\Rightarrow$) Para que $0$ seja um ponto de acumulação de $B$, para todo $\delta \in \R_{>0}$ deve existir $h \in B$ tal que $0 < |h-0| < \delta$. Bem, como $a$ é um ponto de acumulação de $A$, para todo $\delta \in \R_{>0}$ existe $x \in A$ tal que $0 < |x-a| < \delta$. Pois tomando $h := x-a$, temos que $x = a+h$, e como $x \in A$, temos $a+h \in A$, de modo que $h \in B$. Daí, segue a conclusão.
+
+    ($\Leftarrow$) Para que $a$ seja um ponto de acumulação de $A$, para todo $\delta \in \R_{>0}$ deve existir $x \in A$ tal que $0 < |x-a| < \delta$. Bem, como $0$ é ponto de acumulação de $B$, para todo $\delta \in \R_{>0}$ existe $h \in B$ tal que $0<|h|<\delta$. Pois tome $x:=a+h$: como $h \in B$, temos que $a+h \in A$, de modo que $x \in A$. Daí, segue a conclusão. \itemproof
+
+\begin{defi}
+    \textbf{(a)} (Vizinhança) Uma \textit{vizinhança} de $a \in \R$ é qualquer intervalo aberto $I \subseteq \R$ com $a \in I$. Dado $\delta \in \R_{>0}$, dizemos que a vizinhança $V_{\delta}(a) := (a-\delta, a+\delta)$ \textit{centrada} em $a$ e possui \textit{raio} $\delta$.
+    
+    Se a vizinhança for da forma $(a-\delta, a+\delta)$ para algum $\delta \in \R_{>0}$, diremos que a vizinhança é \textit{centrada} em $a$ e possui \textit{raio} $\delta$ e denotaremos por $V_{\delta}(a)$.
+    
+    \textbf{(b)} (Ponto de acumulação) Diremos que $a \in \R$ é um \textit{ponto de acumulação} de $A \subseteq \R$ se $V_{\delta}(a) \cap A \setminus \{ a\} \neq \emptyset$ para todo $\delta \in \R_{>0}$.
+\end{defi}
+
+\begin{prop}
+    $a \in \R$ é um ponto de acumulação de $A \subseteq \R$ se, e somente se, para todo $\delta \in \R_{>0}$ existir $x \in A$ tal que $0 < |x-a| < \epsilon$.
+\end{prop}
+
+\begin{proof}
+\end{proof}
+
+\begin{defi}
+    (Limite) Diremos que a função $f : A \subseteq \R \to \R$ tem \textit{limite} $L \in \R$ no ponto de acumulação $a \in \R$ de $A$, indicando isso por $ \ds \lim_{x \to a} f(x) = L$, se para todo $\epsilon \in \R_{>0}$ existir $\delta = \delta(\epsilon, a) \in \R_{>0}$ tal que
+        \[
+            0 < | x-a | < \delta \Rightarrow | f(x) - L| < \epsilon
+        \]
+    para todo $x \in A$.
+    Seja $f$ uma função e $p$ um número real. Dizemos que $f$ tem \textit{limite} $L$ quando $x$ \textit{tende} a $p$, indicando   $ \ds \lim_{x \to p} f(x) = L$, se para todo $\epsilon > 0$ existir $\delta > 0$ tal que, para todo $x \in D_f$, se $| x-p | < \delta$ e $x \neq p$, então $|f(x) - L| < \epsilon$. Em símbolos,
+        \[
+             \forall \epsilon > 0, \exists \delta > 0 : \forall x \in D_f \backslash \{p\}, |x-p| < \delta \Rightarrow |f(x) - L| < \epsilon,
+        \]
+    ou ainda, para simplificar a notação,
+        \[
+            \lim_{x \to p} f(x) = L \Leftrightarrow \forall \epsilon > 0, \exists \delta > 0: 0 < |x-p| < \delta \Rightarrow |f(x) - L| < \epsilon.
+        \] 
+\end{defi}
+
+\begin{defi}
+    \textbf{(a)} Diremos que $a \in \R$ é um \textit{ponto de acumulação à direita} de $A \subseteq \R$ se $a$ é ponto de acumulação de $A \cap \left] a, +\infty \right[$.
+
+    \textbf{(b)} Diremos que $a \in \R$ é um \textit{ponto de acumulação à esquerda} de $A \subseteq \R$ se $a$ é ponto de acumulação de $A \cap \left] -\infty,a \right[$.
+\end{defi}
+
+\begin{defi}
+    Diremos que $a \in \R$ é um \textit{ponto de acumulação à direita} de $A \subseteq \R$ se $(a, a+ \epsilon) \cap A \neq \emptyset$ para todo $\epsilon \in \R_{>0}$.
+\end{defi}
+
+\begin{defi}
+    Diremos que a função $f : A \subseteq \R \to \R$ tem \textit{limite lateral à direita} $L \in \R$ no ponto de acumulação à direita $a \in \R$ de $A$, indicando isso por $ \ds \lim_{x \to a^+} f(x) = L$, se para todo $\epsilon \in \R_{>0}$ existir $\delta = \delta(\epsilon, a) \in \R_{>0}$ tal que
+        \[
+            0 < x-a < \delta \Rightarrow | f(x) - L| < \epsilon
+        \]
+    para todo $x \in A$.
+\end{defi}
+
+\begin{defi} (Limites Laterais) 
+    Sejam $f$ uma função e $p$ um número real.
+
+    \textbf{(a)} Suponha que existe um número real $b > p$ tal que $\left]p, b\right[ \subset D_f$. Diremos que $f$ tem limite $L$ quando $x$ tende a $p$, \textit{pela direita}, indicando
+        $ \ds
+            \lim_{x \to p^+} f(x) = L,
+        $
+    se para todo $\epsilon > 0$ existir $\delta > 0$, com $p + \delta < b$, tal que se $p < x < p + \delta$, então $|f(x) - L| < \epsilon$. O número real $L$, quando existe, denomina-se \textit{limite lateral à direita} de $f$ em $p$.
+
+    \textbf{(b)} Suponha que existe um número real $a < p$ tal que $\left]a, p\right[ \subset D_f$. Diremos que $f$ tem limite $L$ quando $x$ tende a $p$, \textit{pela esquerda}, indicando
+        $ \ds
+            \lim_{x \to p^-} f(x) = L,
+        $
+    se para todo $\epsilon > 0$ existir $\delta > 0$, com $a < p - \delta $, tal que se $p - \delta < x < p$, então $|f(x)-L| < \epsilon$. O número real $L$, quando existe, denomina-se \textit{limite lateral à esquerda} de $f$ em $p$.
+\end{defi}
+
+\begin{defi} 
+    (Limites no Infinito) Seja $f$ uma função.
+    
+    \textbf{(a)} Suponha que existe um número real $a$ tal que $\left]a, +\infty \right[ \subset D_f$. Diremos que $f$ tem limite $L$ quando $x$ \textit{cresce indefinidamente}, ou \textit{tende ao infinito positivo}, indicando
+        $ \ds
+            \lim_{x \to + \infty} f(x) = L,
+        $
+    se para todo $\epsilon > 0$ existir um $\delta > 0$, com $\delta > a$, tal que $x > \delta \Rightarrow |f(x) - L| < \epsilon$. O número real $L$, quando existe, denomina-se \textit{limite no infinito positivo} de $f$.
+    
+    \textbf{(b)} Suponha que existe um número real $a$ tal que $\left] -\infty, a\right[ \subset D_f$. Diremos que $f$ tem limite $L$ quando $x$ \textit{decresce indefinidamente}, ou \textit{tende ao infinito negativo}, indicando
+        $ \ds
+            \lim_{x \to - \infty} f(x) = L,
+        $
+    se para todo $\epsilon > 0$ existir um $\delta > 0$, com $-\delta < a$, tal que $x < -\delta \Rightarrow |f(x) - L| < \epsilon$. O número real $L$, quando existe, denomina-se \textit{limite no infinito negativo} de $f$.
+\end{defi} 
+
+
+
+    Bagunça
+
+\begin{lem}
+    \textbf{(a)} Se $f : D_f \subseteq \R \to \R$ é uma função derivável no intervalo aberto $I := \left]a,b \right[ \subseteq D_g$, com $g'(x)>0$ para todo $x \in I$ e $\ds \lim_{x \to a^+} g(x) = 0$, então $g(x)>0$ para todo $x \in I$.
+
+    \textbf{(b)} Sejam $f : D_f \subseteq \R \to \R$ e $g:D_g \subseteq \R \to \R$ funções deriváveis no intervalo aberto $I := \left]a,b \right[ \subseteq D_f \cap D_g$, com $g'(x)>0$ para todo $x \in I$ e $\ds \lim_{x \to a^+} f(x) = \lim_{x \to a^+} g(x) = 0$. Se existem constantes $\alpha, \beta \in \R$ tais que
+        \[
+            \alpha < \dfrac{f'(x)}{g'(x)} < \beta
+        \]
+    para todo $x \in I$, então 
+        $ \ds
+            \alpha < \dfrac{f(x)}{g(x)} < \beta
+        $
+    para todo $x \in I$.
+
+    \textbf{(c)} Sejam $f : D_f \subseteq \R \to \R$ e $g:D_g \subseteq \R \to \R$ funções deriváveis no intervalo aberto $I := \left]m,p \right[ \subseteq D_f \cap D_g$, com $g'(x)>0$ para todo $x \in I$ e $\ds \lim_{x \to p^-} f(x) = \lim_{x \to p^-} g(x) = + \infty$. Se existem constantes $\alpha, \beta \in \R$ tais que
+        \[
+            \alpha < \dfrac{f'(x)}{g'(x)} < \beta
+        \]
+    para todo $x \in I$, então existem constantes $M,N,s \in \R$, com $s \in \left]m,p\right[$, tais que
+        \[
+            \dfrac{M}{g(x)} + \alpha < \dfrac{f(x)}{g(x)} < \beta + \dfrac{N}{g(x)}
+        \]
+    para todo $x \in \left]s,p\right[$.
+\end{lem}
+
+\begin{proof}
+    \textbf{(a)}
+
+    \textbf{(b)} Defina $h_1, h_2 : I \to \R$ por
+        \[
+            h_1(x) := \alpha g(x) - f(x) \quad \text{e} \quad h_2(x) := \beta g(x) - f(x),
+        \]
+    e note que
+        \[
+            h_1'(x) = \alpha g'(x) - f'(x) \quad \text{e} \quad h_2'(x) = \beta g'(x) - f(x)'.
+        \]
+    Como 
+        $  \ds
+            \alpha < \dfrac{f'(x)}{g'(x)} < \beta \Rightarrow \alpha g'(x) < f'(x) < \beta g'(x),
+        $
+    temos que 
+        \[
+            \alpha g'(x) - f'(x) < 0 \quad \text{e} \quad \beta g'(x) - f'(x) > 0.
+        \]
+    donde $h_1'(x) < 0$ e $h_2'(x)>0$ para todo $x \in I$. Com isso, $h_1$ é estritamente decrescente em $I$ e $h_2$ é estritamente crescente em $I$, e sendo  $\ds \lim_{x \to a^{+}} h_1(x) = \lim_{x \to a^{+}} h_2(x) = 0$, pelo item (a) só pode ser $h_1 (x) < 0$ e $h_2(x) > 0$, para todo $x \in I$. Agora, aplicando o item (a) à função $g$, concluímos que $g(x) > 0$ para todo $x \in I$, donde, por fim, vem
+        $ \ds
+            \alpha < \dfrac{f(x)}{g(x)} < \beta.
+        $
+
+    Definindo $h_1, h_2 : I \to \R$ por
+        \[
+            h_1(x) := \alpha g(x) - f(x) \quad \text{e} \quad h_2(x) := \beta g(x) - f(x),
+        \]
+    temos então que $h_1'(x) < 0$ e $h_2'(x)>0$ para todo $x \in I$, donde concluímos que $h_1$ é estritamente decrescente em $I$ e $h_2$ é estritamente crescente em $I$. Sendo $\ds \lim_{x \to a^{+}} h_1(x) = \lim_{x \to a^{+}} h_2(x) = 0$, pelo item (a) só pode ser $h_1 (x) < 0$ e $h_2(x) > 0$ para todo $x \in I$. Aplicando o item (a) à função $g$, concluímos que $g(x) > 0$ para todo $x \in I$. Com isso, vem
+        $ \ds
+            \alpha < \dfrac{f(x)}{g(x)} < \beta.
+        $
+\end{proof}
+
+\textbf{(a)} Sejam $f:D_f \subseteq \R \to \R$ e $g: D_g \subseteq \R \to \R$ funções para as quais existe $r>0$ tal que $f$ e $g$ são deriváveis e $g(x) \neq 0$ em $\left] p,p+r \right[ \subseteq D_f \cap D_g$  sempre que $0 < |x-p| < r$. Nesse caso, se $\lim_{x \to p^+} \dfrac{f'(x)}{g'(x)} \in \R$, então $\ds \lim_{x \to p^+} \dfrac{f(x)}{g(x)} = \lim_{x \to p^+} \dfrac{f'(x)}{g'(x)}$.
+    
+     Sejam $f:D_f \subseteq \R \to \R$ e $g: D_g \subseteq \R \to \R$ funções tais que, dado $p \in D_f \cap D_g$, $f$ e $g$ são deriváveis e $g(x) \neq 0$ em
+        \begin{itemize}
+            \item $\left]p, + \infty \right[ \subseteq D_f \cap D_g$  sempre que $p<x$ (caso $x \to + \infty$); ou 
+            \item $\left] -\infty, p \right[ \subseteq D_f \cap D_g$ sempre que $x<p$ (caso $x \to - \infty$).
+        \end{itemize}
+    Se $\ds \lim_{x \to \pm \infty} \dfrac{f'(x)}{g'(x)} \in \R \cup \{\pm \infty\}$, então $\ds \lim_{x \to \pm \infty} \dfrac{f(x)}{g(x)} = \lim_{x \to \pm \infty} \dfrac{f'(x)}{g'(x)}$.
+    
+    
+    
+    (1ª Regra de L'Hospital) Sejam $f:D_f \subseteq \R \to \R$ e $g: D_g \subseteq \R \to \R$ funções tais que, dado $p \in D_f \cap D_g$, existe $r>0$ tal que $f$ e $g$ são deriváveis e $g(x) \neq 0$ em 
+        \begin{itemize} 
+            \item $\left] p,p+r \right[ \subseteq D_f \cap D_g$ sempre que $p<x<p+r$ (caso $x \to p^+$); ou
+            \item $\left[p-r, p \right[ \subseteq D_f \cap D_g$ sempre que $p-r<x<p$ (caso $x \to p^-$); ou
+            \item $\left]p-r,p \right[ \cup \left] p,p+r \right[ \subseteq D_f \cap D_g$ sempre que $0 < |x-p| < r$; (caso $x \to p$).
+
+            
+            \item $\left]r, + \infty \right[ \subseteq D_f \cap D_g$  sempre que $r<x$ (caso $x \to + \infty$); ou 
+            \item $\left] -\infty, r \right[ \subseteq D_f \cap D_g$ sempre que $x<-r$ (caso $x \to - \infty$).
+        \end{itemize} 
+
+
+Seja $\mathcal{F}$ uma $\sigma$-álgebra em conjunto $\Omega$, $\Pb : \mathcal{F} \to \R$ uma probabilidade em $\Omega$ e $A, B, A_1, A_2, \ldots \in \mathcal{F}$. São válidas as seguintes afirmações.
+\begin{itemize}
+\item A1: $\forall u \forall v \forall w (u,v,w \in V \rightarrow u+(v+w)= (u+v)+w)$;
+            \item A2: $\forall u \forall v  (u,v \in V \rightarrow u+v= v+u)$;
+            \item A3: $\forall u (u \in V \rightarrow u+0_V = u)$;
+            \item A4: $\forall u (u \in V \rightarrow \exists v(v \in V \land u+v=0_V))$;
+            \item M1: $\forall u \forall \lambda_1 \forall \lambda_2 (u \in V \land \lambda_1, \lambda_2 \in \R \rightarrow \lambda_1 \cdot (\lambda_2 \cdot u) = (\lambda_1 \cdot \lambda_2) \cdot u)$;
+            \item M2: $\forall u \forall \lambda_1 \forall \lambda_2 (u \in V \land \lambda_1, \lambda_2 \in \R \rightarrow
+            (\lambda_1 + \lambda_2) \cdot u = \lambda_1 \cdot u + \lambda_2 \cdot u)$;
+            \item M3: $\forall u \forall v \forall \lambda_1 (u,v \in V \land \lambda_1 \in \R \rightarrow \lambda_1 \cdot (u + v) = \lambda_1 \cdot u + \lambda_1 \cdot v )$;
+            \item M4: $\forall u(u \in V \rightarrow 1 \cdot u = u)$.
+\end{itemize}
+
+E ainda, diremos que $V$ é um espaço vetorial se, e somente se, a tripla $(V, +, \cdot)$, bem definida, for um espaço vetorial.  Diremos que a tripla $(V, +, \cdot)$ é um \textit{espaço vetorial} sobre $\R$ se no conjunto $V \neq \emptyset$ estiverem definidas duas operações, $+:V \times V \to V$ e $\cdot: \R \times V \to V$, denominadas respectivamente de \textit{adição} e \textit{multiplicação por escalar}, para as quais valem. Diremos que um conjunto $V$ é um \textit{espaço vetorial} sobre $\R$ se em $V$ existir pelo menos um elemento, $0_V \in V$, e estiverem definidas duas operações, $+ : V \times V \to V$ e $\cdot : \R \times V \to V$, para as quais valem
+
+
+%\title{Lógica, Teoria dos Conjuntos e os \\ Fundamentos da Matemática \\  \large{Processo Número: 108178/2025-0}}
+%\author{Bolsista: Alexander Kahleul \\ Orientador: Prof. Dr. Gabriel Fernandes}
+%\date{Período:  01/04/2025 a 31/07/2025 }
+
+
+    Usaremos indução no comprimento de \( \mathbf{u}_1 \ldots \mathbf{u}_n \). Escreva \( \mathbf{u}_1 \) como \( \mathbf{v} \mathbf{v}_1 \ldots \mathbf{v}_k \), onde \( \mathbf{v} \) é um símbolo de índice \( k \) e \( \mathbf{v}_1, \ldots, \mathbf{v}_k \) são designadores. Como \( \mathbf{u}_1' \) começa com \( \mathbf{v} \), ele tem a forma \( \mathbf{v} \mathbf{v}_1' \ldots \mathbf{v}_k' \), onde \( \mathbf{v}_1', \ldots, \mathbf{v}_k' \) são designadores. Agora \( \mathbf{u}_1 \) é compatível com \( \mathbf{u}_1' \); logo, \( \mathbf{v}_1 \ldots \mathbf{v}_k \) é compatível com \( \mathbf{v}_1' \ldots \mathbf{v}_k' \). Pela hipótese de indução, \( \mathbf{v}_i = \mathbf{v}_i' \) para \( i = 1, \ldots, k \); portanto, \( \mathbf{u}_1 = \mathbf{u}_1' \). Disso segue que \( \mathbf{u}_2 \ldots \mathbf{u}_n \) é compatível com \( \mathbf{u}_2' \ldots \mathbf{u}_n' \); assim, pela hipótese de indução, \( \mathbf{u}_i = \mathbf{u}_i' \) para \( i = 2, \ldots, n \).
+
+    \textbf{(a)}
+        Adicionemos $-z$ a ambos os membros da igualdade $x + z = y + z$:
+            \begin{enumerate}
+                \item $\Rightarrow$: $(x + z) + (-z) = (y + z) + (-z)$;
+                \item A1: $x + \left[z + (-z) \right] = y + \left[z + (-z) \right]$;
+                \item A4: $x + 0 = y + 0$;
+                \item A3: $x = y$.
+            \end{enumerate}
+        Multipliquemos ambos os membros da igualdade $x \cdot z = y \cdot z$ por $z^{-1}$ (que existe, pois $z \neq 0$):
+
+    \textbf{(b)}
+        Pois tome
+            \begin{enumerate}[itemsep=0pt, topsep=0pt]
+                \item A3: $0 + 0 = 0$;
+                \item a: $(0 + 0) \cdot x = 0 \cdot x$;
+                \item M2: $x \cdot (0 + 0) = x \cdot 0$;
+                \item D: $x \cdot 0 + x \cdot 0 = x \cdot 0$;
+                \item a: $x \cdot 0 = 0$. $\blacksquare$
+            \end{enumerate}
+
+Uma função $T : V \to W$ é uma transformação linear se, e somente se $T(\lambda_1 v_1 + \lambda_2 v_2) = \lambda_1 T(v_1) + \lambda_2 T(v_2)$ para quaisquer $v_1, v_2 \in V$ e $\lambda_1, \lambda_2 \in \R$.
+
+\begin{obs}
+    O Teorema $\eqref{teo:bases2}$ garante que o conceito de dimensão está bem definido. Com esse conceito, o Teorema \eqref{teo:bases} pode ser escrito assim: se $V$ é um espaço vetorial de dimensão $n$, então qualquer subconjunto de $V$ com mais de $n$ elementos é L.D..
+\end{obs}
+
+
+\begin{defi}
+    Sejam $f : X \subseteq \R \to \R^n$ e $g : Y \subseteq \R \to \R^n$ funções vetoriais de variável real.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $f$ e $g$ são \textit{equivalentes} se $f(X) = g(Y)$.
+            \item Suponha que $f$ e $g$ são equivalentes. Uma \textit{mudança de parâmetro} entre $f$ e $g$ é uma função $u : Y \to X$ bijetora, derivável, com $u'(t) \neq 0$, tal que $g(t) = f(u(t))$.
+        \end{enumerate}
+\end{defi}
+
+
+a função $\varphi : \{ h \in \R_{\neq 0} : a+h \in A \setminus \{ a\} \} \to \R$ definida por $\varphi(h) := g(a+h)$ é tal que $\ds \lim_{h \to 0} \varphi(h) = L$, onde $g : A \setminus \{a\} \to \R$ é a função definida por $g(x) := \dfrac{f(x) - f(a)}{x-a}$.
+
+Um resultado lá em topologia da reta garante que podemos considerar a questão da existência desses limites, já que $a$ e $0$ são pontos de acumulação dos domínios das respectivas funções.
+
+\begin{defi}
+    Seja $G$ um conjunto não vazio e $* : G \times G \to G$ uma operação.
+    
+    \textbf{(a)} Dizemos que o par $(G, *)$ é um \textit{grupo} se $*$ cumpre as seguintes propriedades:
+        \begin{itemize}
+            \item \textit{associatividade}:
+                $
+                    x * (y * z) = (x * y) * z 
+                $
+            para quaisquer $x, y, z \in G$;
+            \item \textit{elemento neutro}: existe um $e \in G$, chamado de \textit{elemento neutro} de $*$, tal que
+                $
+                    x * e = x = e * x
+                $
+            para todo $x \in G$;
+            \item \textit{invertibilidade}: para todo $x \in G$, existe um $y \in G$, chamado de \textit{inverso} de $x$, tal que
+                $
+                    x * y = e = y * x.
+                $
+        \end{itemize}
+    \textbf{(b)} Dizemos que o grupo $(G,*)$ é \textit{comutativo}, ou \textit{abeliano}, se a operação $*$ cumpre a seguinte propriedade:
+        \begin{itemize}
+            \item \textit{comutatividade}: $x * y = y * x$ para quaisquer $x,y \in G$.
+        \end{itemize}
+    Diremos que o par $(X, *)$ é um \textit{monoide} se no conjunto $X \neq \emptyset$ estiver definida uma operação $*:X \times X \to X$ para a qual vale, para quaisquer $a, b, c \in X$,
+        \begin{itemize}
+            \item A1: a associatividade de $*$, isto é, $a + (b + c) = (a + b) + c$;
+            \item A3: a existência de um \textit{elemento neutro} da operação $*$, tal que $a + 0 = a$;
+        \end{itemize}
+\end{defi}
+
+    Diremos que um conjunto $G$ é um \textit{grupo} se em $G$ estiver definida uma operação $* : G \times G \to G$ e existir $e \in G$ para os quais valem
+        \begin{itemize}
+            \item G1: $\forall x \forall y \forall z (x,y,z \in G \rightarrow x * (y * z) = (x * y) * z )$;
+            \item G3: $\forall x (x \in G \rightarrow x*e=x=e*x)$
+            \item G4: $\forall x(x \in G \rightarrow \exists y (y \in G \land x * y = e = y * x))$.
+        \end{itemize}
+
+\begin{defi} Seja $(A, +, \cdot, \leq)$ um anel ordenado e $S \subset A$.
+    
+    \textbf{(a)} Diremos que $S$ é 
+        \begin{itemize}
+            \item \textit{limitado inferiormente} se existir $a \in A$ tal que $a \leq x$ para todo $x \in S$;
+            \item \textit{limitado superiormente} se existir $a \in A$ tal que $x \leq a$ para todo $x \in S$.
+        \end{itemize}
+    O conjunto vazio é considerado limitado inferiormente e superiormente.
+
+    \textbf{(b)} Diremos que $S$ tem um
+        \begin{itemize}
+            \item \textit{menor elemento} se existir $b \in S$ tal que $b \leq x$ para todo $x \in S$; 
+            \item \textit{maior elemento} se existir $b \in S$ tal que $x \leq b$ para todo $x \in S$.
+        \end{itemize}
+    Indicamos o\footnote{ O leitor atento terá percebido que, a princípio, o artigo correto seria \textit{um}, pois nada foi estabelecido a respeito da unicidade do menor (maior) elemento; no entanto, esse é o caso: (prove:) se existe um menor (maior) elemento, ele é único.} menor elemento de $S$, quando existe, por $\min S$; analogamente, indicamos o maior elemento de $S$, quando existe, por $\max S$.
+\end{defi}
+
+\begin{obs}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Observe que O1--O3 é uma relação de ordem, enquanto O1--O4 é uma relação de ordem total. Com isso, um anel é ordenado se nele existe uma relação de ordem total para a qual vale, adicionalmente, OA e OM.
+            \item Analogamente, um domínio é ordenado se nele existe uma relação de ordem total para a qual vale, adicionalmente, OA e OM.
+            \item Indica-se $a<b$ se $a \leq b$ e $a \neq b$. Análogos sentidos têm $>$ e $\geq$.
+        \end{enumerate}
+\end{obs}
+
+se a equação $\lambda u = 0_V$ só for válida para $\lambda = 0$. Como $0_V \notin S$, temos $u \neq 0_V$; daí $\lambda = 0$ por \eqref{prop:basicas}.
+
+$\mathcal{B}$ gera $V$ e se os vetores de $\mathcal{B}$ forem linearmente independentes.
+
+\begin{proof}
+    Façamos a prova por indução em $|S|$. Se $|S| = 0$, nada há de ser provado. Suponha que o resultado vale para qualquer $S \subsetneq V$ L.I. com $|S| = m \geq 1$. Agora, sejam $S := \{ u_1, \ldots, u_m, u_{m+1}\}$ e $\tilde{S} := S \setminus \{u_{m+1} \}$. Pela hipótese de indução, $|\tilde{S}| = m \leq |T|$ e existe $\tilde{T} \subseteq T$ tal que $|\tilde{T}| = |T| - |\tilde{S}|$ e $[\tilde{T} \cup \tilde{S}] = V$.
+
+    Sejam $S = \{u_1, \ldots, u_m \}$ e $T = \{v_1, \ldots, v_n\}$. Faremos indução em $|S| = m$.
+
+    Sendo $m = 0$, blablabla.
+
+    Agora, suponha que o resultado vale para qualquer
+\end{proof}
+
+
+\begin{teo} \label{teo:bases}
+    Sejam $V$ um espaço vetorial finitamente gerado, $\mathcal{B}$ uma base de $V$ e $W \subseteq V$ finito. Se $W$ é $L.I.$, então $|W| \leq |\mathcal{B}|$. 
+    
+    Seja $\mathcal{B} := \{v_1, v_2, \ldots, v_n\}$ uma base de um espaço vetorial finitamente gerado $V$. Se $W := \{w_1, w_2, \ldots, w_m \} \subset V$ é L.I., então $m \leq n$.
+\end{teo}
+
+\begin{proof}
+    Provaremos a contrapositiva: se $m>n$, então $W$ é L.D.. Para isso, provaremos que a equação $\beta_1 w_1 + \beta_2 w_2 + \cdots + \beta_m w_m = 0_V$ possui uma solução em que $\beta_1, \beta_2, \ldots, \beta_m \in \R$ não são todos nulos. Se $\mathcal{B}$ é uma base de $V$, então existem e são únicos os escalares $\alpha_{ij}$, com cada $i \in [n]$ e $j \in [m]$, tais que
+        $
+            w_j = \alpha_{1j} v_1 + \alpha_{2j} v_2 + \cdots + \alpha_{nj} v_n
+        $
+    para todo $w_j \in W$. Agora, substituindo cada $w_j$ na equação $\beta_1 w_1 + \beta_2 w_2 + \cdots + \beta_m w_m = 0_V$, vem
+        \[
+            \beta_1 \left( \sum_{i=1}^{n} \alpha_{i1} v_i  \right) + \beta_2 \left( \sum_{i=1}^{n} \alpha_{i2} v_i  \right) + \cdots + \beta_m \left( \sum_{i=1}^{n} \alpha_{im} v_i  \right) = 0_V,
+        \]
+    donde, colocando cada $v_i$ em evidência, temos
+        \[
+            v_1 \left( \sum_{j=1}^{m} \alpha_{1j}  \beta_j \right)  + v_2 \left( \sum_{j=1}^{m} \alpha_{2j}  \beta_j \right) + \cdots + v_n \left( \sum_{j=1}^{m} \alpha_{nj}  \beta_j \right) = 0.
+        \]
+    Como os vetores $v_1, v_2, \ldots, v_n$ são L.I. (pois formam uma base de $V$), devemos ter $\alpha_{i1} \beta_{1} + \alpha_{i2} \beta_2 + \cdots +  \alpha_{im} \beta_{m} = 0$ para cada $i \in [n]$. Isso nos dá um sistema linear
+        \[ 
+            \left\{
+                \begin{matrix}
+                    \alpha_{11} \beta_1 + \alpha_{12} \beta_2 + \cdots + \alpha_{1m} \beta_m = 0 \\
+                    \alpha_{21} \beta_1 + \alpha_{22} \beta_2 + \cdots + \alpha_{2m} \beta_m = 0 \\
+                    \vdots \\
+                    \alpha_{n1} \beta_1 + \alpha_{n2} \beta_2 + \cdots + \alpha_{nm} \beta_m = 0 
+                \end{matrix}
+            \right.
+        \]
+    homogêneo de $n$ equações e $m$ incógnitas. Como $m>n$, o número de incógnitas é maior que o número de equações; daí, pelo Teorema \eqref{teo:sislinhom}, esse sistema possui uma solução não trivial, isto é, uma solução em que $\beta_1, \beta_2, \ldots, \beta_m$ não são todos nulos. Com isso, $W$ é L.D..
+\end{proof}
+
+
+\begin{lem}[da troca de Steinitz] \label{teo:steinitz}
+    Sejam $V$ um espaço vetorial e $S,T \subseteq V$ finitos. Se $S$ é L.I. e $[T] = V$, então
+        \begin{enumerate}
+            \item $|S| \leq |T|$;
+            \item existe $\bar{T} \subseteq T$ tal que $|\bar{T}| = |T| - |S|$ e $[\bar{T} \cup S ] = V$.
+        \end{enumerate}
+\end{lem}
+
+
+
+    Pelo lema \eqref{alr.lem:fundamental},
+        \begin{itemize}
+            \item como $\mathcal{B}_1$ é L.I. e $[\mathcal{B}_1] = V$, só pode ser $|\mathcal{B}_1| \leq |\mathcal{B}_2|$ pois $\mathcal{B}_1$ é L.I.. De fato, se fosse $|\mathcal{B}_1| > |\mathcal{B}_2|$, pelo lema $\mathcal{B}_1$ seria L.D., o que contradiz a hipótese. Analogamente,
+            \item como $\mathcal{B}_2$ é L.I. e $[\mathcal{B}_1] = V$, temos que $|\mathcal{B}_2| \leq |\mathcal{B}_1|$.
+        \end{itemize}
+    Sendo $|\mathcal{B}_1| \leq |\mathcal{B}_2|$ e $|\mathcal{B}_2| \leq |\mathcal{B}_1|$, segue que $|\mathcal{B}_1| = |\mathcal{B}_2|$, conforme afirmado.
+\begin{comment}
+    Sejam $\mathcal{B}_1 = \{v_1, v_2, \ldots, v_n \}$ e $\mathcal{B}_2 = \{w_1, w_m, \ldots, w_m\}$ duas bases de $V$. Provemos que $m=n$. De fato,
+        \begin{itemize}
+            \item como $\mathcal{B}_1$ é uma base de $V$ e $\mathcal{B}_2$ é L.I., então pelo Teorema \eqref{teo:bases} temos que $m \leq n$;
+            \item como $\mathcal{B}_2$ é uma base de $V$ e $\mathcal{B}_1$ é L.I., então pelo Teorema \eqref{teo:bases} temos que $n \leq m$.
+        \end{itemize}
+    Como $m \leq n$ e $n \leq m$, temos $m=n$.
+\end{comment}
+
+Seja $\alpha : [a,b] \to \R^n$ um caminho.
+        \begin{enumerate}
+            \item Para uma partição
+                $
+                    P : a = t_0 < \cdots < t_k = b
+                $
+            de $[a,b]$, defina
+                \[
+                    L_{a}^{b}(\alpha, P) := \sum_{i=1}^{k} \| \alpha(t_i) - \alpha(t_{i-1}) \|.
+                \]
+            \item 
+        \end{enumerate}
+
+\label{eq:int} \tag{$\lozenge$}
+
+$\exists x(\forall y  (y \notin x) \land \forall z( \forall y ( y \notin z ) \rightarrow z=x ))$
+
+
+A \textit{derivada de $f$ com respeito a $y$} é definida como
+        \[
+            f_{y}'(a) := \lim_{h \to 0} \dfrac{f(a+hy)-f(a)}{h},
+        \]
+    desde que o limite exista.
+Ao conjunto $\{ \{ a \}, \{a,b \} \}$ (que existe pelo axioma do par) chamamos de \textit{par ordenado} de $a$ e $b$ e denotamos por $(a,b)$, isto é, $(a,b) := \{ \{ a \}, \{a,b \} \}$.
+
+
+\begin{proof}
+    Como $\{a \} \in (a,b) = (c,d)$, temos $\{a \} \in \{ \{ c \}, \{c,d \} \} $, isto é, $\{ a\} = \{ c \}$ ou $\{a \} = \{c,d  \}$. Analogamente, $\{ a,b \} = \{ c\}$ ou $\{ a,b \} = \{ c,d \}$.
+        \begin{itemize}
+            \item Se $\{a \} = \{c \}$ e $\{a,b \} = \{c,d \}$, então, pelos axiomas da extensão e do par, $a=c$, donde $b=d$.
+            \item Se $\{ a \} = \{c,d\}$, então $\{ a,b \} = \{ c \}$. Pelos axiomas da extensão e do par, $a=c$ e $b=c$. 
+        \end{itemize}
+    Com isso, vemos que $(a,b) = (c,d)$.
+\end{proof}
+
+Sejam $\leq_1$ e $\leq_2$ duas ordens parciais em $X_1$ e $X_2$, respectivamente. Diremos que $\leq_1$ e $\leq_2$ são \textit{isomorfas}, ou que os conjuntos ordenados $(X_1, \leq_1)$ e $(X_2, \leq_2)$ são ordem-\textit{isomorfos}, se existir uma função bijetora $f:X_1 \to X_2$ tal que $\forall x \forall y (x,y \in X_1 \rightarrow (x \leq_1 y \leftrightarrow f(x) \leq_2 f(y)))$. Nesse caso, dizemos que a função $f$ é um \textit{isomorfismo de ordens parciais}.
+
+\begin{defi}
+    Seja $f : [a,b] \to \R$ uma função limitada, $P$ uma partição de $[a,b]$ e $\xi$ uma marcação de $P$. Diremos que a soma de Riemann $\mathscr{S} (P_{\xi},f)$ tem limite $L \in \R$ quando $|P| \to 0$, indicando isso por
+        \[
+            \lim_{|P| \to 0} \mathscr{S} (P_{\xi},f) = L,
+        \]
+    se para todo $\epsilon \in \R_{>0}$ existir $\delta = \delta(\epsilon) \in \R_{>0}$ tal que
+        \[
+            |P| < \delta \Rightarrow  |\mathscr{S} (P_{\xi},f) - L| < \epsilon
+        \]
+    para toda partição $P$ de $[a,b]$ e toda marcação $\xi$ de $P$.
+\end{defi}
+
+
+
+\begin{defi}
+     Seja $f : [a,b] \to \R$ uma função limitada. Diremos que a soma de Riemann $\mathscr{S} (P_{\xi},f)$ relativa à partição $P$ de $[a,b]$ com a marcação $\xi$ tem limite $L \in \R$ quando $|P| \to 0$, indicando isso por
+        \[
+            \lim_{|P| \to 0} \mathscr{S} (P_{\xi},f) = L,
+        \]
+    se para todo $\epsilon \in \R_{>0}$ existir $\delta = \delta(\epsilon) \in \R_{>0}$ tal que
+        \[
+            |P| < \delta \Rightarrow |\mathscr{S} (P_{\xi},f) - L| < \epsilon
+        \]
+    para toda partição $P$ de $[a,b]$ e toda marcação $\xi$ de $P$.
+\end{defi}
+
+
+\begin{teo}
+    Seja $I \subset \R$ um intervalo fechado e $f: I \to \R$ uma função contínua. Uma função $F : I \to \R$ é uma primitiva de $f$ se, e somente se, existe $a \in I$ tal que
+        \[
+            F(x) = F(a) + \int_{a}^{x} f(t) \, dt
+        \]
+    para todo $x \in I$.
+\end{teo}
+
+\begin{proof}
+    ($\Leftarrow$) Como $f$ é contínua em $I$, para todo $\epsilon \in \R_{>0}$ existe $\delta \in \R_{>0}$ tal que
+        \[
+            |t - x| < \delta \Rightarrow |f(t) - f(x)| < \epsilon
+        \]
+    para quaisquer $x,t \in I$. 
+    
+    
+    
+    Sendo $h \in \R_{\neq 0}$ tal que $|h|<\delta$ e $x+h \in I$, 
+    
+    temos
+        \[
+            \left |\dfrac{F(x+h) - F(x)}{h} - f(x) \right| = \int_{x}^{x+h} [f(t) - f(x)] \, dx
+        \]
+    
+    
+    
+    Queremos provar que
+        \[
+            \lim_{h \to 0} \left[ \dfrac{F(x+h) - F(x)}{h} - f(x) \right] = 0
+        \]
+    para todo $x \in I$ Para isso, precisamos provar que para todo $\epsilon \in \R_{>0}$ existe $\delta \in \R_{>0}$ tal que
+        \[
+            0 < |h| < \delta \Rightarrow \left| \dfrac{F(x+h) - F(x)}{h} - f(x) \right| < \epsilon
+        \]
+    para todo $x \in I$ interior.
+
+    Como $f$ é contínua em $I$, para todo $\epsilon \in \R_{>0}$ existe $\delta \in \R_{>0}$ tal que
+        \[
+            |t - x| < \delta \Rightarrow |f(t) - f(x)| < \epsilon
+        \]
+    para todo $t \in I$.
+
+
+    ($\Rightarrow$) Como $F : I \to \R$ é uma primitiva de $f : I \to \R$, temos que $F$ é derivável em todo $x \in I$ interior, de modo que $F$ é também contínua em todo $x \in I$ interior. Agora, fixando $a \in I$ e definindo uma função $G : I \to \R$ por
+        \[
+            G(x) := \int_{a}^{x} f(t) \, dt,
+        \]
+    pela volta ($\Leftarrow$) temos que $G$ é derivável em todo $x \in I$ interior, de modo que $G$ é também contínua em todo $x \in I$ interior. E ainda, $G'(x) = f(x)$ para todo $x \in I$ interior. Com isso, as funções $F,G : I \to \R$ são funções contínuas em $I$ e $F'(x) = G'(x) = f(x)$ para todo $x \in I$ interior. Assim, pelo teorema \eqref{teo:TFC0}, existe uma constante $C \in \R$ tal que $F(x) = G(x) + C$ para todo $x \in I$. Dai, tomando $x=a$, vemos que $C = F(a)$, de modo que
+        \[
+            F(x) = F(a) + \int_{a}^{x} f(t) \, dt
+        \]
+    para todo $x \in I$ interior.
+\end{proof}
+
+\begin{defi}
+    Uma variável aleatória $X : \Omega \to \R$ é \textit{degenerada} se existe $c \in \R$ tal que $\Pb(X=c) = 1$. X^{-1}(I) := \{ \omega \in \Omega : X(\omega) \in I\}
+\end{defi}
+
+\begin{enumerate}[label=\roman*.]
+            \item $\forall x_1 \forall x_2 (x1, x_2 \in \R \land x_1 \leq x_2 \Rightarrow F(x_1) \leq F(x_2)$
+            \item $\forall a (a \in \R \Rightarrow \lim_{x \to a^+} F(x) = F(a))$ é contínua à direita.
+            \item $\ds \lim_{x \to - \infty} F(x) = 0$ e $\ds \lim_{x \to + \infty} F(x) = 1$.
+        \end{enumerate}
+
+\begin{defi}
+    Seja $X : \Omega \to \R$ uma variável aleatória.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Dizemos que $X$ é \textit{discreta} se existe $A \subsetneq \R$ enumerável tal que $\Pb(X \in A) = 1$.
+            \item Dizemos que $X$ é \textit{aboslutamente contínua} se existe uma \textit{função densidade} $f: \R \to \R_+$ tal que
+                \[
+                    \Pb(X \in [a,b]) = \int_{a}^{b} f(x) \, dx
+                \]
+            para quaisquer $a,b \in \R$ com $a \leq b$.
+        \end{enumerate}
+\end{defi}
+
+O axioma do vazio nos diz que existe um conjunto $x$ que cumpre $\forall y (y \notin x)$; assim, falta provar a unicidade de $x$, isto é, provar que esse $x$ cumpre $\forall z (\forall y (y \notin z) \rightarrow (z=x))$. Mais ainda, pelo axioma da extensão, precisamos provar que
+        \[
+            \forall z (\forall y (y \notin z) \rightarrow \forall w ((w \in z) \leftrightarrow (w \in x) ) ). \tag{$\lozenge$}
+        \]
+    A fórmula $\lozenge$ só será falsa se $\forall y (y \notin z) \rightarrow \forall w ((w \in z) \leftrightarrow (w \in x) )$ for falsa, que por sua vez só será falsa se $\forall w ((w \in z) \leftrightarrow (w \in x)$ for falsa, que por sua vez só será falsa se $(w \in z) \leftrightarrow (w \in x)$ for falsa. No entanto, essa última fórmula é tautologicamente verdadeira, uma vez que $w \in x$ e $w \in z$ são sempre falsas. De fato, $w \in x$ é sempre falsa já que $\forall y (y \notin x)$ pelo axioma do vazio e $w \in z$ é sempre falsa já que $\forall y (y \notin z)$ por hipótese. Logo, a fórmula ($\lozenge$) é sempre verdadeira. \itemproof
+
+
+    
+    Se $y$ cumprisse $\forall x (x \in y)$, então, pelo axioma da separação com $y$ e a fórmula $x \notin x$, existe $z$ que cumpre $\forall x ( (x \in z) \leftrightarrow (x \in y) \land (x \notin x))$; como a fórmula $x \in y$ é verdadeira, temos $\forall x ((x \in z) \leftrightarrow (x \notin x) )$, donde, particularmente para $z$, vale $(z \in z) \leftrightarrow (z \notin z)$, o que é falso! Logo, não existe $y$ que cumpre $\forall x (x \in y)$, donde $\forall x \exists y (y \notin x)$.
+
+        % se $z \in y$, então trivialmente $\forall w ((w \in x) \rightarrow (z \in w))$; agora, se $z$ satisfaz $\forall w ((w \in x) \rightarrow (z \in w))$, então, para $w = v$, temos $v \in x \rightarrow z \in v$. Como vale $v \in x$, vale também $z \in v$; daí, valendo $z \in v$ e $\forall w ((w \in x) \rightarrow (z \in w))$, temos que $z \in y$, como queríamos.
+
+
+
+        \begin{align*}
+            f \text{ injetora} &\leftrightarrow f^{-1} \text{ função} \\
+            & \leftrightarrow f^{-1} \text{ função injetora} \\
+            & \leftrightarrow f^{-1} \circ f = Id_{\mathrm{Dom}(f)} \\
+            & \leftrightarrow f \circ f^{-1} = Id_{\mathrm{Im}(f)} \\
+            & \leftrightarrow \text{existe uma função } g \text{ tal que } g \circ f = Id_{\mathrm{Dom}(f)}.
+        \end{align*}
+
+\begin{defi}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Uma \textit{relação de ordem} em um conjunto $S \neq \emptyset$ é um subconjunto $< \, \subseteq S \times S$ tal que
+                \begin{enumerate}[label=\roman*.]
+                    \item para quaisquer $x,y \in S$, com $x \neq y$, ou $(x,y) \in \, <$, ou $(y,x) \in \, <$;
+                    \item para quaisquer $x,y,z \in S$, se $(x,y) \in \, <$ e $(y,z) \in \, <$, então $(y,z) \in \, <$.
+                \end{enumerate}
+            \item Um conjunto $S \neq \emptyset$ é \textit{ordenado} se existe uma relação $< \, \subseteq S \times S$ que é de ordem.
+        \end{enumerate}
+\end{defi}
+
+\begin{defi}
+    Seja $S$ um conjunto ordenado.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Um subconjunto $X \subseteq S$ é \textit{limitado superiormente} se existe $M \in S$ tal que $x \leq M$ para todo $x \in X$. Nesse caso, $M$ é uma \textit{cota superior} de $X$.
+            \item Um subconjunto $X \subseteq S$ é \textit{limitado inferiormente} se existe $m \in S$ tal que $x \geq m$ para todo $x \in X$. Nesse caso, $m$ é uma \textit{cota inferior} de $X$.
+        \end{enumerate}         
+\end{defi}
+
+\begin{defi}
+    Seja $S$ um conjunto ordenado.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Seja $X \subseteq S$ limitado superiormente. Uma cota superior $\alpha \in S$ de $X$ é o \textit{supremo} de $X$ se todo $\beta \in S$ com $\beta < \alpha$ não é uma cota superior de $X$. Isso é denotado por $\alpha = \sup{X}$.
+            \item Seja $X \subseteq S$ limitado inferiormente. Uma cota inferior $\alpha \in S$ de $X$ é o \textit{ínfimo} de $X$ se todo $\beta \in S$, com $\beta > \alpha$, não é uma cota inferior de $X$. Isso é denotado por $\alpha = \inf{X}$.
+        \end{enumerate}
+\end{defi}
+
+\begin{defi}        
+    Diremos que um corpo $\F$ é \textit{ordenado} se existir um subconjunto $\F_+ \subsetneq \F$ dos elementos \textit{positivos} de $\F$ para o qual
+        \begin{itemize}
+            \item O1: se $x,y \in \F_+$, então $x+y, \in \F_+$ e $x \cdot y \in \F_+$;
+            \item O2: se $x \in \F$, então ou $x=0$, ou $x \in \F_+$, ou $-x \in \F_+$. %uma, e exatamente uma, das afirmações $x \in \F_+$, $x=0$ e $-x \in \F_+$, é verdadeira.
+        \end{itemize}
+    O conjunto dos elementos \textit{negativos} de $\F$ é definido então como $\F_- := \{ x \in \F : -x \in \F_+ \}$.
+    %$\F_+$, quando existe, é chamado de conjunto dos elementos \textit{positivos} de $\F$. 
+\end{defi}
+
+\begin{ex}
+    Se $\F$ é um corpo ordenado, então $\F = \F_+ \cup \{ 0 \} \cup \F_-$ e $1 \in \F_+$.
+\end{ex}
+
+\begin{prop}
+    Seja $f$ uma função. As seguintes afirmações são equivalentes.
+        \begin{enumerate}
+            \item 
+            \item $f$ é injetora.
+            \item $f^{-1}$ é uma função.
+            \item $f^{-1}$ é uma função injetora.
+            \item $f^{-1} \circ f = Id_{\Dom{(f)}}$.
+            \item $f \circ f^{-1} = Id_{\Im{(f)}}$.
+            \item existe uma função $g$ tal que $g \circ f = Id_{\Dom{(f)}}$.
+        \end{enumerate}
+\end{prop}
+\begin{prop}
+    Seja $f$ uma função.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se $f^{-1}$ é uma função, então $f^{-1}$ é injetora.
+            \item $f^{-1}$ é uma função se, e somente se,
+                \begin{enumerate}
+                    \item $f$ é injetora;
+                    \item existe uma função $g$ tal que $g \circ f = Id_{\Dom{(f)}}$;
+                    \item $f^{-1} \circ f = Id_{\Dom{(f)}}$;
+                    \item $f \circ f^{-1} = Id_{\Im{(f)}}$.
+                \end{enumerate}
+            $f$ é injetora.
+            \item $f^{-1}$ é uma função se, e somente se, existe uma função $g$ tal que $g \circ f = Id_{\Dom{(f)}}$.
+            \item $f^{-1}$ é uma função se, e somente se, $f^{-1} \circ f = Id_{\Dom{(f)}}$.
+            \item $f^{-1}$ é uma função se, e somente se, $f \circ f^{-1} = Id_{\Im{(f)}}$.
+        \end{enumerate}
+\end{prop}
+
+\begin{defi}
+    Seja $f : A \to B$ uma função.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $f$ é \textit{injetora} se 
+                \[
+                    \forall x \forall y (x,y \in A \rightarrow (x \neq y \rightarrow f(x) \neq f(y))).
+                \]
+            \item $f$ é \textit{sobrejetora} em relação a $B$ se $\Im{(f)} = B$.
+            \item $f$ é \textit{bijetora} em relação a $B$ se $f$ é injetora e sobrejetora em relação a $B$.
+            %\item $f$ é a \textit{função identidade} em $A$ -- e denotada, neste caso, por $Id_A$ -- se $f(x) = x$ para todo $x \in A$.
+        \end{enumerate}
+\end{defi}
+
+\item O conjunto de todas as funções de $A$ em $B$ é denotado por $B^A$, isto é,
+                \[
+                    B^A := \{ f \in \mathcal{P}{(A \times B)} : \operatorname{Fun}{(f,A,B)}\}.
+                \]
+
+
+

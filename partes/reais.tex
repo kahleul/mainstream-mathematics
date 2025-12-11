@@ -1,0 +1,869 @@
+%!TEX root = main.tex
+
+\chapter{Números Reais como na Análise}
+
+\section{Corpos Ordenados Completos}
+
+\begin{defi} \label{reais:def.corpo}
+    Uma tripla $(\F, +, \cdot)$ é um \textit{corpo} se no conjunto $\F \neq \emptyset$ existem duas operações, $+ :\F \times \F \to \F$ e $\cdot: \F \times \F \to \F$, para as quais
+        \begin{itemize}
+            \item A1: $x + (y + z) = (x + y) + z$ para quaisquer $x,y,z \in \F$;
+            \item A2: $x + y = y + x$ para quaisquer $x,y \in \F$; 
+            \item A3: existe $0 \in \F$ tal que $x + 0 = x$ para todo $x \in \F$;
+            \item A4: para cada $x \in \F$ existe $y \in \F$ tal que $x+y=0$;
+            \item M1: $x \cdot (y \cdot z) = (x \cdot y) \cdot z$ para quaisquer $x,y,z \in \F$; 
+            \item M2: $x \cdot y = y \cdot x$ para quaisquer $x,y \in \F$;
+            \item M3: existe $1 \in \F_{\neq 0}$ tal que $x\cdot 1 = x$ para todo $x \in \F$;
+            \item M4: para cada $x \in \F_{\neq 0}$ existe $y \in \F$ tal que $x \cdot y = 1$;
+            \item D: $x \cdot ( y + z) = x \cdot y + x \cdot z$ para quaisquer $x,y,z \in \F$.
+        \end{itemize}
+    Para simplificar a notação, e quando não houver perigo de confusão, vamos nos referir ao corpo $(\F, +, \cdot)$ simplesmente como o conjunto $\F$.
+\end{defi}
+
+\begin{obs}
+    As operações $+$ e $\cdot$ são chamadas, respectivamente, de \textit{adição} e \textit{multiplicação}. As propriedades descritas em A1 e M1 são chamadas de \textit{associatividade}; em A2 e M2, de \textit{comutatividade}; em A3 e M3, de existência de \textit{elementos neutros}; em A4, de existência de um \textit{oposto aditivo}; em M4, de existência de um \textit{inverso multiplicativo}; e em D, de \textit{distributividade}.
+\end{obs}
+
+\begin{prop}
+    Seja $\F$ um corpo. Valem as seguintes afirmações.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item (Unicidade)
+            \item (Leis do corte) Para quaisquer $x,y,z \in \F$, temos
+                \begin{enumerate}[label=\roman*.]
+                    \item $x+z=y+z \Rightarrow x=y$;
+                    \item $x \cdot z = y \cdot z \ \text{e} \ z \in \F_{\neq 0} \Rightarrow x = y$.
+                \end{enumerate}
+            \item (Integridade) Para quaisquer $x,y \in \F$, temos
+                \begin{enumerate}[label=\roman*.]
+                    \item $x \cdot 0 = 0$;
+                    \item $x \cdot y = 0 \Rightarrow x = 0 \ \text{ou} \ y = 0$;
+                \end{enumerate}
+            \item (Regras dos sinais) Para quaisquer $x,y \in \F$, temos
+                \begin{enumerate}[label=\roman*.]
+                    \item $(-1) \cdot x = -x$;
+                    \item $-(-x) = x$;
+                    \item $(-x) \cdot y = x \cdot (-y) = - (x \cdot y)$;
+                    \item $(-x) \cdot (-y) = x \cdot y$.
+                \end{enumerate}
+            \item Para quaisquer $x, y \in \F$, temos
+                \[
+                    x^2 = y^2 \Leftrightarrow x = y \ \text{ou} \ x = -y.
+                \]
+        \end{enumerate}
+\end{prop}
+
+\begin{proof}
+\end{proof}
+
+\begin{defi}
+    Um corpo $(\F,+,\cdot)$ é \textit{ordenado} se existe uma relação $\leq \ \subseteq \F \times \F$ tal que $(\F, \leq)$ é um conjunto totalmente ordenado e
+        \begin{enumerate}[label=\roman*.]
+            \item para quaisquer $x,y,z \in \F$, se $x \leq y$, então $x + z \leq y + z$;
+            \item para quaisquer $x,y,z \in \F$, se $x \leq y$ e $0 \leq z$, então $x \cdot z \leq y \cdot z$.
+        \end{enumerate}
+    Isso é denotado por $(\F, +, \cdot, \leq)$.
+\end{defi}
+
+\begin{prop}
+    Seja $(\F, +, \cdot, \leq)$ um corpo ordenado.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item A relação $< \ \subseteq \F \times \F$ definida como
+                \[
+                    < \ := \{(x,y) \in \F \times \F : x \leq y \land x \neq y\}
+                \]
+            é de ordem estrita total.
+            \item Existe um subconjunto $\F_{>0} \subseteq \F$ tal que
+                \begin{enumerate}[label=\roman*.]
+                    \item se $x,y \in \F_{>0}$, então $x+y \in \F_{>0}$ e $x \cdot y \in \F_{>0}$;
+                    \item se $x \in \F$, então ou $x=0$, ou $x \in \F_{>0}$, ou $-x \in \F_{>0}$.
+                \end{enumerate}
+        \end{enumerate}
+\end{prop}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item oi
+            \item Como a notação ``$\F_{>0}$'' sugere, basta tomar $\F_{>0} := \{x \in \F : x > 0\}$, onde $y > x$ significa $x < y$.
+        \end{enumerate}
+\end{proof}
+
+\begin{obs}
+    Sendo $\F$ um corpo ordenado, escrevemos $x<y$ quando $y>x$ e $x \leq y$ quando $y \geq x$.
+\end{obs}
+
+\begin{defi}
+    Seja $\F$ um corpo ordenado. A função $|\cdot| : \F \to \F_{\geq 0}$ definida por
+        \[ |x|:=
+            \begin{cases}
+                x & \text{ se }  x \in \F_{\geq 0} \\
+                -x & \text{ se } x \in \F_{<0}
+            \end{cases}
+        \]
+    é chamada de \textit{função modular}. O \textit{módulo}, ou o \textit{valor absoluto}, de $x \in \F$, é a imagem de $x$ pela função modular, isto é, $|x| \in \F_{\geq 0}$.
+\end{defi}
+
+\begin{prop}
+    Seja $\F$ um corpo ordenado. Valem as seguintes afirmações.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $x \leq |x|$ para todo $x \in \F$;
+            \item $|x \cdot y| = |x| \cdot |y|$ para quaisquer $x,y \in \F$;
+            \item $|x+y| \leq |x|+|y|$ para quaisquer $x,y \in \F$;
+            \item $|x| \leq \epsilon \Leftrightarrow -\epsilon \leq x \leq \epsilon$ para quaisquer $x \in \F$ e $\epsilon \in \F_{>0}$.
+        \end{enumerate}
+\end{prop}
+
+\begin{proof}
+\end{proof}
+
+\begin{defi}
+    Seja $\emptyset \neq A \subseteq \F$ um subconjunto de um corpo ordenado $\F$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Diremos que $A$ é
+                \begin{enumerate}[label=\roman*.]
+                    \item \textit{limitado superiormente}, ou \textit{majorado}, se existir $a \in \F$ tal que $x \leq a$ para todo $x \in A$. Diremos que $a$ é uma \textit{cota superior}, ou um \textit{majorante}, de $A$.
+                    \item \textit{limitado inferiormente}, ou \textit{minorado}, se existir $a \in \F$ tal que $x \geq a$ para todo $x \in A$. Diremos que $a$ é uma \textit{cota inferior}, ou um \textit{minorante}, de $A$.
+                \end{enumerate}
+            \item Se $A$ é 
+                \begin{enumerate}[label=\roman*.]
+                    \item majorado, a menor das cotas superiores de $A$, quando existe, é chamada de \textit{supremo} de $A$ e é denotada por $\sup{A}$.
+                    \item minorado, a maior das cotas inferiores de $A$, quando existe, chama-se \textit{ínfimo} de $A$ e é denotada por $\inf{A}$.
+                \end{enumerate}
+        \end{enumerate}
+\end{defi}
+
+\begin{prop}
+    Seja $\emptyset \neq A \subseteq \F$ um subconjunto de um corpo ordenado $\F$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item O supremo de $A$, quando existe, é único.
+            \item O ínfimo de $A$, quando existe, é único.
+        \end{enumerate}
+\end{prop}
+
+\begin{proof}
+\end{proof}
+
+\begin{defi}
+    Um corpo ordenado $\F$ é \textit{completo} se todo subconjunto não vazio de $\F$ limitado superiormente possui supremo em $\F$.
+\end{defi}
+
+\begin{teo}
+    Existe um corpo ordenado completo. Diremos que seus elementos são \textit{números reais} e o denotaremos por $\R$.
+\end{teo}
+
+\begin{cor}
+    Todo subconjunto não vazio de $\R$ limitado inferiormente admite ínfimo em $\R$.
+\end{cor}
+
+\begin{proof} 
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Naturais}
+
+\begin{defi}
+    Um subconjunto $I \subseteq \R$ é \textit{indutivo} se $1 \in I$ e $n \in I \Rightarrow n+1 \in I$. Isso é denotado por $\ind{I}$.
+\end{defi}
+
+\begin{ex}
+    $\R$ é um conjunto indutivo. Com isso, o conjunto de todos os subconjuntos indutivos de $\R$ é não vazio, isto é, $\{ I \in \mathcal{P}{(\R)} : \ind{(I)} \} \neq \emptyset$. Em particular, isso nos permite considerar $\bigcap \{ I \in \mathcal{P}{(\R)} : \ind{(I)} \}$.
+\end{ex}
+
+\begin{prop}
+    Se $\mathcal{A}$ é uma coleção não vazia de subconjuntos indutivos de $\R$, isto é, se 
+        $ \ds
+            \mathcal{A} \subseteq \{ I \in \mathcal{P}{(\R)} : \ind{(I)} \}
+        $
+    e $\mathcal{A} \neq \emptyset$, então $\bigcap \mathcal{A}$ é um conjunto indutivo.
+\end{prop}
+
+\begin{proof} 
+    Como $1 \in A$ para todo $A \in \mathcal{A}$, temos $1 \in \bigcap \mathcal{A}$. Agora, se $n \in \bigcap \mathcal{A}$, então $n \in A$ para todo $A \in \mathcal{A}$; como cada $A \in \mathcal{A}$ é indutivo, temos $n + 1 \in A$, donde $n+1 \in \bigcap \mathcal{A}$. \itemproof
+\end{proof}
+
+\begin{defi}
+    O conjunto dos números naturais, denotado por $\N$, é definido como a interseção de todos os subconjuntos indutivos de $\R$:
+        \[
+            \N := \bigcap \{ I \in \mathcal{P}{(\R)} : \ind{(I)} \}.
+        \]
+    Em particular, $\N_0 := \N \cup \{0\}$.
+\end{defi}
+
+\begin{teo}[Indução fraca]
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se um subconjunto $A \subseteq \N$ é indutivo, então $A = \N$.
+            \item Seja $s(n)$ uma proposição bem definida para cada $n \in \N$. Se $s(1)$ é verdadeira e se $s(n) \Rightarrow s(n+1)$ é verdadeira, então $s(n)$ é verdadeira para todo $n \in \N$.
+        \end{enumerate}
+\end{teo}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se $A$ é um conjunto indutivo, então, pela definição de $\N$, temos $\N \subseteq A$. Daí, se $A \subseteq \N$, então $A = \N$. \itemproof
+            \item Definindo $A := \{ n \in \N : s(n)\}$, temos $A \subseteq \N$. Além disso, $1 \in A$ e $n+1 \in A$ sempre que $n \in A$, de modo que $A$ é indutivo. Com isso, $\N \subseteq A$, de modo que $A = \N$, isto é, vale $s(n)$ para todo $n \in \N$. \itemproof
+        \end{enumerate}
+\end{proof}
+
+\begin{prop}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Para quaisquer $m,n \in \N$, temos $m+n \in \N$ e $m \cdot n \in \N$.
+            \item Para qualquer $n \in \N$, temos $n \geq 1$. Isso significa, em particular, que $\N$ é limitado inferiormente.
+            \item $\N$ não é limitado superiormente.
+            \item (Propriedade arquimediana de $\R$) Para quaisquer $a \in \R_{>0}$ e $b \in \R$, existe $n \in \N$ tal que $na > b$.
+            \item Para todo $\epsilon \in \R_{>0}$, existe $n \in \N$ tal que $\dfrac{1}{n} < \epsilon$.
+            \item Se $a,x,y \in \R$ cumprem $a \leq x \leq a + \dfrac{y}{n}$ para todo $n \in \N$, então $x=a$.
+        \end{enumerate}
+\end{prop}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Definindo $G := \{ m \in \N : \forall n (n \in \N \Rightarrow n+m \in \N )\}$, temos $G \subseteq \N$. Temos que $1 \in G$ pois, para todo $n \in \N$, vale $n \in \N \Rightarrow n+1 \in \N$, já que $\N$ é indutivo. Agora, se $n+m \in \N$, então, como $\N$ é indutivo, vale $(n+m)+1 \in \N$, isto é, $n+(m+1) \in \N$. Assim, $m \in G \Rightarrow m+1 \in G$, isto é, $G$ é indutivo e, portanto, cumpre $\N \subseteq G$, donde $G = \N$. Agora, definindo $H := \{ m \in \N : \forall n (n \in \N \Rightarrow n \cdot m \in \N )\}$, temos $H \subseteq \N$. Temos que $1 \in H$ pois, para todo $n \in \N$, vale $n \cdot 1 = n \in \N$. Agora, se $n \cdot m \in H$, então $n \cdot (m+1) \in H$ pois $n \cdot (m+1) = n \cdot m + n \cdot 1$ e, como vimos, a soma de dois naturais é um natural. Com isso, $H$ é indutivo e, portanto, cumpre $\N \subseteq H$, donde $H = \N$. \itemproof
+            \item Definindo $A := \{ n \in \N : n \geq 1\}$, temos $A \subseteq \N$. Claramente $1 \in A$ pois $1 \geq 1$. Agora, se $n \in A$, então $1>0 \Rightarrow n+1 > n \geq 1 \Rightarrow n+1 \geq 1$, de modo que $n+1 \in A$. Com isso, $A$ é indutivo e, portanto, cumpre $\N \subseteq A$, donde $A = \N$. \itemproof
+            \item Suponha que $\N$ seja limitado superiormente. Como $\N \subsetneq \R$, existe $a := \sup{\N}$. Como $a-1$ não é cota superior de $\N$, existe $n \in \N$ tal que $a-1 < n$. Mas, daí, $a < n+1 \in \N$, absurdo! Em particular, concluímos que para todo $x \in \R$ existe $n \in \N$ tal que $n > x$. \itemproof
+            \item Pelo item anterior, para o número $\frac{b}{a}$ existe $n \in \N$ tal que $n > \frac{b}{a}$, e sendo $a>0$, temos $na>b$. \itemproof
+            \item Basta colocar $b=1$ e $a= \epsilon$ no item anterior: existe $n \in \N$ tal que $n \cdot \epsilon > 1$, donde $\frac{1}{n} < \epsilon$. \itemproof
+            \item Se fosse $x > a$, então a propriedade arquimediana nos diz que existe $n \in \N$ tal que $n \cdot (x-a) > y$, donde $x > a + \frac{y}{n}$, o que contraria a hipótese. Logo, só pode ser $x=a$. \itemproof
+        \end{enumerate}
+\end{proof}
+
+\begin{lem}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Para qualquer $n \in \N$, ou $n-1=0$ ou $n-1 \in \N$.
+            \item Para quaisquer $m,n \in \N$, com $m<n$, temos $n-m \in \N$.
+            \item Para qualquer $n \in \N$, não existe um $m \in \N$ para o qual $n < m < n+1$.
+        \end{enumerate}
+\end{lem}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Definindo $A := \{ n \in \N : n-1=0 \lor n-1 \in \N \}$, temos $A \subseteq \N$. Temos $1 \in A$ pois vale $1 - 1 = 0 \lor 1 - 1 \in \N$. Agora, se $n \in A$, então $(n+1)-1 = n \in A$, de modo que $n+1 \in A$. Com isso, $A$ é indutivo, de modo que $\N \subseteq A$, donde $A = \N$. \itemproof
+            \item Definindo $A := \{ m \in \N : \forall n (n \in \N \land m < n \Rightarrow n - m \in \N) \}$, temos $A \subseteq \N$. Sendo $n \in \N$ com $n>1$, temos $n-1 > 0$, isto é, $n-1 \neq 0$; com isso, pelo item anterior, $n-1 \in \N$. Agora, supondo que $n,m \in \N$ e $m<n$ implicam $n-m \in \N$, provemos que $n,m \in \N$ e $m+1<n$ implicam $n-(m+1) \in \N$. De fato, $m+1 < n \Rightarrow m < n-1$; pelo item anterior, $n-1 \in \N$, donde, pela hipótese de indução, $(n-1) - m \in \N$, isto é, $n - (m+1) \in \N$. Isso nos mostra que $m \in A \Rightarrow m+1 \in A$, isto é, que $A$ é indutivo; daí, $\N \subseteq A$, donde $A = \N$. \itemproof
+            \item Sendo $n \in \N$, suponha que existe $m \in \N$ tal que $n < m < n+1$. Daí, $m-n<1$ e, pelo item anterior, $m - n \in \N$, absurdo! Logo, tal $m$ não pode existir. \itemproof
+        \end{enumerate}
+\end{proof}
+
+\begin{teo}[Princípio da Boa Ordenação] Todo subconjunto não vazio de números naturais possui um menor elemento. Isto é, se $\emptyset \neq A \subseteq \N$, então existe $a \in A$ tal que $a \leq x$ para todo $x \in A$.
+\end{teo}
+
+\begin{proof}
+    Defina $[n] := \{ x \in \N \mid x \leq n \}$ e $X := \{ n \in \N \mid [n] \subseteq \N - A\}$. Se $1 \in A$, então $1 = \min A$. Se $1 \notin A$, então $[1] = \{ 1 \} \subset \N - A$, de modo que $1 \in X$. Agora, como $A \neq \emptyset$, temos que $X \neq \N$. Se $1 \in X$ e $X \neq \N$, então existe $n_0 \in X$ tal que $n_0 + 1 \notin X$, isto é, $[n_0] \cap A = \emptyset$ e $[n_0+1] \cap A \neq \emptyset$. Com isso, $n_0 + 1 \in A$, sendo este o menor elemento de $A$ (pois não existe um natural entre $n_0$ e $n_0 + 1$). \itemproof
+\end{proof}
+
+\begin{proof}
+    Suponha por contradição que existe um conjunto $\emptyset \neq A \subseteq \N$ que não tem um elemento mínimo. Definindo $X := \{ n \in \N : [n] \cap A = \emptyset \}$, veja que $1 \in X$ (de fato, se $1 \notin X$, então  $[1] \cap A \neq \emptyset$, de modo que $1 \in A$ seria o menor elemento de $A$, absurdo!). Agora, se $n \in X$, então $[n] \cap A = \emptyset$; daí, se fosse $n+1 \in A$, este seria o menor elemento de $A$, absurdo! Logo, só pode ser $n+1 \in X$, de modo que $X$ é indutivo e $\N \subset X$. Como $X \subset \N$ por definição, temos que $X = \N$, donde $A = \emptyset$, uma contradição. \itemproof
+\end{proof}
+
+
+\begin{teo}[Indução forte]
+    Se $A \subseteq \N$ é tal que $n \in A$ sempre que $m \in A$ para todo $m < n$, então $A = \N$.
+\end{teo}
+
+\begin{proof}
+    Provemos que $X := \N - A$ é vazio. De fato, se $X \neq \emptyset$, então pela Boa Ordenação existiria $p \in X$ mínimo; daí, todo $m < p$ seria $m \in A$, de modo que, pela definição de $A$, $p \in A$, absurdo! Logo, $X = \emptyset$. \itemproof
+\end{proof}
+
+\section{Conjuntos Finitos}
+
+\begin{defi}
+    Um conjunto $X \neq \emptyset$ é \textit{finito} se existem um natural $n \in \N$ e uma bijeção $f: [n] \to X$. Isso é denotado por $|X|=n$. O natural $n$ é o \textit{número de elementos} de $X$, enquanto $f$ é uma \textit{contagem dos elementos} de $X$. Em particular, o conjunto vazio $\emptyset$ é finito e tem $0$ elementos.
+\begin{comment}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Um conjunto $X \neq \emptyset$ é dito \textit{finito} quando existem um natural $n \in \N$ e uma bijeção $f: [n] \to X$. Denotamos isso por $|X|=n$. O natural $n$ é chamado de \textit{número de elementos} de $X$, enquanto $f$ é chamada de \textit{contagem dos elementos} de $X$. Se $X = \emptyset$, diremos que $X$ é também finito e tem $0$ elementos.
+
+            \item Diremos que $X \subseteq \N$ é \textit{limitado} se existir $n \in \N$ tal que $x \leq n$ para todo $x \in X$.
+        \end{enumerate}
+\end{comment}
+\end{defi}
+
+\begin{teo} \label{teo:1}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Para todo $n \in \N$, não existe uma bijeção $f : A \subsetneq [n] \to [n]$.
+
+            \item Para todo $n \in \N$, se existe uma bijeção $f: [n] \to A \subseteq [n]$, então $A = [n]$.
+        \end{enumerate}
+\end{teo}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Comecemos com um lema: se existe uma bijeção $f:X \to Y$, então, dados $a \in X$ e $b \in Y$, existe também uma bijeção $g: X \to Y$ tal que $g(a)=b$. De fato, como $f$ é sobrejetora, então existe $a' \in X$ tal que $f(a') = b$; sendo $b' = f(a)$, definamos $g: X \to Y$ pondo $g(a) = b$, $g(a')=b'$ e $g(x) = f(x)$ para todo $x \neq a, a'$ em $X$. É fácil ver que $g$ é uma bijeção. Agora, seja $n_0$ o menor natural para o qual existe uma bijeção $f: A \subsetneq [n_0] \to [n_0]$. Se $n_0 \in A$, então, pelo lema, existe uma bijeção $g: A \subsetneq [n_0] \to [n_0]$ com $g(n_0) = n_0$; daí, a restrição $\tilde{g} : A \setminus \{n_0\} \subsetneq [n_0 -1] \to [n_0 -1]$ é uma bijeção, o que contraria a minimalidade de $n_0$. Por outro lado, se $n_0 \notin A$, então $A \subsetneq [n_0 -1]$; tomando $a \in A$ com $f(a) = n_0$, a restrição $\tilde{f} : A \setminus \{a\} \subsetneq A \subseteq [n_0 -1] \to [n_0 -1]$ é uma bijeção, o que, novamente, contraria a minimalidade de $n_0$. \itemproof
+
+            \item Basta ver que esse enunciado é a contrapositiva do item anterior. No entanto, ainda assim, daremos uma outra prova, que se dará por indução em $n$. Evidentemente, o resultado vale para $n=1$. Agora, supondo que o resultado vale para $n \in \N$, tomando uma bijeção $f : [n+1] \to A \subseteq [n+1]$ provaremos que $A = [n+1]$. Sendo $a := f(n+1)$, a restrição $\tilde{f} : [n] \to A \setminus \{a \}$ é uma bijeção.
+                \begin{itemize}
+                    \item Se for $A \setminus \{ a \} \subseteq [n]$, então, pela hipótese de indução, $A \setminus \{a \} = [n]$, donde $a=n+1$ e $A = [n+1]$.
+                    \item Se for $A \setminus \{ a \} \not\subseteq [n]$, então $n+1 \in A \setminus \{ a \}$ e existe $p \in [n]$ tal que $f(p) = n+1$. Agora, definindo a bijeção $g: [n+1] \to A \subseteq [n+1]$ por
+                        \[
+                            g(x) = 
+                                \begin{cases}
+                                    f(x), & \text{se } x \neq p \text{ e } x \neq n+1 \\
+                                    a, & \text{se } x = p \\
+                                    n+1, & \text{se } x=n+1
+                                \end{cases},
+                        \]
+                    a restrição $\tilde{g} : [n] \to A \setminus \{n+1\}$ é uma bijeção; daí, como $A \setminus \{ n+1\} \subseteq [n]$, pela hipótese de indução $A \setminus \{ n+1\}  = [n]$, donde $A = [n+1] $.
+                \end{itemize}
+            Com isso, temos $A = [n+1]$ em ambos os casos, como queríamos provar. \itemproof
+        \end{enumerate}
+\end{proof}
+
+\begin{cor}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item O número de elementos de um conjunto finito está bem definido. Isto é, se $f:[m] \to X$ e $g:[n] \to X$ são bijeções, então $m=n$.
+
+            \item (Princípio bijetivo) Sejam $A,B \neq \emptyset$ conjuntos finitos. Temos $|A|=|B|$ se, e somente se, existe uma bijeção $f:A \to B$.
+        \end{enumerate}
+\end{cor}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se fosse $m<n$, teríamos $[m] \subsetneq [n]$, donde existiria uma bijeção $g^{-1} \circ f : [m] \to [n]$, o que contraria o teorema \eqref{teo:1}. Analogamente, se fosse $n<m$, teríamos $[n] \subsetneq [m]$, donde existiria uma bijeção $f^{-1} \circ g : [n] \to [m]$, o que novamente contraria o teorema \eqref{teo:1}! Logo, só pode ser $m=n$.
+
+            Uma outra prova é o que segue. Se $h = g^{-1} \circ f :[m] \to [n]$ é uma bijeção, então $m=n$. De fato, se $m \leq n$, então $[m] \subseteq [n]$, e como $h^{-1} : [n] \to [m] \subseteq [n]$, pelo teorema \eqref{teo:1} só pode ser $[m]= [n]$, donde $m=n$. \itemproof
+            
+            \item Como $A,B \neq \emptyset$ são finitos, existem $n,m \in \N$ e bijeções $g: [n] \to A$ e $h : [m] \to B $.
+
+            ($\Rightarrow$) Sendo $|B| = n$, existe uma bijeção $\varphi : [n] \to B$, donde $ g^{-1} \circ \varphi : A \to B$ é uma bijeção.
+
+            ($\Leftarrow$) Existindo uma bijeção $f : A \to B$, temos que $g^{-1} \circ f^{-1} \circ h : [m] \to [n]$ é também uma bijeção, donde $m=n$, isto é, $|A|=|B|$. \itemproof
+        \end{enumerate}
+\end{proof}
+
+\subsection{Resultadinhos}
+
+\begin{prop}
+    Seja $X$ um conjunto finito.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Todo subconjunto próprio $Y \subsetneq X$ não admite uma bijeção $f : X \to Y$.
+
+            \item Todo subconjunto $Y \subseteq X$ também é finito. Se $Y \subsetneq X$, então $|Y| < |X|$, sendo $|Y| = |X|$ somente quando $Y = X$.
+        \end{enumerate}
+\end{prop}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]         
+            \item Suponha que existe uma tal bijeção. Se $X$ é finito, então existe uma bijeção $h : [n] \to X$ para algum $n \in \N$. Definindo $A := h^{-1}(Y)$, temos $A \subsetneq [n]$ e, além disso, a restrição de $h$ a $A$ é uma bijeção $h_A : A \to Y$. Com isso, a composta $h^{-1} \circ f^{-1} \circ h_A : A \to [n]$ é uma bijeção de $A \subsetneq [n]$ em $[n]$, o que contraria o teorema \eqref{teo:1}! Logo, não pode existir uma bijeção $f:X \to Y$ onde $X$ é finito e $Y \subsetneq X$. \itemproof
+
+            Observe que esse item é uma mera reformulação do teorema \eqref{teo:1}.
+    
+            \item Ver \cite{cursodeanalise1}, página 31, teorema 4. Ver \cite{analisereal1}, página 5, teorema 2.
+        \end{enumerate}
+\end{proof}
+
+\begin{cor} \label{cor.reais:funcfin}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se $X$ é um conjunto finito, então uma função $f:X \to X$ será injetora se, e somente se, for sobrejetora. 
+            
+            \item Seja $f:X \to Y$ uma função injetora. Se $Y$ é finito, então $X$ é finito e $|X| \leq |Y|$.
+
+            \item Seja $f:X \to Y$ uma função sobrejetora. Se $X$ é finito, então $Y$ é finito e $|Y| \leq |X|$.
+        \end{enumerate}
+\end{cor}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Ver \cite{analisereal1}, página 4, corolário 2.
+
+            \item Ver \cite{analisereal1}, página 5, corolário 1. Ver \cite{cursodeanalise1}, página 31, corolário 1.
+
+            \item Ver \cite{analisereal1}, página 5, corolário 1. Ver \cite{cursodeanalise1}, página 31, corolário 2.
+        \end{enumerate}
+\end{proof}
+
+\begin{defi}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Um conjunto $X \subseteq \N$ é \textit{limitado} se existir $n \in \N$ tal que $x \leq n$ para todo $x \in X$.
+
+            \item (Maior elemento)
+        \end{enumerate}
+\end{defi}
+
+\begin{teo} \label{teo.reais:caracterizacao}
+    Dado $\emptyset \neq X \subseteq \N$, as seguintes afirmações são equivalentes.
+        \begin{enumerate}
+            \item $X$ é finito;
+            \item $X$ é limitado;
+            \item $X$ possui um maior elemento.
+        \end{enumerate}
+\end{teo}
+
+\begin{proof}
+      Ver \cite{cursodeanalise1}, página 32, teorema 5. Para finito sse limitado, ver \cite{analisereal1}, página 5, corolário 2.
+\end{proof}
+
+
+\section{Conjuntos Infinitos}
+
+\begin{defi}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Um conjunto $X$ é dito \textit{infinito} quando ele não é finito, isto é, quando $X \neq \emptyset$ e quando, para cada $n \in \N$, não existe uma bijeção $f : [n] \to X$.
+            \item Diremos que $X \subseteq \N$ é \textit{ilimitado} quando ele não é limitado, isto é, quando para cada $n \in \N$ existe $p \in X$ tal que $p > n$.
+        \end{enumerate}
+\end{defi}
+
+\begin{cor}
+    $\N$ é infinito.
+\end{cor}
+
+\begin{prop}
+    Segue como contrapositiva do teorema \eqref{teo.reais:caracterizacao}: um conjunto $\emptyset \neq X \subseteq \N$ é infinito se, e somente se, não é limitado. Como $\N$ não é limitado, ele é infinito.
+\end{prop}
+
+\begin{teo}
+    Se $X$ é um conjunto infinito, então existe uma função $f : \N \to X$ injetora.
+\end{teo}
+
+\begin{proof}
+\end{proof}
+
+\begin{cor}
+    Um conjunto $X$ é infinito se, e somente se, existe uma bijeção $f : X \to Y \subsetneq X$.
+\end{cor}
+
+\begin{proof}
+\end{proof}
+
+\begin{cor}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Seja $f:X \to Y$ uma função injetora. Se $X$ é infinito, então $Y$ é infinito.
+            \item Seja $f:X \to Y$ uma função sobrejetora. Se $Y$ é infinito, então $X$ é infinito.
+        \end{enumerate}
+\end{cor}
+
+\begin{proof}
+    Basta ver que essas afirmações são equivalentes às afirmações do resultado \eqref{cor.reais:funcfin} por contrapositiva.
+\end{proof}
+
+\begin{prop}
+    Se $X$ é um conjunto finito e $Y$ é um conjunto infinito, então existem funções $f : X \to Y$ injetora e $g : Y \to X$ sobrejetora. 
+\end{prop}
+
+\begin{proof}
+\end{proof}
+
+\section{Conjuntos Enumeráveis e Não-Enumeráveis}
+
+\begin{defi}
+    Um conjunto $X$ é dito \textit{enumerável} quando é finito ou quando existe uma bijeção $f : \N \to X$. A função $f$ é chamada de uma \textit{enumeração} dos elementos de $X$.
+\end{defi}
+
+\begin{teo}
+    Todo subconjunto de $\N$ é enumerável.
+\end{teo}
+
+\begin{proof}
+    Seja $X \subseteq \N$. Se $X$ é finito, nada há de ser provado.
+\end{proof}
+
+\begin{cor}
+    \textbf{(a)} Seja $f:X \to Y$ uma função injetora. Se $Y$ é enumerável, então $X$ é enumerável.
+
+    \textbf{(b)} Seja $f:X \to Y$ uma função sobrejetora. Se $X$ é enumerável, então $Y$ é enumerável.
+\end{cor}
+
+\begin{proof}
+\end{proof}
+
+\begin{cor}
+    \textbf{(a)} O produto cartesiano de um número finito de conjuntos enumeráveis é enumerável.
+    
+    \textbf{(b)} A união de uma família enumerável de conjuntos enumeráveis é enumerável.
+\end{cor}
+
+\section{Inteiros e Racionais}
+
+\begin{defi}
+    O conjunto dos números inteiros, denotado por $\Z$, é definido como $\Z := \N_0 \cup -\N$, em que $-\N := \{-n : n \in \N\}$.
+\end{defi}
+
+\begin{prop}
+    Para quaisquer $m,n \in \Z$, temos $m+n \in \Z$ e $m \cdot n \in \Z$.
+\end{prop}
+
+\begin{proof}
+\end{proof}
+
+(Racionais) Sendo $y,w \neq 0$, temos que $x \cdot w = y \cdot z \Leftrightarrow x \cdot y^{-1} = z \cdot w^{-1}$.
+
+\begin{defi}
+    O conjunto dos números racionais, denotado por $\Q$, é definido como $\Q := \{ p \cdot q^{-1} : p \in \Z, q \in \Z_{\neq 0} \}$. Denotaremos $p \cdot q^{-1}$ por $\frac{p}{q}$.
+\end{defi}
+
+\begin{prop}
+    Para quaisquer $p,q \in \Q$, temos $p+q \in \Q$ e $p \cdot q \in \Q$.
+\end{prop}
+
+\begin{proof}
+\end{proof}
+
+\begin{defi}
+    Dado $x \in \R$, definimos, para cada $n \in \N$, $x^1 := x$ e $x^{n+1} := x^n \cdot x$, e sendo $x \neq 0$, definimos, para cada $n \in \N_0$, $x^{0} := 1$ e $x^{-n} := \frac{1}{x^n}$.
+\end{defi}
+
+\begin{teo}
+    \textbf{(a)} Seja $n \in \N$. Para todo $a \in \R_{\geq 0}$ existe um único $b \in \R_{\geq 0}$ tal que $b^n = a$. Notação: $b := \sqrt[n]{a}$
+
+    \textbf{(b)} Seja $n \in \N$ ímpar. Para todo $a \in \R$ existe $b \in \R$ tal que $b^n=a$. Notação: $b := \sqrt[n]{a}$.
+\end{teo}
+
+\begin{proof}
+\end{proof}
+
+\begin{defi}
+    \textbf{(a)} Seja $n \in \N$. Dado $x \in \R_{\geq 0}$, definimos $x^{\frac{1}{n}} := \sqrt[n]{x}$. Se $n$ for ímpar, dado $x \in \R$, definimos $x^{\frac{1}{n}} := \sqrt[n]{x}$.
+
+    \textbf{(b)} Seja $n \in \N$. Dado $x \in \R$, definimos $x^{- \frac{1}{n}} := \dfrac{1}{x^{\frac{1}{n}}}$, desde que $x^{\frac{1}{n}} \neq 0$ esteja definido.
+
+    \textbf{(c)} Seja $r := \frac{p}{q} \in \Q$, com $p \in \Z$ e $q \in \Z_{\neq 0}$. Dado $x \in \R$, definimos $x^r := \left( x^{\frac{1}{q}} \right)^p$, desde que $x^{\frac{1}{q}}$ esteja definido. 
+\end{defi}
+
+\begin{teo}
+    \textbf{(a)} Se $a,b \in \R$ cumprem $a<b$, então existe $r \in \Q$ tal que $a<r<b$.
+
+    \textbf{(b)} Se $a,b \in \R$ cumprem $a<b$, então existe $s \in \R \setminus \Q$ tal que $a<s<b$.
+\end{teo}
+
+\begin{proof}
+\end{proof}
+
+\section{Coisas}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\chapter{Números Reais como na Álgebra}
+
+\begin{defi}[Grupo]
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Um par $(G, *)$ é um \textit{grupo} se no conjunto $G \neq \emptyset$ existe uma operação $* : G \times G \to G$ para a qual
+                \begin{itemize}
+                    \item G1:
+                        $x * (y * z) = (x * y) * z$
+                    para quaisquer $x, y, z \in G$;
+                    \item G3: existe $e \in G$ tal que
+                        $x * e = x = e * x$
+                    para todo $x \in G$;
+                    \item G4: para cada $x \in G$ existe $y \in G$ tal que
+                        $x * y = e = y * x$.
+                \end{itemize}
+            \item Umm grupo $(G,*)$ é \textit{comutativo}, ou \textit{abeliano}, se
+                \begin{itemize}
+                    \item G2: $x * y = y * x$ para quaisquer $x, y \in G$,
+                \end{itemize}
+        \end{enumerate}
+\end{defi}
+
+\begin{obs}
+    As propriedades descritas em G1--G4 se chamam, respectivamente, \textit{associatividade}, \textit{comutatividade}, existência de um \textit{elemento neutro} e \textit{invertibilidade} (ou existência de \textit{inversos operativos}). 
+\end{obs}
+
+\begin{prop}
+    Seja $(G,*)$ um grupo.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item O elemento neutro de $*$ é único.
+            \item O inverso de cada elemento de $G$ é único.
+        \end{enumerate}
+\end{prop}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se $e' \in G$ é um elemento neutro de $*$, então
+                \[
+                    e = e * e' = e' * e = e',
+                \]
+            como havíamos afirmado. \itemproof
+            \item Segue analogamente. \itemproof
+        \end{enumerate}
+\end{proof}
+
+Anéis
+
+
+
+\begin{defi}
+    Uma tripla $(A, +, \cdot)$ é um \textit{anel} se no conjunto $A \neq \emptyset$ existem duas operações, $+:A \times A \to A$ e $\cdot: A \times A \to A$, para as quais
+        \begin{itemize}
+            \item A1: $a + (b + c) = (a + b) + c$ para quaisquer $a,b,c \in A$;
+            \item A2: $a + b = b + a$ para quaisquer $a, b \in A$; 
+            \item A3: existe $0 \in A$ tal que $a + 0 = a$ para todo $a \in A$;
+            \item A4: para cada $a \in A$ existe $b \in A$ tal que $a + b = 0$;
+            \item M1: $a \cdot (b \cdot c) = (a \cdot b) \cdot c$ para quaisquer $a,b,c \in A$;
+            \item AM: $a \cdot ( b + c) = a \cdot b + a \cdot c$ e $(a+b) \cdot c = a \cdot c + b \cdot c$ para quaisquer $a,b,c \in A$.
+        \end{itemize}
+\end{defi}
+
+\begin{prop}
+    Seja $(A,+, \cdot)$ um anel.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item O elemento neutro $0$ de $+$ é único.
+            \item (Lei do corte) Para quaisquer $a, b, c \in A$, vale
+                \begin{enumerate}[label=\roman*.]
+                    \item $a+c = b+c \Rightarrow a=b$;
+                    \item $a + b = a \Rightarrow b = 0$.
+                \end{enumerate}
+            \item $a \cdot 0 = 0$ para todo $a \in A$.
+        \end{enumerate}
+\end{prop}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se $0' \in A$ é um elemento neutro de $+$, então
+                \[
+                    0' = 0' + 0 = 0 + 0' = 0,
+                \]
+            conforme afirmado. \itemproof
+            \item
+            \item Observando que $a \cdot 0 = a \cdot (0+0) = a \cdot 0 + a \cdot 0$, somando $-(a \cdot 0)$ aos dois lados de $ a \cdot 0 = a \cdot 0 + a \cdot 0$, segue que $0 \cdot a = 0$. \itemproof
+        \end{enumerate}
+\end{proof}
+
+\begin{defi}
+    Um anel $(A, +, \cdot)$ é um \textit{anel comutativo} se
+        \begin{itemize}
+            \item M2: $a \cdot b = b \cdot a$ para quaisquer $a,b \in A$.
+        \end{itemize}
+\end{defi}
+
+\begin{defi}
+    Um anel $(A, +, \cdot)$ é um \textit{anel com unidade} se
+        \begin{itemize}
+            \item M3: existe $1 \in A_{\neq 0}$ tal que $a \cdot 1 = 1 \cdot a = a$ para todo $a \in A$.
+        \end{itemize}
+\end{defi}
+
+\begin{prop}
+    Seja $(A, +, \cdot)$ um anel com unidade.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item O elemento neutro $1$ de $\cdot$ é único.
+            \item (Regras dos sinais) Para quaisquer $a,b \in A$, vale
+                \begin{enumerate}[label=\roman*.]
+                    \item $(-1) \cdot a = -a$;
+                    \item $-(-a) = a$;
+                    \item $(-a) \cdot b = a \cdot (-b) = - (a \cdot b)$;
+                    \item $(-a) \cdot (-b) = a \cdot b$.
+                \end{enumerate}
+        \end{enumerate}
+\end{prop}
+
+\begin{proof}
+    \itemproof
+\end{proof}
+
+\begin{defi}
+    Um anel comutativo com unidade $(A, +, \cdot)$ é um \textit{domínio de integridade} se
+        \begin{itemize}
+            \item M4: $a \cdot b = 0 \Rightarrow a = 0 \lor b = 0$ para quaisquer $a, b \in A$.
+        \end{itemize}
+\end{defi}
+
+
+\begin{prop}
+    Seja $(A, +, \cdot)$ um domínio de integridade.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item (Leis do corte) Para quaisquer $a, b, c \in A$, com $c \neq 0$,
+                \begin{enumerate}[label=\roman*.]
+                    \item $a \cdot c = b \cdot c \Rightarrow a = b$;
+                    \item $a \cdot b = a \Rightarrow a = 0 \lor b = 1$;
+                    \item $\ds a^2 = 
+                        \begin{cases}
+                            0 \Leftrightarrow a = 0 \\
+                            1 \Leftrightarrow a = 1 \text{ ou } a = -1 \\
+                            a \Leftrightarrow a = 0 \text{ ou } a = 1
+                        \end{cases}$.
+                \end{enumerate}
+        \end{enumerate}
+\end{prop}
+
+\begin{proof}
+    
+\end{proof}
+
+\begin{defi}
+    Um anel comutativo com unidade $(A, +, \cdot)$ é um \textit{corpo} se
+        \begin{itemize}
+            \item M5: para cada $a \in A_{\neq 0}$ existe $b \in A$ tal que $a \cdot b = 1$.
+        \end{itemize}
+\end{defi}
+
+\begin{prop}
+    Todo corpo é um domínio de integridade.
+\end{prop}
+
+\begin{proof}
+    \itemproof
+\end{proof}
+
+\begin{obs}
+    Para simplificar a linguagem, um anel comutativo com unidade será chamado simplesmente de anel.
+\end{obs}
+
+\begin{defi}
+    Um anel $(A, +, \cdot)$ é um \textit{anel ordenado} se existe uma relação de ordem total $\leq \, \subseteq A \times A$ tal que
+        \begin{itemize}
+            %\item O1: $a \leq a$ para todo $a \in A$;
+            %\item O2: $a \leq b \land b \leq a \Rightarrow a = b$ para quaisquer $a,b \in A$;
+            %\item O3: $a \leq b \land b \leq c \Rightarrow a \leq c$ para quaisquer $a,b,c \in A$;
+            %\item O4: $a \leq b \lor b \leq a$ para quaisquer $a,b \in A$;
+            \item OA: $a \leq b \Rightarrow a + c \leq b + c$ para quaisquer $a,b,c \in A$;
+            \item OM: $a \leq b \Rightarrow a \cdot c \leq b \cdot c$ para quaisquer $a,b,c \in A$ com $0 \leq c$.
+        \end{itemize}
+\end{defi}
+
+\begin{prop}
+    Se $(A, +, \cdot, \leq)$ é um anel ordenado e $a, b, c, d \in A$, então
+
+    \textbf{(a)} $a \geq 0 \Rightarrow -a \leq 0$ e $a \leq 0 \Rightarrow -a \geq 0$;
+    
+    \textbf{(b)} $a + c \leq b + c \Rightarrow a \leq b$;
+
+    \textbf{(c)} $a \leq b, c \leq d \Rightarrow a + c \leq b + d$;
+
+    \textbf{(d)} $a \leq b, c \leq 0 \Rightarrow a \cdot c \geq b \cdot c$;
+
+    \textbf{(e)} $a \geq 0, b \leq 0 \Rightarrow a \cdot b \leq 0$ e $a \leq 0, b \leq 0 \Rightarrow a \cdot b \geq 0$;
+
+    \textbf{(f)} $a^2 \geq 0$, $1 > 0$ e $-1 < 0$.
+\end{prop}
+
+\begin{proof}
+    
+\end{proof}
+
+\begin{defi}
+    Seja $(A, +, \cdot, \leq)$ um anel ordenado. O \textit{valor absoluto} de $a \in A$ é definido como
+        \[
+            |a| := 
+                \begin{cases}
+                    a, & \text{ se } a \geq 0 \\
+                    -a, & \text{ se } a < 0
+                \end{cases} .
+        \]
+\end{defi}
+
+\begin{prop}
+    Seja $(A, +, \cdot, \leq)$ um anel ordenado. Para quaisquer $a, b \in A$, vale
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $|a \cdot b| = |a| \cdot |b|$.
+            \item $- |a| \leq a \leq |a|$.
+            \item $|a| \leq b \Leftrightarrow -b \leq a \leq b$.
+            \item $||a| - |b|| \leq |a \pm b| \leq |a|+|b|$.
+        \end{enumerate}
+\end{prop}
+
+\begin{proof}
+    \itemproof
+\end{proof}
+
+\begin{defi}
+    Seja $(A, +, \cdot, \leq)$ um anel ordenado.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Um subconjunto $X \subseteq A$ é
+                \begin{enumerate}[label=\roman*.]
+                    \item \textit{limitado inferiormente} se existe $a \in A$ tal que $a \leq x$ para todo $x \in X$;
+                    \item \textit{limitado superiormente} se existe $a \in A$ tal que $a \geq x$ para todo $x \in X$.
+                \end{enumerate}
+            \item Um subconjunto $X \subseteq A$ tem um
+                \begin{enumerate}[label=\roman*.]
+                    \item \textit{menor elemento} se existe $a \in X$ tal que $a \leq x$ para todo $x \in X$;
+                    \item \textit{maior elemento} se existe $a \in X$ tal que $a \geq x$ para todo $x \in X$.
+                \end{enumerate}
+        \end{enumerate}
+\end{defi}
+
+\begin{prop}
+    Seja $(A, +, \cdot, \leq)$ um domínio ordenado. Todo subconjunto não vazio de $A$, limitado inferiormente, possui um menor elemento se, e somente se, todo subconjunto não vazio de $A$, limitado superiormente, possui um maior elemento.
+\end{prop}
+
+\begin{proof}
+    \itemproof
+\end{proof}
+
+\begin{defi}
+    Um domínio ordenado $(A, +, \cdot, \leq)$ é um \textit{domínio bem ordenado} se
+        \begin{itemize}
+            \item PBO: todo subconjunto não vazio de $A$, limitado inferiormente, possui um menor elemento.
+        \end{itemize}
+\end{defi}
+
+\begin{teo}
+    Existe um único domínio bem ordenado.
+\end{teo}
+
+\begin{teo}
+    Seja $(A, +, \cdot, \leq)$ um domínio bem ordenado.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Para quaisquer $a, b \in A$, vale
+                \begin{enumerate}[label=\roman*.]
+                    \item $a > 0 \Rightarrow a \geq 1$;
+                    \item $a > b \Rightarrow a \geq b+1$;
+                    \item $b \neq 0 \Rightarrow |a \cdot b| \geq |a|$.
+                \end{enumerate}
+            \item Para quaisquer $a, b \in A$, com $b \neq 0$, existe $n \in A$ tal que $n \cdot b \geq a$.
+        \end{enumerate}
+\end{teo}
+
+\begin{proof}
+    \itemproof
+\end{proof}
+
+\section{Homomorfismos}
+
+\begin{defi}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Um \textit{homomorfismo de anéis} $(A, +, \cdot)$ e $(B, +, \cdot)$ é uma função $f : A \to B$ tal que $f(a+b) = f(a) + f(b)$ e $f(a \cdot b) = f(a) \cdot f(b)$ para quaisquer $a, b \in A$.
+            \item Um \textit{homomorfismo de anéis com unidade} $(A, +, \cdot)$ e $(B, +, \cdot)$ é um homomorfismo $f : A \to B$ tal que $f(1_A) = 1_B$.
+            \item Um \textit{homomorfismo de anéis ordenados} $(A, +, \cdot, \leq)$ e $(B, +, \cdot, \leq)$ é um homomorfismo $f : A \to B$ tal que $a \leq b \Rightarrow f(a) \leq f(b)$ para quaisquer $a, b \in A$.
+        \end{enumerate}
+\end{defi}
+
+Isso é denotado por $A \cong B$.
+
+
+

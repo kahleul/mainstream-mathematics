@@ -1,0 +1,1516 @@
+%!TEX root = main.tex
+
+\chapter{Teorias de Primeira Ordem}
+
+\section{Linguagens de Primeira Ordem}
+
+\begin{defi}[Linguagens de Primeira Ordem] 
+    \leavevmode
+    \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Um \textit{alfabeto} é uma coleção infinita de símbolos distintos, nenhum deles propriamente contido em outro, separados nas seguintes categorias:
+                \begin{enumerate}[label=\roman*.]
+                    \item Conectivos: $\lor$, $\neg$.
+                    \item Quantificador universal: $\forall$.
+                    \item Parênteses: $($, $)$.
+                    \item Variáveis, uma para cada inteiro positivo $n$: $v_1, v_2, \ldots, v_n, \ldots$. % O conjunto de símbolos de variáveis será denotado por Vars.
+                    \item Símbolos de função: para cada inteiro positivo $n$, uma coleção de símbolos de função $n$-ários.
+                    \item Símbolos de predicado: para cada inteiro positivo $n$, uma coleção de símbolos de predicado $n$-ários.
+                    \item Símbolo predicado binário de igualdade: $=$.
+                    \item Símbolos de constantes: uma coleção de símbolos.
+            \end{enumerate}
+            \item Os \textit{termos} correspondentes a um alfabeto são definidos do seguinte modo:
+                \begin{enumerate}[label=\roman*.]
+                    \item as variáveis são termos;
+                    \item as constantes são termos;
+                    \item se $t_1, t_2, \ldots, t_n$ são termos e $f$ é um símbolo de função $n$-ário, então $ft_1 t_2 \ldots t_n$ é um termo;
+                    \item todos os termos têm uma das formas acima.
+                \end{enumerate}
+            \item As \textit{fórmulas} correspondentes a um alfabeto são definidas do seguinte modo:
+                \begin{enumerate}[label=\roman*.]
+                    \item se $t_1$ e $t_2$ são termos, então $= t_1  t_2$ é uma fórmula;
+                    \item se $t_1, t_2, \ldots, t_n$ são termos e $R$ é um símbolo de predicado $n$-ário, então $R t_1 t_2 \ldots t_n$ é uma fórmula;
+                    \item se $\alpha$ e $\beta$ são fórmulas, então $(\neg \alpha)$ e $(\alpha \lor \beta)$ são fórmulas;
+                    \item se $x$ é uma variável e $\alpha$ é uma fórmula, então $(\forall x)(\alpha)$ é uma fórmula;
+                    \item todas as fórmulas têm uma das formas acima.
+            \end{enumerate}
+        As fórmulas como definidas nos itens i. e ii. são ditas \textit{atômicas}. A fórmula $\alpha$ que aparece no item iv. é chamada de \textit{escopo} do quantificador $\forall$.
+        \item Uma \textit{linguagem de primeira ordem} $\mathcal{L}$ consiste num alfabeto como descrito no item (a) e termos ($\mathcal{L}$-termos) e fórmulas ($\mathcal{L}$-fórmulas) como descritos nos itens (b) e (c).
+        \item Para especificar uma linguagem de primeira ordem $\mathcal{L}$, basta especificar quais são suas constantes, seus símbolos de função e seus símbolos de predicado:
+            \[
+                \mathcal{L} \quad \text{é} \quad \{ c_1, c_2, \ldots, f^{a(f_1)}_1, f^{a(f_2)}_2, \ldots, R^{a(R_1)}_1, R^{a(R_2)}_2, \ldots \},
+            \]
+        onde cada $c_i$ é um símbolo de constante, cada $f^{a(f_i)}_i$ é um símbolo de função de aridade $a(f_i)$ e cada $R^{a(R_i)}_i$ é um símbolo de predicado de aridade $a(R_i)$.
+    \end{enumerate}
+\end{defi}
+
+\begin{teo}[Legibilidade única] \label{teo.fund:termform}
+    Seja $\mathcal{L}$ uma linguagem de primeira ordem.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Todo termo tem uma, e exatamente uma, das formas i.-iii. da definição de termo.
+            \item Toda fórmula tem uma, e exatamente uma, das formas i.-iv. da definição de fórmula.
+        \end{enumerate}
+\end{teo}
+
+\begin{proof}
+    Ver \cite{shoenfield1967}, página 16, ou ainda, \cite{learykristiansen2017logica}, página 18.
+\end{proof}
+
+
+\begin{defi}[Subtermos e subfórmulas]
+    Sejam $t$ um $\mathcal{L}$-termo e $\varphi$ uma $\mathcal{L}$-fórmula.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Um \textit{subtermo} de $t$ é um $\mathcal{L}$-termo definido recursivamente do seguinte modo:
+                \begin{enumerate}[label=\roman*.]
+                    \item se $t$ é uma variável ou uma constante, então $t$ é o único subtermo de si mesmo;
+                    \item se $t$ é da forma $ft_1 t_2 \ldots t_n$, onde $f$ é um símbolo funcional $n$-ário e $t_1, t_2, \ldots, t_n$ são $\mathcal{L}$-termos, então os subtermos de $t$ são $t$ e os subtermos de $t_1, t_2, \ldots, t_n$.
+                \end{enumerate}
+            \item Uma \textit{subfórmula} de $\varphi$ é uma $\mathcal{L}$-fórmula definida recursivamente do seguinte modo:
+                \begin{enumerate}[label=\roman*.]
+                    \item se $\varphi$ é atômica, então  $\varphi$ é a única subfórmula de si mesma;
+                    \item se \(\varphi\) é da forma \((\neg\alpha)\) ou da forma \((\forall x)(\alpha)\), então as subfórmulas de \(\varphi\) são \(\varphi\) e as subfórmulas de \(\alpha\);
+                    \item se \(\varphi\) é da forma \((\alpha \vee \beta)\), então as subfórmulas de \(\varphi\) são \(\varphi\) e as subfórmulas de \(\alpha\) e de \(\beta\).
+                \end{enumerate}
+        \end{enumerate}
+\end{defi}
+
+\begin{defi} % leary, def1.5.2.
+    Sejam $\mathcal{L}$ uma linguagem de primeira ordem, $x$ uma variável e $\varphi$ uma fórmula. 
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item (Variáveis livres) Dizemos que $x$ é \textit{livre} em $\varphi$ se
+                \begin{enumerate}[label=\roman*.]
+                    \item $\varphi$ é atômica e $x$ ocorre em (é um símbolo) $\varphi$; ou
+                    \item $\varphi$ é da forma $(\neg \alpha)$ e $x$ é livre na fórmula $\alpha$; ou  
+                    \item $\varphi$ é da forma $(\alpha \lor \beta)$ e $x$ é livre em pelo menos uma das fórmulas $\alpha$ ou $\beta$; ou  
+                    \item $\varphi$ é da forma $(\forall y)(\alpha)$, com $x$ diferente de $y$ e livre na fórmula $\alpha$.
+                \end{enumerate}
+            Equivalentemente, podemos dizer que uma ocorrência de $x$ é livre em $\varphi$ se $x$ não ocorre no escopo de uma subfórmula $(\forall x)(\alpha)$ de $\varphi$.
+            \item (Variáveis ligadas) Dizemos que $x$ é \textit{ligada} em $\varphi$ se não for livre em $\varphi$. %, isto é, se ocorre no escopo de uma subfórmula $(\forall x)(\alpha)$ de $\varphi$.
+            \item (Sentenças) Uma \textit{sentença} de $\mathcal{L}$, ou uma $\mathcal{L}$-\textit{sentença}, é uma $\mathcal{L}$-fórmula que não possui variáveis livres.
+        \end{enumerate}
+\end{defi}
+
+\begin{defi}[Substituição]
+    Sejam $\mathcal{L}$ uma linguagem de primeira ordem, $t$ um termo e $x$ uma variável.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Seja $u$ um termo. O termo $u_t^x$, que resulta da substituição de todas as ocorrências de $x$ em $u$ por $t$, é definido recursivamente do seguinte modo:
+                \begin{enumerate}[label=\roman*.]
+                    \item se $u$ é uma variável diferente de $x$, então $u_t^x$ é $u$;
+                    \item se $u$ é a variável $x$, então $u_t^x$ é $t$;
+                    \item se $u$ é uma constante, então $u_t^x$ é $u$;
+                    \item se $u$ é da forma $f t_1 \ldots t_n$, então $u_t^x$ é $f {t_1}_t^x \ldots {t_n}_t^x$.
+                \end{enumerate}
+            \item Seja $\varphi$ uma fórmula. A fórmula $\varphi_t^x$, que resulta da substituição de todas as ocorrências de $x$ em $\varphi$ por $t$, é definida recursivamente do seguinte modo:
+                \begin{enumerate}[label=\roman*.]
+                    \item se $\varphi$ é da forma $(t_1=t_2)$, então $\varphi_t^x$ é $({t_1}_t^x={t_2}_t^x)$; 
+                    \item se $\varphi$ é da forma $R t_1 \ldots t_n$, então $\varphi_t^x$ é $R {t_1}_t^x \ldots {t_n}_t^x$;
+                    \item se $\varphi$ é da forma $(\neg \alpha)$, então $\varphi_t^x$ é $(\neg \alpha_t^x)$;
+                    \item se $\varphi$ é da forma $(\alpha \lor \beta)$, então $\varphi_t^x$ é $(\alpha_t^x \lor \beta_t^x)$;
+                    \item se $\varphi$ é da forma $(\forall y) (\alpha)$, então $\varphi_t^x$ é
+                        \[
+                            \begin{cases}
+                                \varphi, & \text{ se } y \text{ é } x; \text{ ou } \\
+                                (\forall y)(\alpha_t^x), & \text{ caso contrário. }
+                            \end{cases}
+                        \]
+                \end{enumerate}
+        \end{enumerate}
+\end{defi}
+
+\begin{defi}[Substituibilidade]
+    Sejam $\mathcal{L}$ uma linguagem de primeira ordem, $\varphi$ uma fórmula, $t$ um termo e $x$ uma variável. Dizemos que $x$ é \textit{substituível} por $t$ em $\varphi$ se
+        \begin{enumerate}[label=\roman*.]
+            \item $\varphi$ é atômica; ou
+            \item $\varphi$ é da forma $(\neg \alpha)$ e $x$ é substituível por $t$ em $\alpha$;
+            \item $\varphi$ é da forma $(\alpha \lor \beta)$ e $x$ é substituível por $t$ em $\alpha$ e em $\beta$;
+            \item $\varphi$ é da forma $(\forall y)(\alpha)$ e, exclusivamente, ou $x$ é ligada em $\varphi$, ou $y$ não ocorre em $t$ e $x$ é substituível por $t$ em $\alpha$.
+        \end{enumerate}
+\end{defi}
+
+\section{Estruturas}
+
+\begin{defi}
+    Seja $\mathcal{L}$ uma linguagem de primeira ordem. Uma $\mathcal{L}$-\textit{estrutura} $\mathfrak{A}$ consiste num conjunto $A$, chamado de \textit{universo} de $\mathfrak{A}$, tal que
+        \begin{enumerate}[label=\roman*.]
+            \item para cada símbolo de constante $c$ de $\mathcal{L}$, há um elemento $c^{\mathfrak{A}}$ em $A$;
+            \item para cada símbolo de função $n$-ário $f$ de $\mathcal{L}$, há uma função $f^{\mathfrak{A}} : A^n \to A$;
+            \item para cada símbolo de relação $n$-ário $R$ de $\mathcal{L}$, há uma relação $R^{\mathfrak{A}}$ em $A$ (isto é, $R^{\mathfrak{A}} \subseteq A^n$).
+        \end{enumerate}
+\end{defi}
+
+\begin{defi}
+    Seja $\mathfrak{A}$ uma $\mathcal{L}$-estrutura de universo $A$. 
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Uma \textit{valoração} é qualquer função $s : \mathrm{Vars} \to A$.
+            \item Sejam $s$ uma valoração, $x$ uma variável e $a$ um elemento de $A$. Uma \textit{$x$-modificação de $s$} é definida como
+                \[
+                    s[x|a](v) := \begin{cases}
+                        s(v) & \text{ se } v \text{ é uma variável diferente de } x \\
+                        a & \text{ se } v \text{ é a variável } x
+                    \end{cases}.
+                \]
+            \item Seja $s : \mathrm{Vars} \to A$ uma valoração. Uma \textit{valoração de termos gerada por $s$} é uma função $\bar{s} : \mathrm{Term} \to A$ definida recursivamente do seguinte modo:
+                \begin{enumerate}[label=\roman*.]
+                    \item se $t$ é uma variável, então $\bar{s}(t) = s(t)$;
+                    \item se $t$ é um símbolo de constante $c$, então $\bar{s}(t) = c^{\mathfrak{A}}$;
+                    \item se $t$ é da forma $ft_1 \ldots t_n$, onde $f$ é um símbolo funcional $n$-ário e $t_1, \ldots, t_n$ são termos, então $\bar{s}(t) = f^{\mathfrak{A}}(\bar{s}(t_1), \ldots, \bar{s}(t_n))$.
+                \end{enumerate}
+            \item Sejam $\varphi$ uma $\mathcal{L}$-fórmula e $s : \mathrm{Vars} \to A$ uma valoração. Dizemos que $\mathfrak{A}$ \textit{satisfaz $\varphi$ com relação a $s$}, denotando isso por $\mathfrak{A} \models  \varphi[s]$, se
+                \begin{enumerate}[label=\roman*.]
+                    \item $\varphi$ é da forma $=t_1 t_2$ e $\bar{s}(t_1)$ coincide com $\bar{s}(t_2)$; ou
+                    \item $\varphi$ é da forma $Rt_1 \ldots t_n$ e $(\bar{s}(t_1), \ldots, \bar{s}(t_n))$ é um elemento de $R^{\mathfrak{A}}$; ou
+                    \item $\varphi$ é da forma $(\neg \alpha)$ e $\mathfrak{A} \not\models \alpha[s]$; ou
+                    \item $\varphi$ é da forma $(\alpha \lor \beta)$ e $\mathfrak{A} \models \alpha[s]$ ou $\mathfrak{A} \models \beta[s]$; ou
+                    \item $\varphi$ é da forma $(\forall x)(\alpha)$ e $\mathfrak{A} \models \alpha [s[x|a]]$ para cada elemento $a$ de $A$.
+                \end{enumerate}
+            Se $\Gamma$ é um conjunto de $\mathcal{L}$-fórmulas, dizemos que $\mathfrak{A}$ satisfaz $\Gamma$ com relação a $s$, escrevendo $\mathfrak{A} \models \Gamma[s]$, se $\mathfrak{A} \models \gamma[s]$ para cada fórmula $\gamma$ em $\Gamma$.
+        \end{enumerate}
+\end{defi}
+
+\begin{teo}
+    Seja $\mathfrak{A}$ uma $\mathcal{L}$-estrutura.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se $s_1$ e $s_2$ são valorações tais que $s_1 (v) = s_2 (v)$ para toda variável $v$ que ocorre num termo $t$, então $\bar{s}_1(t) = \bar{s}_2(t)$.
+            \item Se $s_1$ e $s_2$ são valorações tais que $s_1 (v) = s_2 (v)$ para toda variável livre $v$ que ocorre na fórmula $\varphi$, então $\mathfrak{A} \models \varphi[s_1]$ se, e somente se, $\mathfrak{A} \models \varphi[s_2]$.
+            \item Se $\psi$ é uma sentença, então ou $\mathfrak{A} \models \psi[s]$ para todas as valorações $s$, ou $\mathfrak{A} \models \psi[s]$ para nenhuma valoração $s$. 
+        \end{enumerate}
+\end{teo}
+
+\begin{proof}
+    Ver \cite{learykristiansen2017logica}, seção 1.7.
+\end{proof}
+
+\begin{defi}
+    Seja $\mathfrak{A}$ uma $\mathcal{L}$-estrutura.
+        \begin{enumerate}[leftmargin=*, align=left, label=(\alph*)]
+            \item Seja $\varphi$ uma fórmula. Diremos que $\mathfrak{A}$ é um \textit{modelo} de $\varphi$, denotando isso por $\mathfrak{A} \models \varphi$, se $\mathfrak{A} \models \varphi[s]$ para toda função de atribuição de variável $s$.
+            \item Seja $\Phi$ um conjunto de fórmulas. Diremos que $\mathfrak{A}$ \textit{modela} $\Phi$, denotando isso por $\mathfrak{A} \models \Phi$, se  $\mathfrak{A} \models \varphi$ para cada fórmula $\varphi$ de $\Phi$.
+        \end{enumerate}
+\end{defi}
+
+\chapter{O sistema ZFC}
+
+A linguagem (de primeira ordem) da teoria dos conjuntos, denotada por $\mathcal{L}_{ST}$, consiste em somente um símbolo de predicado binário dito de \textit{pertencimento} $\in$. A seguir apresentamos os axiomas de ZFC que constituem a teoria de primeira ordem da teoria dos conjuntos. Na primeira seção apresentamos e discutimos os axiomas básicos, deixando os axiomas do infinito (que garante a existência do conjunto dos números naturais $\omega$), da escolha (que tem muitas equivalências) e da substituição (fundamental para a teoria dos ordinais), os mais importantes, e mais complicados, para serem tratados nas próximas seções.
+
+\section{Primeiros Axiomas} \label{sec1}
+
+\subsection{O Axioma da Extensão}
+
+\begin{ax}[da Extensão] \label{ax:1}
+    Dois conjuntos são iguais se, e somente se, eles têm os mesmos elementos.
+        \[
+            \boxed{
+                \forall x \forall y ( (x=y) \leftrightarrow \forall z((z \in x) \leftrightarrow (z \in y)))
+            }
+        \]
+\end{ax}
+
+\begin{defi}[Inclusão]
+    Um conjunto $x$ está \textit{contido} num conjunto $y$, ou é um \textit{subconjunto} de $y$, se todo elemento de $x$ é um elemento de $y$:
+        \[ \ds
+            (x \subseteq y) \overset{\text{def}}{\leftrightarrow} \forall z ((z \in x) \rightarrow (z \in y)).
+        \]
+\end{defi}
+
+\begin{obs}
+    De maneira análoga podemos definir $\subsetneq$, $\not\subseteq$, $\supseteq$, etc. Além disso, com a definição de $\subseteq$, o axioma da extensão pode ser enunciado assim:
+        \[
+            \forall x \forall y ( (x=y) \leftrightarrow ((x \subseteq y) \land (y \subseteq x))).
+        \] 
+\end{obs}
+
+\begin{prop}\footnote{Conforme a definição \eqref{defi.fund:ordemparcial}, isso significa que a relação $\subseteq$ é uma relação de ordem parcial.} \label{prop.fund:inclusaoparcial}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $\forall x (x \subseteq x)$.
+            \item $\forall x \forall y ((x \subseteq y) \land (y \subseteq x) \rightarrow (x=y))$.
+            \item $\forall x \forall y \forall z (((x \subseteq y) \land (y \subseteq z)) \rightarrow (x \subseteq z))$.
+        \end{enumerate}
+\end{prop}
+
+\begin{proof}
+    \itemproof
+\end{proof}
+
+\subsection{O Axioma do Vazio}
+
+\begin{defi}
+    Um conjunto $x$ é \textit{vazio} se $\forall y (y \notin x)$.
+\end{defi}
+
+\begin{ax}[do Vazio] \label{ax:2}
+    Existe um conjunto vazio.
+        \[
+            \boxed{
+                \exists x \forall y (y \notin x)
+            }
+        \]
+    Onde $(y \notin x) \overset{\text{def}}{\leftrightarrow} (\neg (y \in x))$.
+\end{ax}
+
+\begin{prop} \label{prop.fund:extensaounico1}
+    Quaisquer dois conjuntos vazios são iguais.
+        \[
+            \forall x_1 \forall x_2 ( (\forall y (y \notin x_1) \land \forall y (y \notin x_2)) \rightarrow (x_1 = x_2) ).
+        \]
+\end{prop}
+
+\begin{proof}
+    Se $x_1 \neq x_2$, então ou existe $z \in x_1$ tal que $z \notin x_2$, ou existe $z \in x_2$ tal que $z \notin x_1$. Em ambos os casos, $x_1$ e $x_2$ não são vazios, uma contradição. Logo $x_1 = x_2$. \itemproof
+\end{proof}
+
+\begin{obs}
+    O axioma do vazio \eqref{ax:2}, junto com a proposição \eqref{prop.fund:extensaounico1}, nos permite estabelecer que existe um único conjunto vazio:
+        \[
+            \exists x (\forall y  (y \notin x) \land \forall z(\forall y ( y \notin z ) \rightarrow (z=x) )).
+        \]
+    Podemos então falar \textit{do} conjunto vazio (em vez de \textit{de um}). Ele é denotado por $\emptyset$.
+\end{obs}
+
+\begin{prop}
+    O conjunto vazio está contido em qualquer conjunto.
+        \[
+          \forall x (\emptyset \subseteq x)
+        \]
+     %\forall E \left( \forall y (y \notin E) \rightarrow \forall x (E \subseteq x) \right)$
+\end{prop}
+
+\begin{proof}
+    Suponha que existe $x$ tal que $\emptyset \not\subseteq x$. Então existe $y \in \emptyset$ tal que $y \notin x$, uma contradição pois $\forall y (y \notin \emptyset)$. Logo $\forall x (\emptyset \subseteq x)$. \itemproof
+\end{proof}
+
+\begin{proof}
+    Pela definição de $\subseteq$, precisamos provar que $\forall x (\forall y ( (y \in \emptyset) \rightarrow (y \in x) ) )$. Como a fórmula $y \in \emptyset$ é sempre falsa, $(y \in \emptyset) \rightarrow (y \in x)$ é sempre verdadeira, donde $\forall y ( (y \in \emptyset) \rightarrow (y \in x) )$ é sempre verdadeira, donde $\forall x (\forall y ( (y \in \emptyset) \rightarrow (y \in x) ) )$ é sempre verdadeira. Isto prova que a fórmula $\forall x (\emptyset \subseteq x)$ é sempre verdadeira. \itemproof
+\end{proof}
+
+\subsection{O Axioma do Par}
+
+\begin{ax}[do Par] \label{ax:3}
+    Para quaisquer conjuntos $x$ e $y$, existe um conjunto cujos elementos são $x$ e $y$.
+        \[
+            \boxed{
+                \forall x \forall y \exists z \forall w ((w \in z) \leftrightarrow ((w = x) \lor (w = y)))
+            }
+        \]
+\end{ax}
+
+\begin{prop} \label{prop.fund:extensaounico2}
+    O conjunto $z$ do axioma do par é único. Notação: $z := \{x,y\}$. %As chaves podem ser entendidas como um símbolo funcional binário (futuramente, $n$-ário), apesar de terem uma sintaxe um pouco diferente.
+\end{prop}
+
+\begin{proof}
+    Pelo axioma do par, $z$ é tal que
+        \[
+            \forall w ((w \in z) \leftrightarrow ((w = x) \lor (w = y))).
+        \]
+    Se $z'$ é tal que
+        \[
+            \forall w ( (w \in z') \leftrightarrow ((w=x) \lor (w=y)) ),
+        \]
+    então $\forall w ((w \in z') \leftrightarrow (w \in z) )$, de modo que $z' = z$ pelo axioma da extensão. \itemproof
+\end{proof}
+
+\begin{prop}
+    $\forall x \forall y((x \in y) \leftrightarrow \{x\} \subseteq y)$.
+\end{prop}
+
+\subsection{O Axioma da União}
+
+\begin{ax}[da União] \label{ax:4}
+    Para todo conjunto $x$ existe o conjunto de todos os conjuntos que pertencem a algum elemento de $x$.
+        \[
+            \boxed{
+                \forall x \exists y \forall z ((z \in y) \leftrightarrow \exists w ( (z \in w) \land (w \in x)))
+            }
+        \]
+\end{ax}
+
+\begin{prop} \label{prop.fund:extensaounico3}
+    O conjunto $y$ do axioma da união é único. Notação: $y := \bigcup x $.
+\end{prop}
+
+\begin{proof}
+    Pelo axioma da união, $y$ é tal que
+        \[
+            \forall z ((z \in y) \leftrightarrow \exists w ( (z \in w) \land (w \in x))).
+        \]
+    Se $y'$ é tal que 
+        \[
+            \forall z ((z \in y') \leftrightarrow \exists w ( (z \in w) \land (w \in x))),
+        \]
+    então $\forall z ((z \in y') \leftrightarrow (z \in y)) $, donde $y' = y$ pelo axioma da extensão. \itemproof
+\end{proof}
+
+\begin{teo}
+    Para quaisquer conjuntos $x$ e $y$, existe o conjunto dos conjuntos que pertencem a $x$ ou a $y$.
+        \[
+            \forall x \forall y \exists z \forall w ((w \in z) \leftrightarrow ((w \in x) \lor (w \in y)))
+        \]
+    Ademais, esse conjunto é único, sendo denotado por $x \cup y$.
+\end{teo}
+
+\begin{proof}
+    Provemos que $z := \bigcup \{x,y\}$, que existe pelos axiomas do par e da união, funciona. De fato, para todo $w$, temos $w \in z$ se, e somente se, existe $u \in \{x,y \}$ tal que $w \in u$. Mas $u \in \{ x,y \}$ se, e somente se, $u = x$ ou $u=y$, de modo que $w \in x$ ou $w \in y$, como queríamos. A unicidade de $z$ segue do axioma da extensão, de modo que podemos denotar $x \cup y := z$. \itemproof
+\end{proof}
+
+\begin{proof}
+    Uma prova alternativa é a seguinte. Precisamos provar que
+        \[
+            \forall w \left( \left(w \in \bigcup \{ x,y \}  \right) \leftrightarrow ((w \in x) \lor (w \in y))\right). \tag{$\lozenge$}
+        \]
+    Pelos axiomas do par e da união, temos
+        \begin{align*}
+            w \in \bigcup \{ x,y \} &\leftrightarrow \exists u ((u \in \{x,y \}) \land (w \in u) ) \\
+            &\leftrightarrow \exists u ( ( (u=x) \lor (u=y) ) \land (w \in u) ) \\
+            &\leftrightarrow \exists u ( ( (u=x) \land (w \in u) )  \lor ( (u=y) \land ( w \in u ) ) ) \\
+            &\leftrightarrow \exists u ( (w \in x) \lor (w \in y) ) \\
+            &\leftrightarrow (w \in x) \lor (w \in y).
+        \end{align*}
+    Com isso, temos $\lozenge$, como queríamos. \itemproof
+\end{proof}
+
+\subsection{O Axioma das Partes}
+
+\begin{ax}[das Partes] \label{ax:5}
+    Para todo conjunto $x$, existe o conjunto dos subconjuntos de $x$.
+        \[
+            \boxed{
+                \forall x \exists y \forall z ( (z \in y) \leftrightarrow (z \subseteq x) )
+            }
+        \]
+\end{ax}
+
+\begin{prop} \label{prop.fund:extensaounico4}
+    O conjunto $y$ do axioma das partes é único. Notação: $y:=\mathcal{P}(x)$.
+\end{prop}
+
+\begin{proof}
+    Pelo axioma das partes, o conjunto $y$ cumpre $\forall z ( (z \in y) \leftrightarrow (z \subseteq x) )$. Se $y'$ cumpre $\forall z ( (z \in y') \leftrightarrow (z \subseteq x) )$, então $\forall z ((z \in y' )\leftrightarrow(z \in y))$, de modo que $y' = y$ pelo axioma da extensão. \itemproof
+\end{proof}
+
+\subsection{O Esquema de Axiomas da Separação}
+
+\begin{ax}[da Separação] \label{ax:6}
+    Para cada fórmula $P$ em que $z$ não ocorre livre, a fórmula
+        \[
+            \boxed{
+                \forall y \exists z \forall x ( (x \in z) \leftrightarrow ((x \in y) \land P) )
+            }    
+        \]
+    é um axioma.
+\end{ax}
+
+\begin{obs}
+    O conjunto $y$ é o ``universo'' da discussão.  O axioma da separação também é chamado de axioma da compreensão ou axioma da especificação.
+\end{obs}
+
+\begin{prop}
+    O conjunto $z$ do axioma da separação \eqref{ax:6} é único. Notação: $z:=\{x \in y : P(x) \}$.
+\end{prop}
+
+\begin{proof}
+    Segue do axioma da extensão. \itemproof
+\end{proof}
+
+\begin{teo}[Paradoxo de Russell] Não existe o conjunto de todos os conjuntos.
+        \[
+            \forall x \exists y (y \notin x)
+        \]
+\end{teo}
+
+\begin{proof}
+    Suponha que $\exists x \forall y (y \in x)$. Pelo axioma da separação com universo $x$ e a fórmula $y \notin y$, existe $z$ tal que $\forall y ( (y \in z) \leftrightarrow ((y \in x) \land (y \notin y)))$ (note que $z$ não ocorre livre em $y \notin y$). Como $\forall y (y \in x)$, temos $\forall y ((y \in z) \leftrightarrow (y \notin y))$. Particularmente para $y = z$, temos $((z \in z) \leftrightarrow (z \notin z))$, uma contradição. Logo $\forall x \exists y (y \notin x)$. \itemproof
+\end{proof}
+
+\begin{teo} \label{teo.fund:intfamilia}
+    Para todo conjunto $x \neq \emptyset$ existe o conjunto de todos os conjuntos que pertencem simultaneamente a todos os elementos de $x$.
+        \[
+            \forall x ((x \neq \emptyset) \rightarrow \exists y \forall z ((z \in y) \leftrightarrow \forall w ( (w \in x) \rightarrow (z \in w))))
+        \]
+    Ademais, esse conjunto é único, sendo denotado por $\bigcap x$.
+\end{teo}
+
+\begin{proof}
+    Precisamos provar que existe $y$ tal que
+        \[
+           \forall z ( (z \in y) \leftrightarrow \forall w ( (w \in x) \rightarrow (z \in w)) ). \tag{$\lozenge$}
+        \]
+    Observe inicialmente que o axioma da separação pode ser escrito como
+        \[
+            \forall x \exists y \forall z  ( (z \in y) \leftrightarrow ( (z \in x) \land P ) ),
+        \]
+    onde $P$ é uma fórmula em que $y$ não ocorre livre. Agora, como $x \neq \emptyset$, tome $v \in x$. Pelo axioma da separação com universo $v$ e a fórmula $\forall w ( (w \in x) \rightarrow (z \in w))$, onde $y$ não ocorre livre, existe $y$ tal que
+        \[
+            \forall z ( (z \in y) \leftrightarrow ( (z \in v) \land  (\forall w ( (w \in x) \rightarrow (z \in w))) ) ),
+        \]
+    isto é, existe 
+        \[
+            y := \{ z \in v : \forall w ( (w \in x) \rightarrow (z \in w)) \}.
+        \]
+    Afirmamos que vale  ($\lozenge$) nesse $y$. De fato,
+        \begin{itemize}
+            \item por um lado ($\Rightarrow$), se $z \in y$, então trivialmente $\forall w ((w \in x) \rightarrow (z \in w))$;
+            \item por outro lado ($\Leftarrow$), se $z$ é tal que $\forall w ((w \in x) \rightarrow (z \in w))$, então, particularmente para $w = v$, temos $v \in x \rightarrow z \in v$, e como $v \in x$, temos $z \in v$. Como $z \in v$ e $\forall w ((w \in x) \rightarrow (z \in w))$, temos que $z \in y$.
+        \end{itemize}
+    Logo, existe $y$ tal que $\lozenge$. A unicidade de $y$ segue do axioma da extensão, de modo que podemos denotar $\bigcap x := y$.  \itemproof
+\end{proof}
+
+\begin{defi} \label{defi.fund:capminus}
+    Sejam $x$ e $y$ conjuntos.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item A \textit{interseção} entre $x$ e $y$ é definida como
+                \[
+                    x \cap y :=  \{ z \in x : z \in y\}.
+                \]
+            Dizemos que $x$ e $y$ são \textit{disjuntos} se $x \cap y = \emptyset$. 
+            \item A \textit{diferença} entre $x$ e $y$ é definida como
+                \[
+                    x \setminus y := \{z \in x : z \notin y \}.
+                \]
+            Dizemos que $x \setminus y$ é o \textit{complementar} de $y$ relativo a $x$ se $y \subseteq x$. Nesse caso, denotamos $x \setminus y$ por $y^{C}$.
+            \item A \textit{diferença simétrica} entre $x$ e $y$ é definida como
+                \[
+                    x \Delta y := \{ z \in x \cup y :z \notin x \cap y \}.
+                \]
+        \end{enumerate}
+\end{defi}
+
+\begin{obs}
+    As definições \eqref{defi.fund:capminus} se dão pelo axioma da separação. Vejamos como isso é feito, por exemplo, na definição de $x \cap y$. Sendo $x$ o universo, o axioma da separação é a fórmula $\forall x \exists w \forall z ((z \in w) \leftrightarrow ((z \in x) \land P) )$, onde $P$ é uma fórmula em que $w$ não ocorre livre. Se $P$ é a fórmula $z \in y$, então existe $w$ que cumpre $\forall z ( (z \in w) \leftrightarrow (z \in x) \land (x \in y) )$, isto é, $w = \{z \in x : z \in y \}$. Denotamos esse $w$ por $x \cap y$.
+\end{obs}
+
+\subsection{Propriedades Algébricas}
+
+\begin{prop}[Propriedades da União]
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $\forall x (x \cup x = x)$.
+            \item $\forall x (x \cup \emptyset = x)$.
+            \item $\forall x \forall y (x \cup y = y \cup x)$.
+            \item $\forall x \forall y \forall z (x \cup (y \cup z) = (x \cup y) \cup z)$.
+            \item $\forall x \forall y (x \cup y = y \leftrightarrow x \subseteq y)$.
+            \item $\forall x \forall y ( (x \subseteq x \cup y) \land (y \subseteq x \cup y))$.
+            \item $\forall x \forall y \forall z (x \subseteq y \rightarrow x \cup z \subseteq y \cup z )$.
+            \item $\forall x \forall y (x \subseteq y \rightarrow \bigcup x \subseteq \bigcup y)$.
+        \end{enumerate}
+\end{prop}
+
+\begin{proof}
+    Trivial. \itemproof
+\end{proof}
+
+\begin{prop}[Propriedades da Interseção]
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $\forall x (x \cap x = x)$.
+            \item $\forall x (x \cap \emptyset = \emptyset)$.
+            \item $\forall x \forall y (x \cap y = y \cap x)$.
+            \item $\forall x \forall y \forall z (x \cap (y \cap z) = (x \cap y) \cap z)$.
+            \item $\forall x \forall y (x \cap y = x \leftrightarrow x \subseteq y)$.
+            \item $\forall x \forall y ( (x \cap y \subseteq x) \land (x \cap y \subseteq y))$.
+            \item $\forall x \forall y \forall z (x \subseteq y \rightarrow x \cap z \subseteq y \cap z)$.
+            \item $\forall x \forall y (x \subseteq y \land x \neq \emptyset \rightarrow \bigcap y \subseteq \bigcap x)$.
+        \end{enumerate}
+\end{prop}
+
+\begin{proof}
+    Trivial. \itemproof
+\end{proof}
+
+\begin{prop}[Distributividade]
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $\forall x \forall y \forall z (x \cap (y \cup z) = (x \cap y) \cup (x \cap z))$.
+            \item $\forall x \forall y \forall z (x \cup (y \cap z) = (x \cup y) \cap (x \cup z))$.
+        \end{enumerate}
+\end{prop}
+
+\begin{proof}
+    Trivial. \itemproof
+\end{proof}
+
+\begin{prop}[Propriedades da Diferença]
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item (Imediatas).
+                \begin{enumerate}[label=\roman*.]
+                    \item $\forall x (x \setminus \emptyset = x)$;
+                    \item $\forall x (x \setminus x = \emptyset)$;
+                    \item $\forall x (\emptyset \setminus x = \emptyset)$.
+                \end{enumerate}
+            \item \leavevmode
+                \begin{enumerate}
+                    \item $\forall x \forall y (x \setminus y = x \leftrightarrow x \cap y = \emptyset)$;
+                    \item $\forall x \forall y (x \setminus y = \emptyset \leftrightarrow x \subseteq y)$.
+                \end{enumerate}
+            \item (Leis de De Morgan).
+                \begin{enumerate}[label=\roman*.]
+                    \item $\forall x \forall y \forall z ( x \setminus (y \cup z) = (x \setminus y) \cap (x \setminus z) )$;
+                    \item $\forall x \forall y \forall z ( x \setminus (y \cap z) = (x \setminus y) \cup (x \setminus z) )$.
+                \end{enumerate}
+            \item $\forall x \forall y \forall z ( x \setminus (y \setminus z) = (x \setminus y) \cup (x \cap z) )$.
+            \item (Diferenças entre interseções).
+                \begin{enumerate}[label=\roman*.]
+                    \item $\forall x \forall y \forall z ( x \cap (y \setminus z) = (x \cap y) \setminus (x \cap z) )$;
+                    \item $\forall x \forall y \forall z ( (x \setminus y) \cap z = (x \cap z) \setminus y )$.
+                \end{enumerate}
+            \item (Monotonocidade da diferença).
+                \begin{enumerate}[label=\roman*.]
+                    \item $\forall x \forall y \forall z (x \subseteq y \rightarrow x \setminus z \subseteq y \setminus z)$.
+                    \item $\forall x \forall y \forall z (y \subseteq z \rightarrow x \setminus z \subseteq x \setminus y)$.
+                \end{enumerate}
+        \end{enumerate}
+\end{prop}
+
+\begin{proof}
+    Trivial. \itemproof
+\end{proof}
+
+\begin{prop}[Propriedades do Complemento Relativo]
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $\forall x \forall y (y \subseteq x \rightarrow (y^C)^C = y)$.
+            \item $\forall x \forall y (y \subseteq x \rightarrow (y \cup y^C = x) \land (y \cap y^C = \emptyset))$.
+            \item $\forall x \forall y \forall z (z \subseteq y \subseteq x \rightarrow y^C \subseteq z^C)$.
+            \item $\forall x \forall y \forall z (y \subseteq x \land z \subseteq x \rightarrow y \setminus z = y \cap z^C)$.
+            \item (Leis de De Morgan para complementos).
+                \begin{enumerate}[label=\roman*.]
+                    \item $\forall x \forall y \forall z (y \subseteq x \land z \subseteq x \rightarrow (y \cup z)^C = y^C \cap z^C)$.
+                    \item $\forall x \forall y \forall z (y \subseteq x \land z \subseteq x \rightarrow (y \cap z)^C = y^C \cup z^C)$.
+                \end{enumerate}
+        \end{enumerate}
+\end{prop}
+
+\begin{proof}
+    Trivial. \itemproof
+\end{proof}
+
+
+
+
+\begin{prop}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $\forall x \forall y \forall z ( ((x \in y) \land (y \in z)) \rightarrow ( ( x \in \bigcup z) \land (y \subseteq \bigcup z)))$.
+        \end{enumerate}
+\end{prop}
+
+\begin{prop}
+    $\forall A (\bigcup \mathcal{P}{(A)} = A)$.
+\end{prop}
+
+
+
+\subsection{O Axioma da Regularidade}
+
+\begin{ax}[da Regularidade]
+    Para todo conjunto $x \neq \emptyset$ existe $y \in x$ tal que $x \cap y = \emptyset$.
+        \[
+            \boxed{
+                \forall x ((x \neq \emptyset) \rightarrow \exists y ( (y \in x) \land (x \cap y = \emptyset)))
+            }
+        \]
+\end{ax}
+
+\begin{prop} \label{prop.fund:xinyeyinxabs}
+    Não existem conjuntos $x$ e $y$ tais que $x \in y$ e $y \in x$.
+        \[
+            \neg (\exists x \exists y ((x \in y) \land (y \in x)))
+        \]
+\end{prop}
+
+\begin{proof}
+    Basta provar que $\forall x \forall y ((x \notin y) \lor (y \notin x))$. Pelo axioma do par, tome $z := \{ x,y \}$. Como $z \neq \emptyset$, pelo axioma da regularidade existe $w \in z$ tal que $w \cap z = \emptyset$. Se $w = x$, então $y \notin x$, porque se fosse $y \in x$ teríamos $x \cap z = \{ y\} \neq \emptyset$, uma contradição. Analogamente, se $w = y$, então $x \notin y$. \itemproof
+\end{proof}
+
+\begin{cor}
+    Não existe $x$ tal que $x \in x$.
+        \[
+            \forall x(x \notin x)
+        \]
+\end{cor}
+
+\begin{proof}
+    Segue do teorema anterior com $y = x$. \itemproof
+\end{proof}
+
+\section{Relações e Funções}
+
+\subsection{Produto Cartesiano}
+
+\begin{defi}[Par ordenado]
+    Sejam $a$ e $b$ conjuntos. O \textit{par ordenado} $(a,b)$ é definido como o conjunto $\{ \{ a \}, \{a,b \} \}$, isto é,
+        \[
+            (a,b) := \{ \{ a \}, \{a,b \} \}.
+        \]
+\end{defi}
+
+\begin{prop}
+    Dois pares ordenados $(a,b)$ e $(c,d)$ são iguais se, e somente se, $a = c$ e $b=d$.
+        \[
+            \forall a \forall b \forall c \forall d ( ((a,b) = (c,d)) \leftrightarrow ((a=c) \land (b=d)))
+        \]
+\end{prop}
+
+\begin{proof}
+    Ver \cite{fajardo2024conjuntos}, teorema 4.2, página 95. Ver \cite{hercules}, teorema 4.2, página 50. \itemproof
+\end{proof}
+
+\begin{teo} \label{teo.fund:prodcart}
+    Para quaisquer conjuntos $A$ e $B$ existe o conjunto de todos os pares ordenados $(a,b)$ tais que $a \in A$ e $b \in B$.
+        \[
+            \forall A \forall B \exists C \forall x (x \in C \leftrightarrow \exists a \exists b (a \in A \land b \in B \land x = (a,b))) 
+        \]
+    Ademais, esse conjunto é único, sendo denotado por $A \times B$.
+\end{teo}
+
+\begin{proof}
+    Pelos axiomas da união e das partes, considere o conjunto $\mathcal{P}{(\mathcal{P}{(A \cup B)})}$; pelo axioma da separação, considere o conjunto
+        \[
+            C := \{x \in \mathcal{P}{(\mathcal{P}{(A \cup B)})} : \exists a \exists b (a \in A \land b \in B \land x = (a,b)) \}.
+        \]
+    Afirmamos que $C$ cumpre as condições do enunciado. Se $x \in C$, então pela definição de $C$ existem $a \in A$ e $b \in B$ tais que $x = (a,b)$. Provemos então que se existem $a \in A$ e $b \in B$ tais que $x = (a,b)$, então $x \in C$. Para isso, basta provar que $x \in \mathcal{P}(\mathcal{P}(A \cup B))$. Qualquer que seja o par ordenado $(a,b)$, onde $a \in A$ e $b \in B$,
+        \begin{align*}
+            (a,b) \in \mathcal{P}{(\mathcal{P}{(A \cup B)})} &\leftrightarrow
+            \{ \{ a\}, \{ a,b\} \} \in \mathcal{P}{(\mathcal{P}{(A \cup B)})} \\ &\leftrightarrow \{ \{ a\}, \{ a,b\} \} \subseteq \mathcal{P}{(A \cup B)} \\
+            &\leftrightarrow \{a\} \in \mathcal{P}{(A \cup B)} \land \{ a,b\} \in \mathcal{P}{(A \cup B)} \\
+            &\leftrightarrow \{a\} \subseteq (A \cup B) \land \{ a,b\} \subseteq (A \cup B),
+        \end{align*}
+    o que sabemos ser verdade. A unicidade de $C$ segue do axioma da extensão, de modo que podemos denotar $A \times B := C$. \itemproof
+\end{proof}
+
+\begin{defi}
+    O \textit{produto cartesiano} dos conjuntos $A$ e $B$ é definido como $A \times B$.
+\end{defi}
+
+\subsection{Relações}
+
+\begin{defi}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Uma \textit{relação binária}, ou simplesmente uma \textit{relação}, é um conjunto de pares ordenados.
+            \item Um símbolo de predicado para ``$R$ é relação'', onde $R$ ocorre livre, é
+                \[
+                    \operatorname{Rel}(R) \overset{\text{def}}{\leftrightarrow} \forall x \left(x \in R \rightarrow \exists a \exists b \left(x = (a,b)\right)\right).
+                \]
+            Denotamos $(a,b) \in R$ por $aRb$.
+            %\forall x \left(x \in R \rightarrow \exists a \exists b \forall y (y \in x \leftrightarrow (\forall z (z \in y \leftrightarrow z = a) \lor \forall z (z \in y \leftrightarrow (z = a \lor z = b) ) ) )\right).
+            \item Dizemos que $R$ é uma relação de $A$ em $B$ se $R \subseteq A \times B$. Dizemos que $R$ é uma relação em $A$ se $R \subseteq A \times A$.
+        \end{enumerate}
+\end{defi}
+
+\begin{teo}
+    Um conjunto $R$ é uma relação se, e somente se, existem conjuntos $A$ e $B$ tais que $R \subseteq A \times B$.
+        \[
+            \forall R (\operatorname{Rel}{(R)} \leftrightarrow \exists A \exists B(R \subseteq A \times B))
+        \]
+\end{teo}
+
+\begin{proof}
+     ($\Rightarrow$) Sendo $R$ uma relação, usando os axiomas da união e da separação, defina
+        \begin{align*}
+             A &:= \left\{ a \in \bigcup \bigcup R : \exists b \left(b \in \bigcup \bigcup R \land aRb \right) \right\} \\
+             B &:= \left\{ b \in \bigcup \bigcup R : \exists a \left(a \in \bigcup \bigcup R \land aRb \right) \right\}
+        \end{align*}
+    Seja $x \in R$. Então existem $a$ e $b$ tais que $x = (a,b)$. Se $\{ \{a \}, \{a,b \} \} \in R$, então $\{ \{a \}, \{a,b \} \} \subseteq \bigcup R$, donde $\{a,b \} \in \bigcup R$, donde $\{ a,b \} \subseteq \bigcup \bigcup R$, donde $a,b \in \bigcup \bigcup R$. Como $aRb$, pelas definições de $A$ e $B$, temos $a \in A$ e $b \in B$. Como $x = (a,b)$ e $a \in A$ e $b \in B$, pelo teorema \eqref{teo.fund:prodcart} temos $x \in A \times B$, donde, por fim, segue que $R \subseteq A \times B$.
+
+    ($\Leftarrow$) Os elementos de $A \times B$ são pares ordenados; logo, qualquer subconjunto de $A \times B$ terá pares ordenados como elementos. \itemproof
+\end{proof}
+
+\begin{defi}
+    Seja $R$ uma relação.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item O \textit{domínio} de $R$ é definido como
+                \[
+                    \Dom{(R)} := \left\{ a \in \bigcup \bigcup R : \exists b ((a,b) \in R) \right\}.
+                \]
+            \item A \textit{imagem} de $R$ é definida como
+                \[
+                    \Im{(R)} := \left\{ b \in \bigcup \bigcup R : \exists a ((a,b) \in R) \right\}.
+                \]
+            \item A \textit{relação inversa} de $R$ é definida como
+                \[
+                    R^{-1} := \{ (b,a) \in \Im{(R)} \times \Dom{(R)} : (a,b) \in R \}.
+                \]
+            \item A \textit{imagem de um conjunto $X$ por $R$} é definida como
+                \[
+                    R[X] := \{ b \in \bigcup \bigcup R : \exists a (a \in X \land (a,b) \in R) \}.
+                \]
+            \item A \textit{imagem inversa de um conjunto $Y$ por $R$} é definida como
+                \[
+                    R^{-1}[Y] := \left\{ a \in \bigcup \bigcup R : \exists b (b \in Y \land (a,b) \in R) \right\}
+                \]
+            Equivalentemente, $R^{-1}[Y]$ é a imagem de $Y$ pela relação $R^{-1}$. 
+            \item A \textit{restrição de $R$ a $X$} é definida como
+                \[
+                    R|_X := \{ (a,b) \in R : a \in X \}.
+                \]
+            \item A \textit{composição de $R$ e $S$} é definida como 
+                \[
+                    S \circ R := \{ (a,c) \in \Dom{(R)} \times \Im{(S)} : \exists b (b \in \Im{(R)} \cap \Dom{(S)} \land (aRb \land bSc)) \}.
+                \]
+        \end{enumerate}
+\end{defi}
+
+\begin{prop} \label{prop.fund:domeimdeRAB}
+    Sejam $R$ e $S$ relações e $A$, $B$, $C$ e $D$ conjuntos tais que $R \subseteq A \times B$ e $S \subseteq C \times D$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $\Dom{(R)} = \{x \in A : \exists y (y \in B \land xRy)\}$.
+            \item $\Im{(R)} = \{ y \in B : \exists x (x \in A \land xRy)\}$.
+            \item $S \circ R \subseteq A \times D$.
+        \end{enumerate}
+\end{prop}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item 
+            \item 
+            \item 
+        \end{enumerate}
+\end{proof}
+
+\begin{prop} \label{prop.fund:relacoes}
+    Sejam $R$, $S$ e $T$ relações. Valem as seguintes afirmações.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $\Dom{R^{-1}} = \Im{(R)}$, $\Im{(R^{-1})} = \Dom{(R)}$ e $(R^{-1})^{-1} = R$.
+            \item $T \circ (S \circ R) = (T \circ S) \circ R$.
+            \item $(S \circ R)^{-1} = R^{-1} \circ S^{-1}$.
+            \item Se $\Im{(R)} \subseteq \Dom{(S)}$, então $\Dom{(S \circ R)} = \Dom{(R)}$.
+            \item Se $\Dom{(S)} \subseteq \Im{(R)}$, então $\Im{(S \circ R)} = \Im{(S)}$.
+        \end{enumerate}
+\end{prop}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Temos $(a,b) \in R$ se, e somente se, $(b,a) \in R^{-1}$, o que é equivalente a $(a,b) \in (R^{-1})^{-1}$. Logo $R = (R^{-1})^{-1}$. \itemproof
+            \item Se $(a,d) \in T \circ (S \circ R)$, então $a \in \Dom{(S \circ R)}$, $d \in \Im{(T)}$ e existe $c \in \Im{(S \circ R)} \cap \Dom{(T)}$ tal que $(a,c) \in S \circ R$ e $(c,d) \in T$. De $(a,c) \in S \circ R$ segue que $a \in \Dom{(R)}$, $c \in \Im{(S)}$ e existe $b \in \Im{(R)} \cap \Dom{(S)}$ tal que $(a,b) \in R$ e $(b,c) \in S$. Como $b \in \Dom{(S)}$, $d \in \Im{(T)}$ e existe $c \in \Dom{(T)} \cap \Im{(S)}$ tal que $(b,c) \in S$ e $(c,d) \in T$, temos que $(b,d) \in T \circ S$. Com isso, $b \in \Dom{(T \circ S)}$ e $d \in \Im{(T \circ S)}$. Como $a \in \Dom{(R)}$, $d \in \Im{(T \circ S)}$ e existe $b \in \Dom{(T \circ S)} \cap \Im{(R)}$ tal que $(a,b) \in R$ e $(b,d) \in T \circ S$, temos que $(a,d) \in (T \circ S) \circ R$. Com isso, $T \circ (S \circ R) \subseteq (T \circ S) \circ R$. A prova de que $(T \circ S) \circ R \subseteq T \circ (S \circ R)$ é completamente análoga, de modo que $T \circ (S \circ R) = (T \circ S) \circ R$. \itemproof
+            \item Se $(c,a) \in (S \circ R)^{-1}$, então $(a,c) \in S \circ R$, $a \in \Dom{(R)}$, $c \in \Im{(S)}$ e existe $b \in \Im{(R)} \cap \Dom{(S)}$ tal que $(a,b) \in R$ e $(b,c) \in S$ isto é, $(c,b) \in S^{-1}$, $(b,a) \in R^{-1}$, com $c \in \Dom{(S^{-1})}$, $a \in \Im{(R^{-1})}$ e $b \in \Im{(S^{-1})} \cap \Dom{(R^{-1})}$. Com isso, $(c,a) \in R^{-1} \circ S^{-1}$, de modo que $(S \circ R)^{-1} \subseteq R^{-1} \circ S^{-1}$. A prova de que $R^{-1} \circ S^{-1} \subseteq (S \circ R)^{-1}$ é completamente análoga, de modo que $(S \circ R)^{-1} = R^{-1} \circ S^{-1}$. \itemproof
+            \item Se $a \in \Dom{(R)}$, então existe $b \in \Im{(R)}$ tal que $(a,b) \in R$. Se $\Im{(R)} \subseteq \Dom{(S)}$, então $b \in \Dom{(S)}$, de modo que existe $c \in \Im{(S)}$ tal que $(b,c) \in S$. Assim, $(a,c) \in S \circ R$, de modo que $a \in \Dom{(S \circ R)}$. Com isso, $\Dom{(R)} \subseteq \Dom{(S \circ R)}$. Agora, se $a \in \Dom{(S \circ R)}$, então existe $c \in \Im{(S \circ R)}$ tal que $(a,c) \in S \circ R$, donde $a \in \Dom{(R)}$ e $\Dom{(S \circ R)} \subseteq \Dom{(R)}$. Com isso, $\Dom{(R)} = \Dom{(S \circ R)}$. \itemproof
+            \item Se $c \in \Im{(S)}$, então existe $b \in \Dom{(S)}$ tal que $(b,c) \in S$. Se $\Dom{(S)} \subseteq \Im{(R)}$, então $b \in \Im{(R)}$, de modo que existe $a \in \Dom{(R)}$ tal que $(a,b) \in R$. Assim, $(a,c) \in S \circ R$, de modo que $c \in \Im{(S \circ R)}$. Com isso, $\Im{(S)} \subseteq \Im{(S \circ R)}$. Agora, se $c \in \Im{(S \circ R)}$, então existe $a \in \Dom{(S \circ R)}$ tal que $(a,c) \in S \circ R$, donde $c \in \Im{(S)}$ e $\Im{(S \circ R)} \subseteq \Im{(S)}$. Com isso, $\Im{(S)} = \Im{(S \circ R)}$. \itemproof
+        \end{enumerate}
+\end{proof}
+
+\subsection{Relações de Ordem}
+
+\begin{defi}
+    Seja $R$ uma relação em $X$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Dizemos que $R$ é \textit{reflexiva} se
+                \[
+                    \forall x (x \in X \rightarrow (x,x) \in R).
+                \]
+            \item Dizemos que $R$ é \textit{irreflexiva} se
+                \[
+                    \forall x (x \in X \rightarrow (x,x) \notin R).
+                \]
+            \item Dizemos que $R$ é \textit{simétrica} se
+                \[
+                    \forall x \forall y (x,y \in X \rightarrow (xRy \rightarrow yRx)).
+                \]
+            \item Dizemos que $R$ é \textit{antissimétrica} se
+                \[
+                    \forall x \forall y (x,y \in X \rightarrow (xRy \land yRx \rightarrow x=y)).
+                \]
+            \item Dizemos que $R$ é \textit{transitiva} se
+                \[
+                    \forall x \forall y \forall z (x,y,z \in X \rightarrow (xRy \land yRz \rightarrow xRz)).
+                \]
+            %$(x,x) \in R$ para todo $x \in X$. %se $(x,x) \notin R$ para todo $x \in X$.
+        \end{enumerate}
+\end{defi}
+
+\begin{defi}[Relação de ordem] \label{defi.fund:ordemparcial}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Uma \textit{relação de ordem parcial} em $X$ é uma relação $\leq  \, \, \subseteq X \times X$ que tem as seguintes propriedades.
+                \begin{enumerate}[label=\roman*.]
+                    \item Reflexividade: $\forall x(x \in X \rightarrow x \leq x)$;
+                    \item Antissimetria: $\forall x \forall y (x,y \in X \rightarrow (x \leq y \land y \leq x \rightarrow x=y))$;
+                    \item Transitividade: $\forall x \forall y \forall z (x,y,z \in X \rightarrow (x \leq y \land y \leq z \rightarrow x \leq z))$. 
+                \end{enumerate}
+            Dizemos que $X$ é o \textit{domínio} da ordem $\leq$.
+            \item Um \textit{conjunto parcialmente ordenado} é um par $(X, \leq)$ onde $\leq  \, \, \subseteq X \times X$ é uma relação de ordem.
+        \end{enumerate}
+\end{defi}
+
+\begin{nota}
+    Sendo $\leq$ uma ordem parcial, abreviaremos $y \leq x$ por $x \geq y$, $x \leq y$ e $x \neq y$ por $x < y$ e $x<y$ por $y>x$. Quando não houver perigo de confusão, podemos escrever somente \textit{ordem} em vez de ordem parcial.
+\end{nota}
+
+\begin{ex}
+    A relação de inclusão $\subseteq$ é uma relação de ordem parcial \eqref{prop.fund:inclusaoparcial}.
+\end{ex}
+
+\begin{defi}
+    Dois conjuntos parcialmente ordenados $(X_1, \leq_1)$ e $(X_2, \leq_2)$ são \textit{ordem-isomorfos} se existe uma bijeção $f:X_1 \to X_2$ tal que 
+        \[
+          \forall x \forall y (x,y \in X_1 \rightarrow (x \leq_1 y \leftrightarrow f(x) \leq_2 f(y))).  
+        \]
+    Dizemos que a função $f$ é um \textit{isomorfismo de ordens parciais}.
+\end{defi}
+
+\begin{teo}
+    Se $(X, \leq)$ é um conjunto ordenado, então existe um conjunto ordenado $(Y, \preceq)$ ordem-isomorfo a $(X,\leq)$ tal que 
+        \[
+            \preceq \, \, = \{ (x,y) \in Y \times Y : x \subseteq y \}.
+        \]
+\end{teo}
+
+\begin{proof}
+    Definindo $f : X \to \mathcal{P}{(X)}$ por $f(x) := \{y \in X : y \leq x \}$, temos que $f$ é bijetora em relação a $Y := \Im{(f)}$. De fato, se $f(x) = f(y)$, então $x \in f(y)$ e $y \in f(x)$ já que $x \in f(x)$ e $y \in f(y)$; daí, pela definição de $f$, vem $x \leq y$ e $y \leq x$, de modo que $x = y$ e $f$ é injetora. Provemos então que $x \leq y$ se, e somente se, $f(x) \subseteq f(y)$, para quaisquer $x,y \in X$. Se $z \in f(x)$, então $z \leq x$, e se $x \leq y$, então $z \leq y$, de modo que $z \in f(y)$ e $f(x) \subseteq f(y)$. Agora, se $x \in f(x) \subseteq f(y)$, então $x \in f(y)$, donde $x \leq y$. Com isso, $(X, \leq)$ é ordem-isomorfo a $(Y, \subseteq)$, como havíamos afirmado. \itemproof
+\end{proof}
+
+\begin{defi}
+    Sejam $(X, \leq)$ um conjunto parcialmente ordenado e $\emptyset \neq S \subseteq X$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Dizemos que $x \in X$ é um \textit{limitante superior} de $S$ se $y \leq x$ para todo $y \in S$.
+            \item Dizemos que $x \in X$ é um \textit{limitante inferior} de $S$ se $x \leq y$ para todo $y \in S$.
+            \item Dizemos que $S$ é \textit{limitado superiormente} se existe $x \in X$ que é um limitante superior de $S$.
+            \item Dizemos que $S$ é \textit{limitado inferiormente} se existe $x \in X$ que é limitante inferior de $S$.
+            \item Dizemos que $x \in S$ é o \textit{máximo} de $S$ se $y \leq x$ para todo $y \in S$.
+            \item Dizemos que $x \in S$ é o \textit{mínimo} de $S$ se $x \leq y$ para todo $y \in S$.
+            \item Dizemos que $x \in S$ é \textit{maximal} em $S$ se não existe $y \in S$ tal que $x < y$.
+            \item Dizemos que $x \in S$ é \textit{minimal} em $S$ se não existe $y \in S$ tal que $y < x$.
+            \item Dizemos que $x \in X$ é o \textit{supremo} de $S$ se $S$ é limitado superiormente e $x \leq y$ para todo limitante superior $y \in X$ de $S$.
+            \item Dizemos que $x \in X$ é o \textit{ínfimo} de $S$ se $S$ é limitado inferiormente e $y \leq x$ para todo limitante inferior $y \in X$ de $S$.
+        \end{enumerate}
+\end{defi}
+
+\begin{obs}
+    É fácil ver que o máximo de $S$, quando existe, é único. De fato, se $x, y \in S$ são máximos de $S$, então $x \leq y$ e $y \leq x$, de modo que $x = y$. Essa unicidade também vale para o mínimo, o ínfimo e o supremo de $S$, quando existem. Isso justifica o uso do artigo ``o'' (em \textit{o} máximo, em vez de \textit{um} máximo, por exemplo) e nos permite denotar esses elementos por $\max{S}$, $\min{S}$, $\inf{S}$ e $\sup{S}$, respectivamente.
+\end{obs}
+
+\begin{defi}
+    Seja $(X, \leq)$ um conjunto parcialmente ordenado.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Dizemos que $\leq$ é uma relação de ordem \textit{total}, ou que o par $(X,\leq)$ é \textit{totalmente ordenado}, se 
+                \[
+                    \forall x \forall y (x,y \in X \rightarrow (x \leq y \lor y \leq x)).
+                \]
+            \item Dizemos que $\leq$ é uma \textit{boa ordem} em $X$, ou que o par $(X,\leq)$ é \textit{bem-ordenado}, se todo subconjunto não vazio de $X$ possui um elemento mínimo.
+            \item Dizemos que $\leq$ é uma \textit{árvore} se, para todo $x \in X$, o conjunto $S = \{ y \in X : y \leq x\}$ é tal que $(S, \leq \bigcap S \times S)$ é bem-ordenado.
+            \item Dizemos que $\leq$ é um \textit{reticulado} se para quaisquer $x,y \in X$, o conjunto $\{ x,y \}$ possui supremo e ínfimo.
+        \end{enumerate}
+\end{defi}
+
+\begin{prop}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Toda boa ordem é uma ordem total.
+            \item Toda boa ordem é uma árvore.
+            \item Toda ordem total é um reticulado.
+        \end{enumerate}
+\end{prop}
+
+\begin{prop}
+    Se $(X,\leq)$ é ordenado e $Y \subset X$, então $\leq  \bigcap Y \times Y$ é uma relação de ordem e
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item se $\leq$ é uma ordem total, então $\leq  \bigcap Y \times Y$ é uma ordem total;
+            \item se $\leq$ é uma boa ordem, então $\leq  \bigcap Y \times Y$ é uma boa ordem;
+            \item se $\leq$ é uma árvore, então $\leq  \bigcap Y \times Y$ é uma árvore;
+        \end{enumerate}
+\end{prop}
+
+\begin{defi}
+    Seja $(X,\leq)$ um conjunto ordenado. Sendo $Y \subset X$, dizemos que $\leq \bigcap Y \times Y$ é uma \textit{subordem} de $\leq$. Dizemos que o conjunto ordenado $(Y, \leq \bigcap Y \times Y)$ é um \textit{subconjunto ordenado} de $(X, \leq)$.
+\end{defi}
+
+\subsection{Relações de Equivalência}
+
+\begin{defi} (Relações de equivalência)
+    \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+        \item Uma \textit{relação de equivalência} em $X$ é uma relação $\sim \, \, \subseteq X \times X$ que tem as seguintes propriedades.
+        \begin{enumerate}[label=\roman*.]
+            \item Reflexividade: $\forall x(x \in X \rightarrow x \sim x)$;
+            \item Simetria: $\forall x \forall y (x,y \in X \rightarrow (x \sim y \rightarrow y \sim x))$;
+            \item Transitividade: $\forall x \forall y \forall z (x,y,z \in X \rightarrow (x \sim y \land y \sim z \rightarrow x \sim z))$.
+        \end{enumerate}
+        \item A \textit{classe de equivalência} de $a \in X$ por $\sim$ é definida como
+            \[
+                [a]_{\sim} := \{ x \in X : x \sim a \}. 
+            \]
+        \item O conjunto das classes de equivalência de $\sim$ é definido como
+            \[
+                X / \sim \ := \{ Y \in \mathcal{P} (X) : \exists x \forall y (y \in Y \leftrightarrow x \sim y) \} = \{ [x]_{\sim} : x \in X \}.
+            \]
+    \end{enumerate}
+\end{defi}
+
+\begin{prop}
+    Seja $\sim$ uma relação de equivalência num conjunto $X$. As seguintes afirmações são equivalentes.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $a \sim b$.
+            \item $a \in [b]$.
+            \item $b \in [a]$.
+            \item $[a] = [b]$.
+        \end{enumerate}
+\end{prop}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left]
+            \item[\textbf{(a)} $\Rightarrow$ \textbf{(b)}:] Por definição, $[b] = \{ x \in X : x \sim b \}$, e como $a \sim b$, segue $a \in [b]$. \itemproof
+            \item[\textbf{(b)} $\Rightarrow$ \textbf{(c)}:] Se $a \in [b]$, então $a \sim b$, isto é, $b \in [a]$. \itemproof
+            \item[\textbf{(c)} $\Rightarrow$ \textbf{(d)}:] Se $b \in [a]$, então $b \sim a$. Se $x \in [a]$, então $x \sim a$, de modo que $x \sim b$, isto é, $x \in [b]$. Com isso, $[a] \subseteq [b]$. Analogamente temos $[b] \subseteq [a]$, de modo que $[a] = [b]$. \itemproof
+            \item[\textbf{(d)} $\Rightarrow$ \textbf{(a)}:] Se $a \in [a] = [b]$, então $a \sim b$. \itemproof  
+        \end{enumerate}
+\end{proof}
+
+\begin{defi}
+    Uma \textit{partição} de um conjunto $X \neq \emptyset$ é um subconjunto $\mathcal{P} \subseteq \mathcal{P}{(X)}$ que tem as seguintes propriedades.
+        \begin{enumerate}[label=\roman*.]
+            \item $\emptyset \notin \mathcal{P}$;
+            \item $\bigcup \mathcal{P} = X$;
+            \item $A \cap B = \emptyset$ para quaisquer $A, B \in \mathcal{P}$ tais que $A \neq B$.
+        \end{enumerate}
+    % tal que $\emptyset \notin \mathcal{P}$, $A \cap B = \emptyset$ para quaisquer $A, B \in \mathcal{P}$ tais que $A \neq B$ e $\bigcup \mathcal{P} = X$.
+\end{defi}
+
+\begin{teo}
+    Se $\sim$ é uma relação de equivalência num conjunto $X$, então $X / \sim$ é uma partição de $X$, isto é, valem as seguintes afirmações.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $\emptyset \notin X / \sim$.
+            \item $\bigcup X / \sim = X$.
+            \item $\forall Y\forall Z((Y, Z \in X / \sim)\rightarrow (Y=Z \lor Y \cap Z = \emptyset))$.
+        \end{enumerate}
+\end{teo}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se $\emptyset \in X/ \sim$, então existiria $x \in X$ tal que $\emptyset = [x]$, mas $x \in [x]$, uma contradição. \itemproof
+            \item Se $y \in \bigcup X / \sim$, então existe $Y \in X / \sim$ tal que $y \in Y$. Como $Y \in X / \sim$, existe $x \in X$ tal que $Y = [x]$. Como $[x] \subseteq X$, vem $y \in X$, de modo que $\bigcup X / \sim \subseteq X$. Agora, se $x \in X$, então $x \sim x$ e $x \in [x]$, e como $[x] \in X / \sim$, vem $x \in \bigcup X / \sim$, de modo que $X \subseteq \bigcup X / \sim$. Logo $\bigcup X / \sim = X$. \itemproof
+            \item Se $Y \cap Z = \emptyset$, nada há de ser provado. Se $Y \cap Z \neq \emptyset$, então existe $x \in X$ tal que $x \in Y \cap Z$. Sendo $y_0, z_0 \in X$ tais que $Y = [y_0]$ e $Z = [z_0]$, temos $x \sim y_0$ e $x \sim z_0$, de modo que $[y_0] = [z_0]$, isto é, $Y = Z$. \itemproof
+        \end{enumerate}
+\end{proof}
+
+\begin{teo}
+    Se $\mathcal{P}$ é uma partição de um conjunto $X \neq \emptyset$, então existe uma relação de equivalência $R$ em $X$ tal que $X / R = \mathcal{P}$.
+\end{teo}
+
+\begin{proof}
+    Pois tome $R := \{(x,y) \in X \times X : \exists A (A \in \mathcal{P} \land x,y \in A) \}$. \itemproof
+\end{proof}
+
+\subsection{Funções}
+
+\begin{defi}[Função] \label{defi.fund:função}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Uma relação $f$ é uma \textit{função} se $(a,b) \in f$ e $(a,c) \in f$ implicam $b=c$. A \textit{imagem} de $a \in \Dom{(f)}$ é denotada por $f(a)$.
+            \item Uma \textit{função de $A$ em $B$} é uma função $f$ tal que $\Dom{(f)} = A$ e $\Im{(f)} \subseteq B$. Isso é denotado por $f : A \to B$.
+        \end{enumerate}
+\end{defi}
+
+\begin{obs}
+    Um símbolo de predicado para ``$f$ é função'', onde $f$ ocorre livre, é
+        \[
+            \operatorname{Fun}(f) \overset{\text{def}}{\leftrightarrow} \operatorname{Rel}(f) \land \forall a \forall b \forall c ((a,b) \in f \land (a,c) \in f \rightarrow b=c).
+        \]
+    Um símbolo de predicado para ``$f$ é função de $A$ em $B$'', onde $f$, $A$ e $B$ ocorrem livre, é
+        \[
+            \operatorname{Fun}(f,A,B) \overset{\text{def}}{\leftrightarrow} \operatorname{Fun}(f) \land \Dom{(f)} = A \land \Im{(f)} \subseteq B,
+        \]
+    ou ainda, de maneira mais explícita,
+        \[
+            \operatorname{Fun}{(f,A,B)} \overset{\text{def}}{\leftrightarrow} \operatorname{Fun}(f) \land \forall x(x \in A \leftrightarrow \exists y((x,y) \in f)) \land \forall x \forall y((x,y) \in f \rightarrow y \in B).
+        \]
+\end{obs}
+
+\begin{prop}
+    Sejam $f$ e $g$ funções e $X$ um conjunto.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $f|_X$ é uma função e seu domínio é $\Dom{(f)} \cap X$.
+            \item $g \circ f$ é uma função.
+        \end{enumerate}
+\end{prop}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Por definição, $f|_X = \{ (a,b) \in f : a \in X \}$, isto é, $f$ é um conjunto de pares ordenados e, portanto, uma relação. Se $(a,b) \in f|_X$ e $(a,c) \in f|_X$, então, pela definição de $f|_X$, $(a,b) \in f$, $(a,c) \in f$ e $a \in X$; como $f$ é função, $b=c$, de modo que $f|_X$ é também uma função. Provemos, por fim, que $\Dom{(f|_X)} =  \Dom{(f)} \cap X$. Se $a \in \Dom{(f|_X)}$, então existe $b \in \Im{(f|_X)}$ tal que $(a,b) \in f|_X$; pela definição de $f|_X$, vem $(a,b) \in f$ e $a \in X$, e de $(a,b) \in f$ vem $a \in \Dom{(f)}$. Com isso, $a \in \Dom{(f)} \cap X$, de modo que $\Dom{(f|_X)} \subseteq \Dom{(f)} \cap X$. Por outro lado, se $a \in \Dom{(f)} \cap X$, então de $a \in \Dom{(f)}$ segue que existe $b \in \Im{(f)}$ tal que $(a,b) \in f$, e como $a \in X$, vem $(a,b) \in f|_X$, de modo que $\Dom{(f)} \cap X \subseteq \Dom{(f|_X)}$. Logo $\Dom{(f|_X)} = \Dom{(f)} \cap X$. Em particular, temos $f|_X = f |_{\Dom{(f)} \cap X}$. \itemproof
+            \item Se $(a,x) \in g \circ f$ e $(a,y) \in g \circ f$, então, por definição, existe $b \in \Im{(f)} \cap \Dom{(g)}$ tal que $(a,b) \in f$ e $(b,x) \in g$ e existe $c \in \Im{(f)} \cap \Dom{(g)}$ tal que $(a, c) \in f$ e $(c,y) \in g$. Como $f$ é função, vem $b=c$; daí, vem $(b,x) \in g$ e $(b,y) \in g$, e como $g$ é função, vem $x=y$. \itemproof
+        \end{enumerate}
+\end{proof}
+
+\begin{defi}
+    A \textit{função identidade} de um conjunto $A$ é a função $\id_A : A \to A$ definida por $\id_A{(x)} = x$ para todo $x \in A$.
+\end{defi}
+
+\begin{prop}
+    Se $f: A \to B$ é uma função, então $\id_B \circ f = B$ e $f \circ \id_A = A$.
+\end{prop}
+
+\begin{proof}
+    \itemproof
+\end{proof}
+
+\subsection{Bijeções e Funções Inversas}
+
+\subsubsection{Injeções}
+
+\begin{defi}
+    Uma função $f$ é \textit{injetora} se
+        \[
+            \forall x \forall y (x,y \in \Dom{(f)} \rightarrow (x \neq y \rightarrow f(x) \neq f(y))).
+        \]
+\end{defi}
+
+\begin{prop}
+    Sejam $f$ e $g$ funções.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se $f$ e $g$ são injetoras, então $g \circ f$ é injetora.
+            \item Se $g \circ f$ é injetora e $\Im{(f)} \subseteq \Dom{(g)}$, então $f$ é injetora.
+        \end{enumerate}
+\end{prop}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Sejam $x,y \in \Dom{(g \circ f)}$. Se $g(f(x)) = g(f(y))$, então $f(x) = f(y)$ pela injetividade de $g$. Se $f(x) = f(y)$, então $x = y$ pela injetividade de $f$. Logo $g \circ f$ é injetora. \itemproof
+            \item Sejam $x,y \in \Dom{(f)}$ tais que $f(x) = f(y)$. Se $\Im{(f)} \subseteq \Dom{(g)}$, então $f(x), f(y) \in \Dom{(g)}$, e como $f(x) = f(y)$, temos $g (f(x)) = g(f(y))$. Daí, pela injetividade de $g \circ f$ temos $x=y$, de modo que $f$ é injetora. \itemproof
+        \end{enumerate}
+\end{proof}
+
+\begin{teo} \label{teo.fund:inj}
+    Seja $f$ uma função.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se a relação $f^{-1}$ é uma função, então $f^{-1}$ é injetora.
+            \item A relação $f^{-1}$ é uma função se, e somente se,
+                \begin{enumerate}[label=\roman*.]
+                    \item $f$ é injetora;\footnote{Uma hipótese adicional necessária para este enunciado é a de que $\Dom{(f)} \neq \emptyset$. Colocamos essa hipótese aqui, numa nota de rodapé, para não deixar o enunciado feio e, principalmente, para não chatear o leitor.}
+                    \item $f^{-1} \circ f = \id_{\Dom{(f)}}$;
+                    \item $f \circ f^{-1} = \id_{\Im{(f)}}$.
+                \end{enumerate}
+        \end{enumerate}
+\end{teo}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se $(y,x) \in f^{-1}$ e $(z,x) \in f^{-1}$, então $(x,y) \in f$ e $(x,z) \in f$, e como $f$ é função vem $y=z$, de modo que $f^{-1}$ é uma função injetora. \itemproof
+            \item A equivalência mais importante é com $f$ ser injetora.
+                \begin{enumerate}[label=\roman*.]
+                    \item Se $f^{-1}$ é uma função, então $(x,y) \in f^{-1}$ e $(x,z) \in f^{-1}$ implicam $y=z$. Daí, como $(y,x) \in f$ e $(z,x) \in f$, sendo $y=z$ segue que $f$ é injetora. Agora, se $f$ é injetora, então $(y,x) \in f$ e $(z,x) \in f$ implicam $y=z$, e como $(x,y) \in f^{-1}$ e $(x,z) \in f^{-1}$, segue que $f^{-1}$ é uma função. \itemproof
+                \end{enumerate}
+            Provemos que $f$ é injetora se, e somente se, $f^{-1} \circ f = \id_{\Dom{(f)}}$.
+                \begin{enumerate}[label=\roman*., resume]
+                    \item ($\Rightarrow$) Se $(x,z) \in f^{-1} \circ f$, então existe $y \in \Im{(f)} \cap \Dom{(f^{-1})}$ tal que $(x,y) \in f$ e $(y,z) \in f^{-1}$. Com isso, $(z,y) \in f$, e como $f$ é injetora vem $z=x$, de modo que $(x,x) \in \id_{\Dom{(f)}}$, isto é, $f^{-1} \circ f \subseteq \id_{\Dom{(f)}}$. Agora, se $(x,x) \in \id_{\Dom{(f)}}$, então existe $y \in \Im{(f)}$ tal que $(x, y) \in f$, isto é, $(y,x) \in f^{-1}$. Com isso, $(x,x) \in f^{-1} \circ f$, de modo que $\id_{\Dom{(f)}} \subseteq f^{-1} \circ f$. Com isso, vem $f^{-1} \circ f = \id_{\Dom{(f)}}$.
+                    
+                    ($\Leftarrow$) Se $(x,y) \in f$ e $(z,y) \in f$, então $(y,x) \in f^{-1}$ e $(y,z) \in f^{-1}$. Como $(x,x) \in f^{-1} \circ f$, existe $w \in \Im{(f)} \cap \Dom{(f^{-1})}$ tal que $(x,w) \in f$ e $(w,x) \in f^{-1}$. Como $f$ é uma função, vem $w=y$, de modo que $(y,x) \in f^{-1}$. Analogamente temos $(y,z) \in f^{-1}$, e como $f$ é uma função vem $x=z$, de modo que $f$ é injetora.  \itemproof
+
+                    Agora, sendo $(x,y) \in f$ e $(z,y) \in f$, provemos que $x=z$. Como $f$ é invertível, existe uma função $g$ tal que $g \circ f = \id_{\Dom(f)}$. Como $(x,x) \in g \circ f$, existe $w \in \Im{(f)} \cap \Dom{(g)}$ tal que $(x,w) \in f$ e $(w,x) \in g$. Como $f$ é uma função, vem $w=y$, de modo que $(y,x) \in g$. Analogamente temos $(y,z) \in g$, e como $g$ é uma função vem $x=z$, de modo que $f$ é injetora.
+                \end{enumerate}
+            Por fim, provemos que $f$ é injetora se, e somente se, $f \circ f^{-1} = \id_{\Im{(f)}}$.
+                \begin{enumerate}[label=\roman*., resume]
+                    \item Segue analogamente. Para ver os detalhes, consulte ver \cite{fajardo2024conjuntos}, teorema 4.14, página 104.\itemproof
+                \end{enumerate}
+            Com isso, todas as equivalências foram provadas. \itemproof
+        \end{enumerate}
+\end{proof}
+
+\begin{defi}
+    Uma função $f$ é \textit{invertível à esquerda} se existe uma função $g$ tal que $g \circ f = \id_{\Dom{(f)}}$. Dizemos que $g$ é uma \textit{inversa à esquerda} de $f$.
+\end{defi}
+
+\begin{teo} \label{teo.fund:invesquerda}
+    Uma função $f$ é invertível à esquerda se, e somente se, $f$ é injetora.
+\end{teo}
+
+\begin{proof}
+    Se $f$ é injetora, então pelo teorema \eqref{teo.fund:inj} $f^{-1}$ é uma função tal que $f^{-1} \circ f = \id_{\Dom{(f)}}$, isto é, $f$ é invertível à esquerda. Agora, sendo $(x,y) \in f$ e $(z,y) \in f$, provemos que $x=z$. Como $f$ é invertível, existe uma função $g$ tal que $g \circ f = \id_{\Dom(f)}$. Como $(x,x) \in g \circ f$, existe $w \in \Im{(f)} \cap \Dom{(g)}$ tal que $(x,w) \in f$ e $(w,x) \in g$. Como $f$ é uma função, vem $w=y$, de modo que $(y,x) \in g$. Analogamente temos $(y,z) \in g$, e como $g$ é uma função vem $x=z$, de modo que $f$ é injetora. \itemproof
+\end{proof}
+
+\subsubsection{Sobrejeções}
+
+\begin{defi}
+    Uma função $f : A \to B$ é \textit{sobrejetora em relação a $B$} se $\Im{(f)} = B$.
+\end{defi}
+
+\begin{prop}
+    Uma função $f: A \to B$ é sobrejetora em relação a $B$ se, e somente se, para todo $y \in B$ existe $x \in A$ tal que $(x,y) \in f$.
+\end{prop}
+
+\begin{proof}
+    \itemproof    
+\end{proof}
+
+\begin{lem}
+    Sejam $f: A \to B$ e $g: C \to D$ funções.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $\Dom{(g \circ f)} = \{ x \in A : f(x) \in C\}$.
+            \item $\Dom{(g \circ f)} = A$ se, e somente se, $f(A) \subseteq C$.
+        \end{enumerate}
+\end{lem}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Pela proposição \eqref{prop.fund:domeimdeRAB}, $\Dom{(g \circ f)} = \{ x \in A : \exists y(y \in D \land (x,y \in g \circ f))\}$.
+                \begin{enumerate}[label=\roman*.]
+                    \item Se $x \in \Dom{(g \circ f)}$, então existe $y \in D$ tal que $(x,y) \in g \circ f$. Logo existe $z \in \Im{(f)} \cap \Dom{(g)} \subseteq B \cap C$ tal que $(x,z) \in f$ e $(z,y) \in g$, isto é, $z = f(x)$ e $y = g(z)$. Com isso, $x \in A$ e $f(x) \in C$, de modo que $x \in \{ x \in A : f(x) \in C\}$, isto é, $\Dom{(g \circ f)} \subseteq \{ x \in A : f(x) \in C\}$.
+                    \item Se $x \in \{ x \in A : f(x) \in C\}$, então $x \in A$ e $f(x) \in C$, isto é, existe (um único) $z \in C$ tal que $(x,z) \in f$. Como $z \in C$, existe $y \in \Im{g} \subseteq D$ tal que $(z,y) \in g$. Com isso, $x \in A$ e existe $y \in D$ tal que $(x,y) \in g \circ f$, de modo que $x \in \Dom{(g \circ f)}$, isto é, $\{ x \in A : f(x) \in C\} \subseteq \Dom{(g \circ f)}$.
+                \end{enumerate}
+            Logo $\Dom{(g \circ f)} = \{ x \in A : f(x) \in C\}$. \itemproof
+            \item A volta ($\Leftarrow$) já foi provada (proposição \eqref{prop.fund:relacoes}). Agora, se $y \in f(A)$, então existe $x \in A$ tal que $y = f(x)$, e como $A = \Dom{(g \circ f)}$, vem $f(x) \in C$, isto é, $y \in C$. Logo $f(A) \subseteq C$. \itemproof
+        \end{enumerate}
+\end{proof}
+
+\begin{prop}
+    Sejam $f : A \to B$ e $g : C \to D$ funções.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se $f$ e $g$ são sobrejetoras e $B=C$, então $g \circ f$ é sobrejetora.
+            \item Se $g \circ f$ é sobrejetora e $f(A) \subseteq C$, então $g$ é sobrejetora.
+        \end{enumerate} 
+\end{prop}
+
+\begin{proof}
+    \itemproof
+\end{proof}
+
+\begin{defi}
+    Uma função $f:A \to B$ é \textit{invertível à direita} se existe uma função $g : B \to A$ tal que $f \circ g = \id_{B}$. Dizemos que $g$ é uma \textit{inversa à direita} de $f$.
+\end{defi}
+
+\begin{teo} \label{teo.fund:invdireita}
+    Uma função $f:A \to B$ é invertível à direita se, e somente se, $f$ é sobrejetora em relação a $B$.
+\end{teo}
+
+\begin{obs}
+    A prova deste teorema depende do axioma da escolha. Mais precisamente, de um enunciado equivalente ao axioma da escolha: para toda relação $R$ existe uma função $f \subseteq R$ tal que $\Dom{(f)} = \Dom{(R)}$. Ainda assim, enunciamos este resultado aqui por uma questão de organização didática.  
+\end{obs}
+
+\begin{proof}
+    \itemproof
+\end{proof}
+
+\subsubsection{Bijeções e Funções Inversas}
+
+\begin{defi}
+    Uma função $f: A \to B$ é \textit{bijetora em relação a $B$} se é injetora e sobrejetora em relação a $B$.
+\end{defi}
+
+\begin{prop} \label{prop.fund:defbij}
+    Uma função $f: A \to B$ é bijetora em relação a $B$ se, e somente se, para todo $y \in B$ existe um único $x \in A$ tal que $(x,y) \in f$.
+\end{prop}
+
+\begin{proof}
+    \itemproof
+\end{proof}
+
+\begin{prop}
+    Se $f : A \to B$ e $g : B \to C$ são funções bijetoras, então a função $g \circ f : A \to C$ é uma função bijetora.
+\end{prop}
+
+\begin{proof}
+    
+\end{proof}
+
+\begin{teo} \label{teo.fund:bij1}
+    Seja $f : A \to B$ uma função.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se a relação $f^{-1}$ é uma função de $B$ em $A$, então $f^{-1}$ bijetora.
+            \item A relação $f^{-1}$ é uma função de $B$ em $A$ se, e somente se,
+                \begin{enumerate}[label=\roman*.]
+                    \item $f$ é bijetora;
+                    \item $f^{-1} \circ f = \id_{A}$;
+                    \item $f \circ f^{-1} = \id_{B}$.
+                \end{enumerate}
+        \end{enumerate}
+\end{teo}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Como $f$ é função, para todo $x \in A$ existe um único $y \in B$ tal que $(x,y) \in f$, isto é, $(y,x) \in f^{-1}$. Daí, pela proposição \eqref{prop.fund:defbij}, $f^{-1}$ é bijetora em relação a $A$. \itemproof
+            \item A equivalência que mais importa é com $f$ ser bijetora.
+                \begin{enumerate}[label=\roman*.]
+                    \item Se $f^{-1} \subseteq B \times A$ é uma função tal que $\Dom{(f^{-1})} = B$, então para todo $y \in B$ existe um único $x \in A$ tal que $(y,x) \in f^{-1}$, isto é, $(x,y) \in f$. Daí, pela proposição \eqref{prop.fund:defbij}, temos que $f$ é bijetora. Agora, pela mesma proposição, se $f$ é bijetora, então para todo $y \in B$ existe um único $x \in A$ tal que $(x,y) \in f$, isto é, $(y,x) \in f^{-1}$. Daí, pela definição de função, $f^{-1}$ é uma função de $B$ em $A$. \itemproof
+                \end{enumerate}
+            Provemos que $f$ é bijetora se, e somente se, $f^{-1} \circ f = \id_A$.
+                \begin{enumerate}[label=\roman*., resume]
+                    \item Segue analogamente à prova do teorema \eqref{teo.fund:inj}. \itemproof
+                \end{enumerate}
+            Por fim, provemos que $f$ é bijetora se, e somente se, $f \circ f^{-1} = \id_B$.
+                \begin{enumerate}[label=\roman*., resume]
+                    \item Segue analogamente à prova do teorema \eqref{teo.fund:inj}. \itemproof
+                \end{enumerate}
+            Com isso, todas as equivalências foram provadas. \itemproof
+        \end{enumerate}
+\end{proof}
+
+\begin{defi}
+    Uma função $f: A \to B$ é \textit{invertível} se $f$ é invertível à esquerda e à direita. A função $g: B \to A$ tal que $g \circ f = \id_A$ e $f \circ g = \id_B$ é chamada de \textit{função inversa} de $f$.
+\end{defi}
+
+\begin{prop}
+    A função inversa de uma função invertível é única.
+\end{prop}
+
+\begin{proof}
+    Sejam $f : A \to B$ uma função invertível e $g_1, g_2 : B \to A$ funções inversas de $f$. Provemos que $g_1 = g_2$. De fato,
+        \[
+            g_1 = g_1 \circ \id_B = g_1 \circ (f \circ g_2) = (g_1 \circ f) \circ g_2 = \id_A \circ g_2 = g_2.    
+        \]
+    Logo, a inversa de $f$, quando existe, é única. \itemproof
+\end{proof}
+
+\begin{teo} \label{teo.fund:bij2}
+    Seja $f: A \to B$ uma função.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $f$ é invertível se, e somente se, $f$ é bijetora.
+            \item Se $f$ é invertível, então a função inversa de $f$ é a relação inversa $f^{-1}$.
+        \end{enumerate}
+\end{teo}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $f$ é invertível se, e somente se, é invertível à esquerda e à direita. Pelo teorema \eqref{teo.fund:invesquerda}, $f$ é invertível à esquerda se, e somente se, $f$ é injetora. Pelo teorema \eqref{teo.fund:invdireita}, $f$ é invertível à direita se, e somente se, $f$ é sobrejetora. Com isso, $f$ é invertível se, e somente, $f$ é bijetora. \itemproof  
+            \item Se $f$ é invertível, então $f$ é bijetora. Se $f$ é bijetora, então pelo teorema \eqref{teo.fund:bij1} a relação $f^{-1} \subseteq B \times A$ é uma função de $B$ em $A$, isto é, $f^{-1} : B \to A$. Naturalmente, $f^{-1}$ (como relação inversa de $f$) é uma candidata para ser a função inversa de $f$, de sorte que teorema \eqref{teo.fund:bij1} temos $f^{-1} \circ f = \id_A$ e $f \circ f^{-1} = \id_B$, isto é, $f^{-1}$ é, de fato, a função inversa de $f$. \itemproof
+        \end{enumerate}
+\end{proof}
+
+\begin{obs}
+    Vamos resumir o que está acontecendo. O resultado mais importante é a equivalência entre $f : A \to B$ ser invertível e $f$ ser bijetora: por um lado, se $f$ é bijetora, então existe uma função inversa de $f$, que é única, e ela é dada pela relação inversa $f^{-1} \subseteq B \times A$, que pelo teorema \eqref{teo.fund:bij1} é uma função de $B$ em $A$, que é ainda bijetora. Por outro lado, se $f$ é invertível, então existe $f^{-1} : B \to A$ (como função inversa de $f$), que coincide com $f^{-1}$ (como relação inversa de $f$).
+\end{obs}
+
+\section{O Axioma do Infinito e os Números Naturais}
+
+\begin{defi}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item (Sucessor) Dado um conjunto $x$, o \textit{sucessor} de $x$, denotado por $x^+$, é definido como o conjunto $x \cup \{x \}$:
+                \[
+                    \forall x \forall y ((y \in x^+) \leftrightarrow ((y \in x) \lor (y = x)))
+                \]
+            \item (Conjuntos indutivos) Um conjunto $x$ é \textit{indutivo} se $\emptyset \in x$ e $y \in x \rightarrow y^+ \in x$ para todo conjunto $y$. Isso é denotado por
+                \[
+                    \ind{(x)} \overset{\text{def}}{\leftrightarrow} ((\emptyset \in x) \land \forall y ( (y \in x) \rightarrow (y^+ \in x))).
+                \]
+        \end{enumerate}
+% Diremos que um conjunto $x$ é \textit{indutivo} se \[ (\emptyset \in x) \land \forall y ( (y \in x) \rightarrow (y^+ \in x)).\]   
+%    $\emptyset \in x$ e $y \in x \rightarrow y^+$ para todo $y$:
+%        \[ \forall x (\ind{(x)} \overset{\text{def}}{\leftrightarrow} ((\emptyset \in x) \land \forall y ( (y \in x) \rightarrow (y^+ \in x)))) \]
+\end{defi}
+
+\begin{ax}[Infinito]
+    Existe um conjunto indutivo.
+        \[    \boxed{
+            \exists x ( (\emptyset \in x) \land \forall y ((y \in x) \rightarrow (y^+ \in x)) )
+        }
+        \]
+\end{ax}
+
+\begin{teo} \label{teo.fund:omega}
+    Para cada conjunto indutivo $I$, definindo
+        \[
+            \omega(I) := \bigcap \{ x \in \mathcal{P}{(I)} : \ind{(x)}\},
+        \]
+    valem as seguintes afirmações para quaisquer conjuntos $I$ e $J$ indutivos.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $\omega(I)$ é um conjunto indutivo:
+                \[ \ds
+                    \forall I ( \ind{(I)} \rightarrow \ind{(\omega(I))}).
+                \]
+            \item $\omega(I) = \omega(J)$:
+                \[
+                    \forall I \forall J ( \ind{(I)} \land \ind{(J)} \rightarrow \omega(I) = \omega(J) ).
+                \] 
+        \end{enumerate}  
+\end{teo}
+
+\begin{proof} \label{teo.fund:uomega}
+    Provemos primeiramente que $\omega(I)$ está bem definido. Pelo axioma das partes, existe o conjunto $\mathcal{P}{(I)}$. Pelo axioma da separação com universo $\mathcal{P}{(I)}$ e a fórmula $ (\emptyset \in x) \land \forall y ((y \in x) \rightarrow (y^+ \in x)  )$ (que se abrevia por $\ind{(x)}$), existe $z(I) :=  \{ x \in \mathcal{P}{(I)} : \ind{(x)} \}$. Pelo teorema \eqref{teo.fund:intfamilia}, como $z(I) \neq \emptyset$ já que $I \in z(I)$, existe $\omega(I) := \bigcap z(I)$.
+
+    \textbf{(a)} Provemos primeiramente que $\emptyset \in \omega(I)$. Observe que, pelo teorema \eqref{teo.fund:intfamilia}, $\omega(I) := \bigcap z(I)$ é o conjunto que satisfaz
+        \[
+            \forall x \left(x \in \bigcap{z(I)} \leftrightarrow \forall y (y \in z(I) \rightarrow x \in y) \right). \tag{$\lozenge_1$}
+        \]
+    Com isso, $\emptyset \in \bigcap{z(I)} \leftrightarrow \forall y (y \in z(I) \rightarrow \emptyset \in y)$. Agora, note que, por definição,
+        \[
+           \forall y (y \in z(I) \leftrightarrow y \subset I \land \ind{(y)}); \tag{$\lozenge_2$}
+        \]
+    daí, $\emptyset \in \bigcap{z(I)} \leftrightarrow \forall y (y \subset I \land \ind{(y)} \rightarrow \emptyset \in y)$, o que sabemos ser verdade: se $y \subset I$ é indutivo, então $\emptyset \in y$. Assim, $\emptyset \in \bigcap{z(I)} = \omega (I)$.
+
+    Agora provemos que $\forall x ( (x \in \omega(I)) \rightarrow (x^+ \in \omega(I)) )$. 
+    Com ($\lozenge_1$), precisamos provar que
+        \[
+            \forall x ( \forall y (y \in z(I) \rightarrow x \in y) \rightarrow \forall y (y \in z(I) \rightarrow x^+ \in y)  ),
+        \]
+    isto é, precisamos provar que
+        \[
+            \forall x ( \forall y (y \in z(I) \rightarrow (x \in y \rightarrow x^+ \in y) ).
+        \]
+    Por ($\lozenge_2$), ficamos com
+        \[
+            \forall x ( \forall y (y \subset I \land \ind{(y)} \rightarrow (x \in y \rightarrow x^+ \in y) )),
+        \]
+    o que sabemos ser verdade: se $y \subset I$ é indutivo, então $\forall x (x \in y \rightarrow x^+ \in y)$.
+    
+    \textbf{(b)} Provemos inicialmente que, para quaisquer $I$ e $J$ indutivos, $\omega (I) \subset J$, isto é, que $\omega(I)$ é, de certo modo, o ``menor'' conjunto indutivo. Inicialmente, veja que o mesmo argumento do item (a) nos mostra que, se $I$ e $J$ são indutivos, então $I \cap J$ é indutivo. Como $I \cap J \subset I$, temos $I \cap J \in z(I)$. Agora, pelo teorema   \eqref{teo.fund:intfamilia},
+        \[
+            x \in \bigcap z(I) \leftrightarrow \forall w (w \in z(I) \rightarrow x \in w ),
+        \] 
+    donde, particularmente para $w = I \cap J$, $x \in \bigcap z(I) \rightarrow x \in I \cap J$, isto é, $\omega{(I)} = \bigcap{z(I)} \subset I \cap J \subset J$. Para finalizar, como $\omega(I)$ é indutivo, vale $\omega{(I)} \subset \omega{(J)}$ e, por simetria, também vale $\omega{(J)} \subset \omega{(I)}$, donde $\omega{(I)} = \omega{(J)}$.
+\end{proof}
+
+\begin{obs}
+    O teorema \eqref{teo.fund:omega} nos diz que $\omega(I)$ é a interseção da família de todos os conjuntos indutivos e que o parâmtro $I$ pode ser suprimido. A seguinte definição só é possível devido a esse teorema.
+\end{obs}
+
+\begin{defi}
+    O conjunto dos números naturais, que será denotado por $\omega$, é definido como a interseção de todos os conjuntos indutivos.
+\end{defi}
+
+\begin{teo} \label{teo.fund:peano}
+    O conjunto $\omega$ dos números naturais serve como modelo para os axiomas de Peano, a saber:
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $\forall x \forall y (x,y \in \omega  \rightarrow  (\neg (x=y) \rightarrow \neg (x^+ = y^+ )))$;
+            \item $\forall x (x \in \omega \rightarrow (\neg (x^+ = \emptyset) ))$;
+            \item $(P(\emptyset) \land  \forall x (x \in \omega \rightarrow (P(x) \rightarrow P(x^+)))) \rightarrow \forall x (x \in \omega \rightarrow P(x))$, para cada fórmula $P$.
+        \end{enumerate}
+\end{teo}
+
+\begin{proof}
+    \textbf{(a)} Suponha, por absurdo, que $x \neq y$ e $x^+ = y^+$. Sabemos que $x \in x^+$; sendo $x^+ = y^+ = y \cup \{y\}$, vemos que $x \in y$ ou $x \in \{y\}$. Esta última equivale a $x=y$, o que contraria a hipótese. Logo, só pode ser $x \in y$. Analogamente, obtemos $y \in x$, o que contraria a proposição \eqref{prop.fund:xinyeyinxabs}. Logo, se $x \neq y$, só pode ser $x^+ \neq y^+$. \itemproof
+
+    Note que não usamos a hipótese de ser $x,y \in \omega$, ou seja, vale a afirmação mais forte $\forall x \forall y (\neg(x=y) \rightarrow \neg (x^+ = y^+) )$.
+
+    \textbf{(b)} Sabemos que $\forall x (x \in x^+)$. Se fosse $x^+ = \emptyset$ para algum $x$, seria $x \in \emptyset$, o que não é. \itemproof
+
+    Novamente, não usamos a hipótese de ser $x \in \omega$, ou seja, vale a afirmação mais forte $\forall x (\neg(x^+ = \emptyset))$.
+        
+    \textbf{(c)} Seja $P$ uma fórmula em que $x$ aparece livre tal que $P(\emptyset)$ e $\forall x (P(x) \rightarrow P(x^+))$. Pelo axioma da separação, defina $A := \{ x \in \omega : P(x) \}$. Afirmamos que $A$ é indutivo. De fato, isso segue imediatamente do fato de ser, por hipótese, $P(\emptyset)$ e $\forall x (P(x) \rightarrow P(x^+))$. Com o que provamos no item (b) do teorema \eqref{teo.fund:uomega}, temos $\omega \subset A$, o que nos mostra que todo elemento de $\omega$ satisfaz $P(x)$.
+\end{proof}
+
+
+\begin{teo}
+    $(\omega, \subset)$ é bem ordenado.
+\end{teo}
+
+\begin{proof}
+    Ver \cite{fajardo2024conjuntos}, teorema 4.26, página 111.
+\end{proof}
+
+\subsection{O Teorema da Recursão}
+
+Para definir funções de domínio $\omega$ recursivamente, precisamos
+    \begin{enumerate}
+        \item estabelecer o valor da função em 0;
+        \item estabelecer uma ``regra'' para definir o valor da função em $n^+$ uma vez que se conheça o seu valor em $n$.
+    \end{enumerate}
+
+\begin{teo}[da recursão finita] \label{teo.fund:recfin}
+    Sejam $X$ um conjunto, $x_0 \in X$ e $g:X \to X$. Existe e é única a função $f : \omega \to X$ tal que
+        \begin{itemize}
+            \item $f(0) = x_0$;
+            \item $f(n^+) = g(f(n))$, para todo $n \in \omega$.
+        \end{itemize}
+\end{teo}
+
+\begin{proof}
+    A ideia é considerar todas as relações contidas em $\omega \times X$ que cumprem as condições desejadas e provar que a interseção de todas elas resulta em uma única função de domínio $\omega$. Defina
+        \[
+            \mathcal{C} := \left\{  R \in \mathcal{P}(\omega \times X) : (0,x_0) \in R \land \forall n \forall y ((n,y) \in R \to (n^{+},g(y)) \in R) \right\}.
+        \]
+    Como $\omega \times X \in \mathcal{C}$, temos $\mathcal{C} \neq \emptyset$, de modo que, pelo teorema \eqref{teo.fund:intfamilia} podemos tomar $f := \bigcap \mathcal{C}$. Temos $(0,x_0) \in f$ porque $(0,x_0) \in R$ para toda $R \in C$. Analogamente, se $(n,y) \in f$, então $(n,y) \in R$ para toda $R \in C$, de modo que $(n^{+},g(y)) \in R$ para toda $R \in C$, provando que $(n^{+},g(y)) \in f$ e que $f \in \mathcal{C}$.
+        \begin{enumerate}[label=\roman*.]
+            \item $\mathrm{Dom}(f) = \omega$. Claramente, $\mathrm{Dom}(f) \subset \omega$. Como $(0,x_0) \in f$, temos $0 \in \mathrm{Dom}(f)$. Agora, se $n \in \mathrm{Dom}(f)$, então existe $y \in X$ tal que $(n,y) \in f$, já que $f$ é uma relação. Com isso, vem $(n^+,g(y)) \in f$, donde $n^+ \in \mathrm{Dom}(f)$. Assim, $\mathrm{Dom}(f)$ é indutivo, e como $\mathrm{Dom}(f) \subset \omega$, temos que $\mathrm{Dom}(f) = \omega$.
+            \item $f$ é função. Provaremos que $(n,y) \in f$ e $(n,z) \in f$ implicam $y=z$ por indução em $n$.
+                \begin{itemize}
+                    \item Base de indução. Como $(0, x_0) \in f$, provemos que se $(0,z) \in f$, então $z=x_0$. Equivalentemente, via contrapositiva, podemos provar que se $z \in X$ é tal que $z \neq x_0$, então $(0,z) \notin f$. Como $(0,z) \notin f$ equivale a $f \setminus \{ (0,z)\} \in \mathcal{C}$, provemos isso para todo $z \in X$ tal que $z \neq x_0$. Sendo $z \neq x_0$, o par $(0,x_0)$ não foi ``removido'' de $f$, de modo que $(0,x_0) \in f \setminus \{(0,z)\}$. Agora, se $(n,y) \in f \setminus \{(0,z)\}$, então, como $f \in C$, temos que $(n^+,g(y)) \in f$. Como, pelo teorema \eqref{teo.fund:peano}, $n^+ \neq 0$ para todo $n \in \omega$, temos $(n^+,g(y)) \in f \setminus \{(0,z)\}$. Isso prova que $f \setminus \{(0,z) \}$ é uma relação que satisfaz as condições do teorema e, portanto, $f \setminus \{(0,z) \} \in \mathcal{C}$. Com isso, se $(0,z) \in f$, então $z=x_0$.
+                    \item Passo indutivo. Agora, tomando $n \in \mathrm{Dom}(f)$, existe $y \in X$ tal que $(n,y) \in f$, e ainda, $(n^+,g(y)) \in f$. Supondo, por hipótese de indução, que $(n,z) \in f$ implica $y=z$, precisamos provar que $(n^+,z) \in f$ implica $z = g(y)$. Provemos, então, via contrapositiva, que se $z \in X$ é tal que $z \neq g(y)$, então $(n^{+},z) \notin f$. Isso significa provar, assim como fizemos no caso base da indução, que $f \setminus \{(n^+,z)\} \in \mathcal{C}$. De fato, como $n^+ \neq 0$, temos $(0,x_0) \in f \setminus \{(n^+, z) \}$ (o par $(0,x_0)$ não pode ter sido ``removido''). Agora, se $m \in \mathrm{Dom}(f)$, existe $t \in X$ tal que $(m,t) \in f$ e $(m^+,g(t)) \in f$. Se for $m^+ = n^+$, então $m=n$ (teorema \eqref{teo.fund:peano}), de modo que, pela hipótese de indução, $t=y$, donde $g(t) = g(y) \neq z$. Assim, $f \setminus \{(n^+,z)\}$ satisfaz as condições do teorema e, portanto, $f \setminus \{(n^+,z)\} \in \mathcal{C}$. Com isso, se $(n^+,z) \in f$, então $z = g(y)$.
+                \end{itemize}
+            \item Unicidade de $f$. Se $h$ é outra função satisfazendo as condições do teorema, então $h(0) = x_0 = f(0)$ e, se $h(n) = f(n)$, então
+                \[
+                    h(n^+) = g(h(n)) = g(f(n)) = f(n^+).
+                \]  
+            de modo que, por indução, $h = f$.
+        \end{enumerate}
+    Com isso, vemos que existe uma relação $f$ que é uma função, tem domínio $\omega$, é única e satisfaz as condições do teorema. 
+\end{proof}
+
+\begin{teo}[da recursão com parâmetro] \label{teo.fund:recpar}
+    Sejam $X$ um conjunto, $x_0 \in X$ e $g : \omega \times X \to X$. Existe e é única a função $f : \omega \to X$ tal que
+        \begin{itemize}
+            \item $f(0) = x_0$;
+            \item $f(n^+) = g(n, f(n))$, para todo $n \in \omega$.
+        \end{itemize}
+\end{teo}
+
+\begin{proof}
+    Defina $ g' : \omega \times X \longrightarrow \omega \times X$ por $g'(n, y) = (n^+, g(n, y))$. Pelo teorema da recursão finita \eqref{teo.fund:recfin}, existe uma única função $f' : \omega \rightarrow \omega \times X$ tal que $ f'(0) = (0, x_0)$ e $f'(n^+) = g'(f'(n))$ para todo $n \in \omega$.
+
+    Afirmamos que a primeira coordenada de $f'(n)$ é sempre $n$, isto é, que $f'(n) = (n, y_n)$ para todo $n \in \omega$ e algum $y_n \in X$. De fato, $f'(0) = (0,x_0)$ claramente cumpre a afirmação, e se $f'(n) = (n, y_n)$ para algum $y_n \in X$, então $f'(n^+) = g'(n, y_n) = (n^+, g(n,y_n))$, o que prova, via indução, a afirmação. Com isso, podemos definir $f : \omega \to X$ de modo que $f(n)= y_n$, para todo $n \in \omega$.
+    
+    Provemos que $f$ satisfaz as condições do teorema. Temos $f'(0) = (0,x_0)$, donde $f(0) = x_0$. Ainda pela definição de $f$, temos $f'(n) = (n, f(n))$ e $f'(n^+) = (n^+, f(n^+))$; por outro lado, $f'(n^+) = g'(n, f(n)) = (n^+, g(n,f(n)))$, de modo que $f(n^+) = g(n,f(n))$ para todo $n \in \omega$.
+
+    Por fim, provemos a unicidade de $f$. Se $h : \omega \to X$ tal que $h(0) = x_0$ e $h(n^+) = g(n, h(n))$ para todo $n \in \omega$, definindo $h' : \omega \to \omega \times X$ por $h'(n) = (n, h(n))$, temos que $h'(0) = (0,x_0)$ e, para todo $n \in \omega$,
+        \[
+            h(n^+) = (n^+, h(n^+)) = (n^+, g(n, h(n))) = g'(n, h(n)) = g'(h'(n)).
+        \]
+    Com isso, $h'$ é uma função que satisfaz as mesmas condições que $f'$; como $f'$ foi construída pelo teorema da recursão, segue que $h' = f'$.
+\end{proof}
+
+Para a próxima versão do teorema da recursão, denotamos por $X^{<\omega}$ o conjunto de todas as funções de um certo $n \in \omega$ em $X$.
+
+\begin{teo}[da recursão completa]
+    Sejam $X$ um conjunto e $g :  X^{<\omega} \to X$ uma função. Existe e é única a função $f : \omega \to X$ tal que $f(n) = g(f|_n)$ para todo $n \in \omega$.
+\end{teo}
+
+\begin{proof}
+    Ver \cite{fajardo2024conjuntos}, corolário 4.31, página 115. Observe que esse resultado, assim como \eqref{teo.fund:recpar}, são corolários do teorema \eqref{teo.fund:recfin}.
+\end{proof}
+
+\subsection{Aritmética dos Números Naturais}
+
+\section{O Axioma da Escolha}
+
+\begin{ax}[da Escolha]
+    Para todo conjunto $x$ de conjuntos não vazios existe uma função $f : x \to \bigcup x$ tal que $f(y) \in y$ para todo $y \in x$.
+        \[
+            \forall x \left(\emptyset \notin x \rightarrow \exists f \left(\operatorname{Fun}\left(f, x, \bigcup x \right) \land \forall y (y \in x \rightarrow f(y) \in y) \right)\right).
+        \]
+        \[\forall x \exists f \left( \operatorname{Fun}\left(f, x \setminus \{\emptyset\}, \bigcup x \right) \land \forall y (y \in x \setminus \{\emptyset\} \rightarrow f(y) \in y) \right).\]
+    Dizemos que $f$ é uma \textit{função escolha} em $x$.
+%\forall y (y \in x \rightarrow \exists z (z \in y))
+\end{ax}
+
+\begin{obs}
+    Usamos a sigla AC (do inglês Axiom of Choice) para nos referir ao axioma da escolha. Por seu caráter não construtivo, o axioma da escolha é o axioma matemático mais controverso, evitado por uns e usado indiscriminadamente por outros. Desastres acontecem com e sem AC: por exemplo, sem AC, muitos resultados matemáticos fundamentais falham, sendo equivalentes em ZF a AC ou a alguma forma fraca de AC.
+\end{obs}
+
+\begin{defi}
+    Uma \textit{sequência} de elementos de um conjunto $X$ \textit{indexada} por elementos de um conjunto $I$ é uma função $x : I \to X$. 
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Denotamos por $x_i$ a imagem de $i \in I$ pela sequência $x : I \to X$, isto é, $x_i := x(i)$.
+            \item Denotamos por $\left( x_i \right)_{i \in I}$ a sequência $x : I \to X$.
+            \item Denotamos por $\{x_i : i \in I \}$ a imagem da sequência $\left( x_i \right)_{i \in I}$.
+            \item Denotamos por $\bigcup_{i \in I} x_i$ a união da imagem da sequência $\left( x_i \right)_{i \in I}$, isto é, $\bigcup_{i \in I} x_i := \bigcup \left\{x_i : i \in I \right\}$ 
+        \end{enumerate}
+\end{defi}
+
+\begin{defi}
+    O \textit{produto cartesiano} de $\left(X_i \right)_{i \in I}$ é definido como
+        \[
+           \prod_{i \in I} X_i := \left\{ f \in \mathcal{P}\left(I \times \bigcup_{i \in I} X_i\right) : \operatorname{Fun}\left(f, I, \bigcup_{i \in I} X_i \right) \land \forall i(i \in I \rightarrow f(i) \in X_i) \right\},
+        \]
+    isto é, $\prod_{i \in I} X_i$ é definido como o conjunto de todas as funções $f$ de domínio $I$ tais que $f(i) \in X_i$ para todo $i \in I$.
+\end{defi}
+
+\begin{prop}
+    O axioma da escolha é equivalente à seguinte afirmação: se $\left(X_i \right)_{i \in I}$ é uma sequência com $X_i \neq \emptyset$ para todo $i \in I$, então $\prod_{i \in I} X_i \neq \emptyset$.
+\end{prop}
+
+\begin{proof}
+    ($\Rightarrow$) Usemos a notação usual de função escrevendo $g = (X_i)_{i \in I}$. Note que o conjunto imagem de $g$, denotado por $\{X_i : i \in I \}$, é, formalmente, o conjunto
+        \[
+            \left\{ x \in \mathcal{P}\left( \bigcup_{j \in I} X_j \right) : \exists i (i \in I \land x = X_i) \right\}.
+        \]
+    Como $X_i \neq \emptyset$ para todo $i \in I$, temos que $\emptyset \notin \mathrm{Im}(g)$, de modo que, pelo axioma da escolha, existe uma função $f : \mathrm{Im}(g) \to \bigcup \mathrm{Im}(g)$ tal que $f(x) \in x$ para todo $x \in \mathrm{Im}(g)$. Assim, existe uma função, $f \circ g : I \to \bigcup \mathrm{Im}(g)$, tal que que $(f \circ g)(i) = f(X_i) \in X_i$ para todo $i \in I$, de modo que $f \circ g \in \prod_{i \in I} X_i \neq \emptyset$.
+
+    $(\Leftarrow)$ Agora, seja $x \neq \emptyset$ tal que $\emptyset \notin x$. Sendo $g$ a função identidade em $x$ e fazendo $I = x$ e $X_i = i$ para todo $i \in I$, temos que $g$ é a sequência $\left(X_i \right)_{i \in I}$. Como $I \neq \emptyset$ e $X_i \neq \emptyset$ para todo $i \in I$, temos, por hipótese, que $\prod_{i \in I} X_i \neq \emptyset$. Com isso, toda função $f \in \prod_{i \in I} X_i$ é tal que $f(i) \in X_i$ para todo $i \in I$, isto é, $f(y) \in y$ para todo $y \in x$, como exige o axioma da escolha.
+\end{proof}
+

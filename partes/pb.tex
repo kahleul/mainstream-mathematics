@@ -1,0 +1,385 @@
+%!TEX root = main.tex
+
+\chapter{Combinatória Finita}
+
+
+
+\begin{prop}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item (Regra da soma) Se $X_1, X_2, \ldots, X_n$ são conjuntos finitos dois a dois disjuntos, então o conjunto $\ds \bigcup_{i=1}^{n} X_i$ é finito e
+                \[
+                    \left| \bigcup_{i=1}^{n} X_i \right| = \sum_{i=1}^{n} |X_i|.
+                \]
+            \item (Regra do produto) Se $X_1, X_2, \ldots, X_n$ são conjuntos finitos, então o conjunto $X_1 \times X_2 \times \cdots \times X_n$ é finito e
+                \[
+                    |X_1 \times X_2 \times \cdots \times X_n| = \prod_{i=1}^{n} |X_i|.
+                \]
+        \end{enumerate}
+\end{prop}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Façamos indução em $n \geq 2$. 
+            
+            Para $n=2$, ver \cite{cursodeanalise1}, p. 32, teorema 6, \cite{tertulianoprob}, p. 14, \cite{tme4}, p. 2.
+            
+            Para completar a indução, ver \cite{cursodeanalise1}, p. 33, corolário 1, \cite{tertulianoprob}, p. 15, \cite{tme4}, p. 2.
+
+            \item Ver \cite{cursodeanalise1}, p. 33, corolário 3.
+        \end{enumerate}
+\end{proof}
+
+\begin{prop}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se $X$ é um conjunto finito, então $\mathcal{P} (X)$ é finito e $|\mathcal{P}(X)| = 2^{|X|}$.
+
+            \item Se $X$ e $Y$ são conjuntos finitos, então o conjunto $X^Y$ (de todas as funções $f:X \to Y$) é finito $|X^Y| = |Y|^{|X|}$.
+        \end{enumerate}
+\end{prop}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item
+
+            \item Ver \cite{cursodeanalise1}, p. 33, corolário 3.
+        \end{enumerate}
+\end{proof}
+
+\chapter{Espaços de Probabilidade}
+
+\begin{defi}
+    Seja $\Omega$ um conjunto.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item  Uma \textit{$\sigma$-álgebra} é um subconjunto $\mathcal{F} \subseteq \mathcal{P}(\Omega)$, tal que
+                \begin{enumerate}[label=\roman*.]
+                    \item $\Omega \in \mathcal{F}$;
+                    \item se $A \in \mathcal{F}$, então $A^C \in \mathcal{F}$;
+                    \item se $\left\{ A_n \right\}_{n \in \N} \subseteq \mathcal{F}$, então $\ds \bigcup_{n \in \N} A_n \in \mathcal{F}$.
+                \end{enumerate}
+            \item Um \textit{espaço mensurável} é um par $(\Omega, \mathcal{F})$, onde $\mathcal{F}$ é uma $\sigma$-álgebra em $\Omega$.
+        \end{enumerate}
+\end{defi}
+
+\begin{ex}
+    Seja $\Omega$ um conjunto.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $(\Omega, \mathcal{P}(\Omega))$ é um espaço mensurável.
+            \item $(\Omega, \{\emptyset, \Omega\})$ é um espaço mensurável, dito \textit{trivial}, pois $\{\emptyset, \Omega\}$ é uma $\sigma$-álgebra em $\Omega$.
+        \end{enumerate}
+\end{ex}
+
+\begin{cor}
+    Seja $(\Omega, \mathcal{F})$ um espaço mensurável. Valem as seguintes afirmações.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $\emptyset \in \mathcal{F}$.
+            \item Se $\left\{ A_n \right\}_{n \in \N} \subseteq \mathcal{F}$, então $\ds \bigcap_{n \in \N} A_n \in \mathcal{F}$.
+            \item Se $A, B \in \mathcal{F}$, então $A \setminus B \in \mathcal{F}$ e $B \setminus A \in \mathcal{F}$.
+        \end{enumerate}
+\end{cor}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Temos $\Omega \in \mathcal{F}$, de modo que $\Omega^{C} \in \mathcal{F}$, isto é, $\emptyset \in \mathcal{F}$. \itemproof
+            \item \itemproof
+        \end{enumerate}
+\end{proof}
+
+\begin{defi}
+    Seja $(\Omega, \mathcal{F})$ um espaço mensurável com $\Omega \neq \emptyset$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Uma \textit{medida de probabilidade} em $(\Omega, \mathcal{F})$ é uma função $\Pb : \mathcal{F} \to \R$ tal que
+                \begin{enumerate}[label=\roman*.]
+                    \item $\Pb(\Omega) = 1$;
+                    \item $\Pb(A) \geq 0$ para todo $A \in \mathcal{F}$;
+                    \item se $\left\{ A_n \right\}_{n \in \N} \subseteq \mathcal{F}$ e $A_i \cap A_j = \emptyset$ para $i \neq j$, então
+                        \[
+                            \Pb \left( \bigcup_{n \in \N} A_n \right) = \sum_{n \in \N} \Pb (A_n).
+                        \]
+                \end{enumerate}
+            \item Um \textit{espaço de probabilidade} é uma terna $(\Omega, \mathcal{F}, \Pb)$, onde $\Pb : \mathcal{F} \to \R$ é uma medida de probabilidade definida em $(\Omega, \mathcal{F})$. Neste contexto, dizemos que $\Omega$ é um \textit{espaço amostral} e que os elementos de $\mathcal{F}$  (subconjuntos de $\Omega$) são \textit{eventos aleatórios}, ou simplesmente \textit{eventos}.
+        \end{enumerate}
+\end{defi}
+
+\begin{prop}
+    Sejam $(\Omega, \mathcal{F}, \Pb)$ um espaço de probabilidade, $\left\{ A_n \right\}_{n \in \N} \subseteq \mathcal{F}$ e $A, B \in \mathcal{F}$. Valem as seguintes afirmações.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $\Pb (\emptyset) = 0$;
+            \item $\Pb (A^C) = 1 - \Pb (A)$;
+            \item se $A \subseteq B$, então $\Pb(B \setminus A) = \Pb(B) - \Pb(A) \geq 0$;
+            \item $0 \leq \Pb (A) \leq 1$;
+            \item $\ds \Pb \left( \bigcup_{i \in \N} A_i \right) \leq \sum_{i \in \N} \Pb (A_i)$;
+            \item $\Pb (A \cup B) = \Pb(A) + \Pb(B) - \Pb(A \cap B) $.
+        \end{enumerate}
+\end{prop}
+
+\begin{proof}
+    \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+        \item Temos $\Pb(\emptyset) \geq 0$. Notando que $\ds \Pb(\emptyset) = \Pb\left( \bigcup_{n \in \N} \emptyset \right) = \sum_{n \in \N} \Pb(\emptyset)$, só pode ser $\Pb(\emptyset) = 0$. \itemproof
+    \end{enumerate}
+\end{proof}
+
+\begin{teo}
+    Seja $\Omega$ um conjunto enumerável. Se $p: \Omega \to \R$ é uma função tal que $p(\omega) \geq 0$ para todo $\omega \in \Omega$ e
+        \[
+            \sum_{\omega \in \Omega} p(\omega) = 1,
+        \]
+    então a tripla $(\Omega, \mathcal{P}(\Omega), \Pb)$, onde $\Pb : \mathcal{P}(\Omega) \to \R$ é a função definida por
+        \[
+            \Pb(A) := \sum_{\omega \in A} p(\omega)
+        \]
+    para todo $A \in \mathcal{P}(\Omega)$, é um espaço de probabilidade.
+\end{teo}
+
+\begin{proof}
+    \itemproof
+\end{proof}
+
+\begin{defi}
+    Sejam $(\Omega, \mathcal{F}, \Pb)$ um espaço de probabilidade, $\left\{ A_n \right\}_{n \in \N} \subseteq \mathcal{F}$ e $A \in \mathcal{F}$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Denota-se
+                \[
+                    A_1 \subseteq A_2 \subseteq A_3 \subseteq \cdots \quad \text{e} \quad \bigcup_{n \in \N} A_n = A
+                \]
+            por $A_n \uparrow A$.
+            \item Denota-se
+                \[
+                    A_1 \supseteq A_2 \supseteq A_3 \supseteq \cdots \quad \text{e} \quad \bigcap_{n \in \N} A_n = A
+                \]
+            por $A_n \downarrow A$.
+        \end{enumerate}
+\end{defi}
+
+\begin{prop}
+    Sejam $(\Omega, \mathcal{F}, \Pb)$ um espaço de probabilidade, $\left\{ A_n \right\}_{n \in \N} \subseteq \mathcal{F}$ e $A \in \mathcal{F}$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se $A_n \uparrow A$, então $\ds \lim_{n \to +\infty} \Pb(A_n) = \Pb(A)$.
+            
+            \item Se $A_n \downarrow A$, então $\ds \lim_{n \to +\infty} \Pb(A_n) = \Pb(A)$. 
+        \end{enumerate}
+\end{prop}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Pois tome $ A_0 := \emptyset$ e defina $\left\{ B_n \right\}_{n \in \N}$ por $B_n := A_n \setminus A_{n-1}$ para todo $n \in \N$. É fácil provar que $\left\{ B_n \right\}_{n \in \N}$ é disjunto e que $\bigcup_{n \in \N} B_n = \bigcup_{n \in \N} A_n  $. Com isso,
+                \begin{align*}
+                    \Pb(A) = \Pb\left( \bigcup_{n \in \N} A_n \right) &= \Pb\left( \bigcup_{n \in \N} B_n \right) = \sum_{k=1}^{\infty} \Pb(B_k) \\
+                    &= \sum_{k=1}^{\infty} \Pb (A_k \setminus A_{k-1}) = \lim_{n \to +\infty} \sum_{k=1}^{n} \Pb (A_k \setminus A_{k-1}) \\
+                    &= \lim_{n \to +\infty} \sum_{k=1}^{n}[\Pb(A_k) - \Pb(A_{k-1})] = \lim_{n \to +\infty} \Pb(A_n),
+                \end{align*}
+            como queríamos. \itemproof
+            
+            \item Se $A_n \downarrow A$, então
+                $
+                    A_1 \supseteq A_2 \supseteq A_3 \supseteq \cdots
+                $
+            e
+                $ \ds
+                    \bigcap_{n \in \N} A_n = A.
+                $
+            Observando que
+                \[
+                    A_1 \supseteq A_2 \supseteq A_3 \supseteq \cdots \Leftrightarrow A_1^C \subseteq A_2^C \subseteq A_3^C \subseteq \cdots,
+                \]
+            trivialmente temos $\ds A_n^C \uparrow \bigcup_{n \in \N} A_n^C = A^C$, donde $\ds \lim_{n  \to +\infty} \Pb \left(A_n^C\right) = \Pb \left(A^C\right) $ pelo item anterior. Com isso,
+                \[
+                    \lim_{n \to +\infty} \Pb (A_n) = \lim_{n \to +\infty} [1 - \Pb \left( A_n^C \right)] = 1 - \Pb\left(A^C\right) = \Pb(A),
+                \]
+            como queríamos. \itemproof
+        \end{enumerate}
+\end{proof}
+
+\begin{defi}
+    Seja $(\Omega, \mathcal{F}, \Pb)$ um espaço de probabilidade. \textit{A probabilidade condicional de $A \in \mathcal{F}$ dado $B \in \mathcal{F}$} é definida como
+        \[
+            \Pb(A|B) :=
+                \begin{cases}
+                    \dfrac{\Pb(A \cap B)}{\Pb (B)} & \text{ se } \Pb(B) > 0; \\
+                    \Pb(A) & \text{ se } \Pb(B) = 0.
+                \end{cases}
+        \]
+\end{defi}
+
+\begin{prop}
+    Sejam $(\Omega, \mathcal{F}, \Pb)$ um espaço de probabilidade e $B \in \mathcal{F}$. A terna $(\Omega, \mathcal{F}, \bar{\Pb})$, onde $\bar{\Pb} : \mathcal{F} \to \R$ é uma função definida por $\bar{\Pb}(A) := \Pb(A|B)$ para todo $A \in \mathcal{F}$, é um espaço de probabilidade.
+\end{prop}
+
+\begin{proof}
+    Ver \cite{rolla}, proposição 2.2. \itemproof
+\end{proof}
+
+\begin{teo}[Regra do produto]
+    Sejam $(\Omega, \mathcal{F}, \Pb)$ um espaço de probabilidade e $A_1, A_2, \ldots, A_n \in \mathcal{F}$. Tem-se
+        \[
+            \Pb\left( \bigcap_{i = 1}^{n} A_i \right) = \Pb(A_1) \cdot \prod_{i=2}^{n} \Pb\left(A_i | \bigcap_{j=1}^{n-1} A_j \right).
+        \]
+\end{teo}
+
+\begin{proof}
+    Basta fazer indução em $n$. Ver \cite{rolla}, teorema 2.5. \itemproof
+\end{proof}
+
+\begin{teo}[Probabilidade total]
+    Sejam $(\Omega, \mathcal{F}, \Pb)$ um espaço de probabilidade e $A \in \mathcal{F}$. Se $\left\{ B_n \right\}_{n \in \N} \subseteq \mathcal{F}$ é uma partição de $\Omega$, então
+        \[
+            \Pb(A) = \sum_{n \in \N} \Pb(B_n) \Pb(A | B_n).
+        \]
+\end{teo}
+
+\begin{proof}
+    \itemproof
+\end{proof}
+
+\begin{cor}[fórmula de Bayes]
+    Sejam     
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Oi
+                \[
+                    \Pb(B|A) = \dfrac{\Pb(A|B)}{\Pb(A)} \cdot \Pb(B).
+                \]
+            \item Se $\left\{ B_n \right\}_{n \in \N} \subseteq \mathcal{F}$ é uma partição de $\Omega$, então
+                \[
+                    \Pb(B_j | A) = \dfrac{\Pb(B_j) \Pb(B_j | A)}{\ds \sum_{n \in \N} \Pb(B_n) \Pb(A | B_n)}
+                \]
+            para todo $j \in \N$.
+        \end{enumerate}
+\end{cor}
+
+\begin{proof}
+    \itemproof
+\end{proof}
+
+\begin{defi}
+    Dois eventos $A, B \in \mathcal{F}$ são \textit{independentes} se $\Pb(A \cap B) = \Pb(A) \Pb(B)$.
+\end{defi}
+
+\begin{prop}
+    Dois eventos $A, B \in \mathcal{F}$ são independentes se , e somente se, $\Pb(A | B) = \Pb(A)$.
+\end{prop}
+
+\begin{proof}
+    \itemproof
+\end{proof}
+
+\begin{defi}
+    Seja $J$ um conjunto de índices.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Eventos independentes dois a dois.
+            \item Eventos independentes
+        \end{enumerate}
+\end{defi}
+
+\section{Variáveis Aleatórias}
+
+Seja $(\Omega, \mathcal{F}, \Pb)$ um espaço de probabilidade.
+
+\begin{defi}
+    Uma \textit{variável aleatória} é uma função $X : \Omega \to \R$ tal que
+        $
+            X^{-1}(I) \in \mathcal{F}
+        $
+    para todo intervalo $I \subseteq \R$.
+\end{defi}
+
+\begin{defi}
+    Seja $X : \Omega \to \R$ uma variável aleatória. A \textit{função de distribuição acumulada} de $X$ é a função $F_X : \R \to \R$ definida por $F_X(x) = \Pb(X \in \left]-\infty,x \right])$ para todo $x \in \R$.
+\end{defi}
+
+\begin{prop}
+    Sejam $(\Omega, \mathcal{F}, \Pb)$ um espaço de probabilidade, $X : \Omega \to \R$ uma variável aleatória e $F_X : \R \to [0,1]$ a FDA de $X$. Valem as seguintes afirmações.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $F_X$ é crescente.
+            \item $F_X$ é contínua à direita.
+            \item $\ds \lim_{x \to - \infty} F_X (x) = 0$ e $\ds \lim_{x \to + \infty} F_X (x) = 1$.
+        \end{enumerate}
+\end{prop}
+
+\begin{defi}
+    Uma função $F : \R \to \R$ é uma \textit{função de distribuição} se é crescente, contínua à direita e $\ds \lim_{x \to - \infty} F(x) = 0$ e $\ds \lim_{x \to + \infty} F(x) = 1$.
+\end{defi}
+
+\begin{defi}
+    Uma função $f: \R \to \R$ é uma \textit{função de densidade} se $f \geq 0$ e
+        \[
+            \int_{-\infty}^{+\infty} f(x) \, dx = 1.
+        \]
+\end{defi}
+
+\begin{prop}
+    Se $f: \R \to \R$ é uma função de densidade, então a função $F: \R \to \R$ definida por
+        \[
+            F(x) = \int_{-\infty}^{x} f(t) \, dt
+        \]
+    para todo $x \in \R$ é uma função de distribuição.
+\end{prop}
+
+\begin{proof}
+    \itemproof
+\end{proof}
+
+\begin{defi}
+    Duas variáveis aleatórias $X,Y: \Omega \to \R$ são \textit{independentes} se os eventos $[X \in I_1], [Y \in I_2] \in \mathcal{F}$ são independentes para quaisquer intervalos $I_1, I_2 \subseteq \R$.
+\end{defi}
+
+\subsection{Distribuições Discretas}
+
+\begin{defi}
+    Uma variável aleatória $X: \Omega \to \R$ é \textit{discreta} se existe $A \subsetneq \R$ enumerável tal que $\Pb(X \in A) = 1$.
+\end{defi}
+
+\begin{defi} \label{pb.defi:discretas}
+    Seja $X : \Omega \to \R$ uma variável aleatória.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Dizemos que $X$ tem distribuição \textit{Bernoulli} de parâmetro $p \in \left]0,1\right[$ se $\Pb(X=1) = p$ e $\Pb(X=0) = 1-p$. Isso é denotado por $X \sim \mathrm{Bernoulli}(p)$.
+            \item Dizemos que $X$ tem distribuição \textit{geométrica} de parâmetro $p \in \left] 0,1\right[$ se $\Pb(X=k) = p(1-p)^{k-1}$ para todo $k \in \N$. Isso é denotado por $X \sim \mathrm{Geom}(p)$.
+            \item Dizemos que $X$ tem distribuição \textit{binomial} de parâmetros $n \in \N$ e $p \in \left] 0,1\right[$ se
+                \[
+                    \Pb(X=k) = \binom{n}{k}p^k(1-p)^{n-k}
+                \]
+            para todo $k \in \N$. Isso é denotado por $X \sim \mathrm{Binom}(n,p)$.
+            \item Dizemos que $X$ tem distribuição \textit{Poisson} de parâmetro $\lambda \in \R_{>0}$ se
+                \[
+                    \Pb(X=k) = e^{-\lambda} \dfrac{\lambda^k}{k!}
+                \]
+            para todo $k \in \N$. Isso é denotado por $X \sim \mathrm{Poisson}(\lambda)$.
+        \end{enumerate}
+\end{defi}
+
+\begin{prop}
+    As distribuições da definição \eqref{pb.defi:discretas} são discretas.
+\end{prop}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item 
+        \end{enumerate}
+\end{proof}
+
+
+
+\subsection{Distribuições Absolutamente Contínuas}
+
+\begin{defi}
+    Uma variável aleatória $X: \Omega \to \R$ é \textit{absolutamente contínua} se existe uma função contínua por partes $f: \R \to \R$ tal que $f(x) \geq 0$ para todo $x \in \R$ e
+        \[
+            \Pb(X \in I) = \int_{I} f
+        \]
+    para todo intervalo $I \subseteq \R$.
+\end{defi}
+
+
+
+
+
+
+
+
+
+

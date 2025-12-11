@@ -1,0 +1,178 @@
+\documentclass[12pt, a4paper, openany, oneside]{book}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazilian]{babel}
+\usepackage{libertine}
+
+
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+
+\usepackage{csquotes}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{esvect}
+\usepackage{verbatim}
+%\usepackage{cancel}
+%\usepackage{xcolor}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setlength{\parskip}{8pt}
+\setlength{\parindent}{0pt}
+\setlist[itemize]{itemsep=0pt, topsep=0pt}
+\setlist[enumerate]{itemsep=0pt, topsep=0pt}
+
+\allowdisplaybreaks
+\raggedbottom
+%\setlength\emergencystretch{0.5em}
+%\tolerance=300
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[backend=biber]{biblatex}
+\addbibresource{bibliografia.bib}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newtheoremstyle{meuestilo}
+  {8pt}                     % Espaço acima
+  {0pt}                     % Espaço abaixo
+  {\normalfont}             % Fonte do corpo do teorema
+  {}                        % Indentação (vazio = nenhuma)
+  {\bfseries}               % Fonte do cabeçalho do teorema
+  {.}                       % Pontuação após o cabeçalho
+  { }                       % Espaço após o cabeçalho
+  {}                        % Especificação do cabeçalho (vazio = `Teorema 1.1`)
+
+\theoremstyle{meuestilo}
+
+\newtheorem{defi}{Definição}[chapter]
+\newtheorem{teo}[defi]{Teorema}
+\newtheorem{prop}[defi]{Proposição}
+\newtheorem{lem}[defi]{Lema}
+\newtheorem{cor}[defi]{Corolário}
+\newtheorem{obs}[defi]{Observação}
+\newtheorem{ex}[defi]{Exemplo}
+\newtheorem{ax}[defi]{Axioma}
+\newtheorem{fato}[defi]{Fato}
+\newtheorem{nota}[defi]{Notação}
+
+\renewenvironment{proof}[1][Prova.]{\par\noindent\textbf{#1} }%{\hfill$\blacksquare$\par}
+
+\newcommand{\itemproof}{\hfill$\blacksquare$\par}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Pb}{\mathbb{P}}
+\newcommand{\ds}{\displaystyle}
+\newcommand{\op}{\operatorname}
+\newcommand{\ind}{\operatorname{Ind}}
+\newcommand{\id}{\operatorname{Id}}
+\newcommand{\Dom}{\operatorname{Dom}}
+\renewcommand{\Im}{\operatorname{Im}}
+\renewcommand{\sin}{\operatorname{sen}}
+
+
+\makeatletter
+\NewDocumentCommand{\lowerint}{}{\mathop{}\mathpalette\lowerint@\relax\!\int}
+\NewDocumentCommand{\upperint}{}{\mathop{}\mathpalette\upperint@\relax\!\int}
+\newcommand{\lowerint@}[2]{%
+  \begingroup
+  \sbox\z@{$\m@th#1\int$}%
+  \lowup@{l}{\underline}{#1}%
+  \endgroup
+}
+\newcommand{\upperint@}[2]{%
+  \begingroup
+  \sbox\z@{$\m@th#1\int$}%
+  \lowup@{r}{\overline}{#1}%
+  \endgroup
+}
+\newcommand{\lowup@}[3]{%
+  % #1 = l (lower) or r (upper)
+  % #2 = \underline (lower) or \overline (upper)
+  % #3 = math style
+  \rlap{%
+    \hspace{0.05\wd\z@}%
+    \makebox[0.9\wd\z@][#1]{%
+      $\m@th#2{%
+        \hspace{0.4\wd\z@}%
+        \ifx#3\displaystyle\else\hspace{0.1\wd\z@}\fi
+        \vphantom{\copy\z@}%
+      }$%
+    }%
+    \hspace{0.05\wd\z@}%
+  }%
+}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    urlcolor=blue,
+    breaklinks=true
+]{hyperref}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{anotações buxas de matemática cringe}
+\author{Alexander Kahleul}
+\date{\today}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\part{Fundamentos}
+
+\include{partes/fund}
+
+\part{Números Reais}
+
+\include{partes/reais}
+
+\part{Análise Real I}
+
+\include{partes/ar1}
+
+\part{Álgebra Linear}
+
+\include{partes/alr}
+
+\part{Cálculo II}
+
+\include{partes/c2}
+
+\part{Probabilidade}
+
+\include{partes/pb}
+
+\part{Outros}
+
+\include{partes/fundlivros}
+
+\include{partes/fis}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\nocite{*}
+\printbibliography[heading=bibintoc]
+
+\end{document}

@@ -1,0 +1,1270 @@
+%!TEX root = main.tex
+
+\chapter{Matrizes e Sistemas Lineares}
+
+\section{Definições Iniciais e Operações Matriciais}
+
+% $abcdemz$ abcde \textit{abcdemz} $12345$ \textit{12345} 12345
+
+\begin{defi}
+    \textbf{(a)} Sejam $m,n \in \N$. Uma \textit{matriz} $A = (a_{ij})_{m \times n}$ é uma função $A : \left\{1,2, \ldots, m\right\} \times \left\{1, 2, \ldots, n\right\} \to \mathbb{R}$ que associa a cada par $(i,j)$, com $i \in [m]$ e $j \in [n]$, um elemento $a_{ij} \in \mathbb{R}$. A representação canônica de uma matriz é uma tabela com $m$ linhas e $n$ colunas
+        \[
+            A :=
+                \begin{bmatrix}
+                    a_{11} & a_{12} & \cdots & a_{1n} \\
+                    a_{21} & a_{22} & \cdots & a_{2n} \\
+                    \vdots & \vdots & \ddots &  \vdots \\
+                    a_{m1} & a_{m2} & \cdots & a_{mn}
+                \end{bmatrix}.
+        \]
+    Dizemos que a matriz $A$ definida acima tem \textit{tamanho}, ou \textit{tipo}, $m \times n$ (lê-se $m$ por $n$). Dizemos que $a_{ij}$, ou $[A]_{ij}$, é o \textit{elemento}, ou a \textit{entrada}, de posição $i, j$. O conjunto de todas as matrizes de tamanho $m \times n$ com entradas reais será denotado por $\mathcal{M}_{m \times n} (\R)$.
+    
+    \textbf{(b)} Duas matrizes são ditas \textit{iguais} se elas são do mesmo tipo e se os elementos correspondentes forem iguais. Mais especificamente, as matrizes $A = (a_{ij})_{m \times n}$ e $B = (b_{ij})_{p \times q}$ são iguais se $m=p$, $n=q$ e $a_{ij} = b_{ij}$ para todos $i \in [m]$ e $j \in [n]$.
+    \begin{comment} Uma matriz $A = (a_{ij})_{m \times n}$ é um elemento de
+        $
+            \mathbb{K}^{m \times n} := \mathbb{K}^m \times \mathbb{K}^m \times \cdots \times \mathbb{K}^m,
+        $
+    podendo ser representada como
+        \[ A =
+            \begin{bmatrix}
+                A_1 & A_2 & \cdots & A_n
+            \end{bmatrix},
+            \quad \text{em que} \quad
+            A_i = \begin{bmatrix}
+                a_{1i} \\
+                a_{2i} \\
+                \vdots \\
+                a_{mi} \\
+            \end{bmatrix}
+        \] \end{comment}
+\end{defi}
+
+\begin{defi}
+    Dada uma matriz $A := (a_{ij})_{m \times n}$, definimos
+        \[
+            L_i (A):=
+                \begin{bmatrix}
+                    a_{i1} & a_{i2} & \cdots & a_{in}
+                \end{bmatrix}
+        \]
+    como a $i$-ésima linha da matriz $A$, com $i \in [m]$. Definimos, ainda,
+        \[
+            C_j(A) :=
+                \begin{bmatrix}
+                    a_{1j} \\
+                    a_{2j} \\
+                    \vdots \\
+                    a_{mj} \\
+                \end{bmatrix}
+        \]
+    como a $j$-ésima coluna da matriz $A$, com $j \in [n]$.
+\end{defi}
+
+\subsection*{Operações Matriciais}
+
+\begin{defi}
+    A \textit{soma}, ou \textit{adição}, de duas matrizes do mesmo tipo $A = (a_{ij})_{m \times n}$ e $B = (b_{ij})_{m \times n}$ é definida como a matriz $C = (c_{ij})_{m \times n}$ em que $c_{ij} = a_{ij} + b_{ij}$ para todos $i \in [m]$ e $j \in [n]$. Denotamos isso com $C = A + B$.
+\end{defi}
+
+\begin{prop}
+    Para quaisquer matrizes $A = (a_{ij})_{m \times n}$, $B = (b_{ij})_{m \times n}$ e $C = (c_{ij})_{m \times n}$, valem
+
+        \textbf{(a)} a associatividade da adição, isto é, $A + (B + C) = (A + B) + C$;
+
+        \textbf{(b)} a comutatividade da adição, isto é, $A+B=B+A$;
+
+        \textbf{(c)} a existência de um elemento neutro, isto é, $A + 0 = A$;
+
+        \textbf{(d)} a existência de um oposto aditivo, isto é, $A + (-A) = 0$.
+\end{prop}
+
+\begin{proof}
+\end{proof}
+
+\begin{defi}
+    A multiplicação de uma matriz $A = (a_{ij})_{m \times n}$ por um \textit{escalar} $\alpha$ é definida como a matriz $B = (b_{ij})_{m \times n}$ em que $b_{ij} = \alpha \cdot a_{ij}$ para todos $i \in [m]$ e $j \in [n]$. Denotamos isso com $B = \alpha \cdot A = \alpha A$.
+\end{defi}
+
+\begin{prop}
+    Para quaisquer matrizes $A = (a_{ij})_{m \times n}$ e $B = (b_{ij})_{m \times n}$ e escalares $\alpha, \beta \in \R$, temos que
+
+    \textbf{(a)} $\alpha \cdot (\beta \cdot A) = (\alpha \cdot \beta) \cdot A$;
+
+    \textbf{(b)} $\alpha \cdot (A + B) = \alpha \cdot A + \alpha \cdot B$:
+
+    \textbf{(c)} $(\alpha + \beta) \cdot A = \alpha \cdot A + \beta \cdot A$;
+
+    \textbf{(d)} $1 \cdot A = A$.
+\end{prop}
+
+\begin{proof}
+\end{proof}
+
+\begin{defi}
+    \textbf{(a)} O \textit{produto}, ou \textit{multiplicação}, de duas matrizes, em que o número de colunas da primeira matriz é igual ao número de linhas da segunda, $A = (a_{ij})_{m \times n}$ e $B = (b_{ij})_{n \times p}$, é definido como a matriz $C = (c_{ij})_{m \times p}$ em que
+        \[
+            c_{ij} = \sum_{k=1}^{n} a_{ik} b_{kj},
+        \]
+    para todos $i \in [m]$ e $j \in [p]$. Denotamos isso por $C = A \cdot B = AB$.
+
+    \textbf{(b)} O produto de duas matrizes, em que o número de colunas da primeira matriz é igual ao número de linhas da segunda, $A = (a_{ij})_{m \times n}$ e $B = (b_{jk})_{n \times p}$ também pode ser definido como a matriz $C = (c_{ik})_{m \times p}$ em que
+        \[
+            c_{ik} = \sum_{j=1}^{n} a_{ij} b_{jk},
+        \]
+    para todos $i \in [m]$, $k \in [p]$ e $j \in [n]$. Essa definição pode ser útil para evitar confusões com os índices.
+\end{defi}
+
+\begin{prop}
+    Para quaisquer matrizes $A$, $B$ e $C$, de tamanhos compatíveis, e escalares $\alpha, \beta \in \R$, valem
+
+    \textbf{(a)} a associatividade do produto, isto é, $A \cdot (B \cdot C) = (A \cdot B) \cdot C$;
+
+    \textbf{(b)} a existência de um elemento neutro, isto é $A \cdot \mathrm{I} = \mathrm{I} \cdot A = A$;
+
+    \textbf{(c)} a distributividade da multiplicação com relação à adição, isto é, $A \cdot (B+C) = A \cdot B + A \cdot C$ e $(A+B) \cdot C = A \cdot C + B \cdot C$;
+
+    \textbf{(d)} a associatividade do produto de matrizes com relação ao produto por escalar, isto é, $(\alpha \cdot A) \cdot B = \alpha \cdot (A \cdot B) = A \cdot (\alpha \cdot B)$;
+\end{prop}
+
+\begin{proof}
+\end{proof}
+
+\subsection*{Matrizes Especiais}
+
+\begin{defi}
+    Uma matriz $A \in \mathcal{M}_{m \times n}(\R)$ é dita
+        \begin{enumerate}
+            \item \textit{invertível à esquerda} se existir uma matriz $B \in \mathcal{M}_{n \times m}(\R)$ tal que $BA=\mathrm{I}_n$;
+            \item \textit{invertível à direita} se existir uma matriz $C \in \mathcal{M}_{n \times m}(\R)$ tal que $AC = \mathrm{I}_m$;
+            \item \textit{invertível}, ou ainda, \textit{não singular}, se for invertível à esquerda e à direita;
+            \item \textit{singular} se não for invertível. 
+        \end{enumerate}
+\end{defi}
+
+\begin{prop}
+    Se uma matriz possui uma matriz inversa, então ela é única.
+\end{prop}
+
+\begin{proof} 
+    Se $A \in \mathcal{M}_{m \times n}(\R)$ é invertível, então, por definição, existem $B \in \mathcal{M}_{n \times m}(\R)$ e $C \in \mathcal{M}_{n \times m}(\R)$ tais que $BA = \mathrm{I}_n$ e $AC = \mathrm{I}_{m}$. Com isso, basta ver que
+        \[
+            B = B \mathrm{I}_{m} = B(AC) = (BA)C = \mathrm{I}_{n} C = C,
+        \]
+    isto é, $B = C$.
+\end{proof}
+
+\section{Operações e Matrizes Elementares}
+
+Dada uma matriz, podemos 
+
+\begin{itemize}
+    \item trocar a posição de duas de suas linhas;
+    \item multiplicar uma de suas linhas por um escalar;\footnote{Esperamos ser evidente que nos referimos a uma multiplicação que  ocorre em \textit{cada entrada} da referida linha.}
+    \item e somar a uma de suas linhas uma outra linha que foi multiplicada por um escalar.
+\end{itemize}
+Estas são as chamadas \textit{operações elementares}. Elas estão formalizadas na próxima definição e serão úteis no nosso estudo dos sistemas de equações lineares.
+
+\begin{defi} Sejam $A \in \mathcal{M}_{m \times n}(\R)$ e $p, q \in [m]$, com $p < q$.
+    
+    \textbf{(a)} Definimos $A_{L_p \leftrightarrow L_q}$ como a matriz, também $m \times n$, tal que
+        \[
+            L_i \left( A_{L_p \leftrightarrow L_q} \right) :=
+                \begin{cases}
+                    L_q (A) & \text{se } i = p \\
+                    L_p (A) & \text{se } i = q \\
+                    L_i (A) & \text{se } i \neq p, q
+                \end{cases}.
+        \]
+    \begin{comment} isto é,
+        \[
+            A :=
+                \begin{bmatrix}
+                    a_{11} & a_{12} & \cdots & a_{1n} \\
+                    \vdots & \vdots & \ddots &  \vdots \\
+                    a_{p1} & a_{p2} & \cdots & a_{pn} \\
+                    \vdots & \vdots & \ddots &  \vdots \\
+                    a_{q1} & a_{q2} & \cdots & a_{qn} \\
+                    \vdots & \vdots & \ddots &  \vdots \\
+                    a_{m1} & a_{m2} & \cdots & a_{mn}
+                \end{bmatrix}
+            \Rightarrow
+            A_{L_p \leftrightarrow L_q} :=
+                \begin{bmatrix}
+                    a_{11} & a_{12} & \cdots & a_{1n} \\
+                    \vdots & \vdots & \ddots &  \vdots \\
+                    a_{q1} & a_{q2} & \cdots & a_{qn} \\
+                    \vdots & \vdots & \ddots &  \vdots \\
+                    a_{p1} & a_{p2} & \cdots & a_{pn} \\
+                    \vdots & \vdots & \ddots &  \vdots \\
+                    a_{m1} & a_{m2} & \cdots & a_{mn}
+                \end{bmatrix}.
+        \] \end{comment}
+    \textbf{(b)} Seja $\lambda \in \R^*$ um escalar. Definimos $A_{L_p \gets \lambda L_p}$ como a matriz, também $m \times n$, tal que
+        \[
+            L_i \left( A_{L_p \gets \lambda L_p} \right) := 
+            \begin{cases}
+                \lambda L_p (A), & \text{se } i = p \\
+                L_i (A), & \text{se } i \neq p
+            \end{cases}.
+        \]
+    \begin{comment} isto é,
+        \[
+            A :=
+                \begin{bmatrix}
+                    a_{11} & a_{12} & \cdots & a_{1n} \\
+                    \vdots & \vdots & \ddots &  \vdots \\
+                    a_{p1} & a_{p2} & \cdots & a_{pn} \\
+                    \vdots & \vdots & \ddots &  \vdots \\
+                    a_{m1} & a_{m2} & \cdots & a_{mn}
+                \end{bmatrix}
+            \Rightarrow
+            A_{L_p \gets \lambda L_p} :=
+                \begin{bmatrix}
+                    a_{11} & a_{12} & \cdots & a_{1n} \\
+                    \vdots & \vdots & \ddots &  \vdots \\
+                    \lambda a_{p1} & \lambda a_{p2} & \cdots & \lambda a_{pn} \\
+                    \vdots & \vdots & \ddots &  \vdots \\
+                    a_{m1} & a_{m2} & \cdots & a_{mn}
+                \end{bmatrix}.
+        \] \end{comment}
+    \textbf{(c)} Seja $\lambda \in \R^*$ um escalar. Definimos $A_{L_p \gets L_p + \lambda L_q}$ como a matriz, também $m \times n$, tal que
+        \[
+            L_i \left( A_{L_p \gets L_p + \lambda L_q} \right) := 
+                \begin{cases}
+                    L_p (A) + \lambda L_q (A), & \text{se } i = p \\
+                    L_i (A), & \text{se } i \neq p
+                \end{cases},
+        \]
+    \begin{comment} isto é,
+        \[
+             A :=
+                \begin{bmatrix}
+                    a_{11} & \cdots & a_{1n} \\
+                    \vdots & \ddots &  \vdots \\
+                    a_{p1} & \cdots & a_{pn} \\
+                    \vdots & \ddots &  \vdots \\
+                    a_{q1} & \cdots & a_{qn} \\
+                    \vdots & \ddots &  \vdots \\
+                    a_{m1} & \cdots & a_{mn}
+                \end{bmatrix}
+            \Rightarrow
+            A_{L_p \gets L_p + \lambda L_q} =
+                \begin{bmatrix}
+                    a_{11} & \cdots & a_{1n} \\
+                    \vdots & \ddots &  \vdots \\
+                    a_{p1} + \lambda a_{q1} & \cdots & a_{pn} + \lambda a_{qn} \\
+                    \vdots & \ddots &  \vdots \\
+                    a_{q1} & \cdots & a_{qn} \\
+                    \vdots & \ddots &  \vdots \\
+                    a_{m1} & \cdots & a_{mn}
+                \end{bmatrix},
+        \] \end{comment}
+    e definimos $A_{L_q \gets L_q + \lambda L_p}$ como a matriz,  também $m \times n$, tal que
+        \[
+            L_i \left( A_{L_q \gets L_q + \lambda L_p} \right) :=
+                \begin{cases}
+                    L_q (A) + \lambda L_p (A), & \text{se } i = q \\
+                    L_i (A), & \text{se } i \neq q
+                \end{cases}.
+        \]
+    \begin{comment} isto é,
+        \[
+            A :=
+                \begin{bmatrix}
+                    a_{11} & \cdots & a_{1n} \\
+                    \vdots & \ddots &  \vdots \\
+                    a_{p1} & \cdots & a_{pn} \\
+                    \vdots & \ddots &  \vdots \\
+                    a_{q1} & \cdots & a_{qn} \\
+                    \vdots & \ddots &  \vdots \\
+                    a_{m1} & \cdots & a_{mn}
+                \end{bmatrix}
+            \Rightarrow
+            A_{L_q \gets L_q + \lambda L_p} =
+                \begin{bmatrix}
+                    a_{11} & \cdots & a_{1n} \\
+                    \vdots & \ddots &  \vdots \\
+                    a_{p1} & \cdots & a_{pn} \\
+                    \vdots & \ddots &  \vdots \\
+                    a_{q1} + \lambda a_{p1} & \cdots & a_{qn} + \lambda a_{pn} \\
+                    \vdots & \ddots &  \vdots \\
+                    a_{m1} & \cdots & a_{mn}
+                \end{bmatrix}.
+        \] \end{comment}
+\end{defi}
+
+Na proposição a seguir, mostramos que cada operação elementar equivale à multiplicar a matriz $A$ por uma matriz dita \textit{elementar}, obtida pela aplicação de operações elementares na matriz identidade $\mathrm{I}_m$.
+
+\begin{prop} 
+    Sejam $A \in \mathcal{M}_{m \times n}(\R)$ e $p, q \in [m]$, com $p < q$.
+    
+    \textbf{(a)} Temos $\ds \mathrm{I}_{L_p \leftrightarrow L_q} \cdot A = A_{L_p \leftrightarrow L_q}$. \begin{comment} , isto é,
+        \[
+            \begin{bmatrix}
+                    1 &         &          &         &        &      &      \\
+                      & \ddots  &          &         &        &      &     \\
+                      &         & 0        & \cdots  & 1      &      &     \\
+                      &         & \vdots   & \ddots  & \vdots &      &      \\
+                      &         & 1        & \cdots  & 0      &      &       \\
+                      &         &          &         &        &      \ddots &  \\
+                      &         &          &         &        &      &  1
+            \end{bmatrix} \cdot
+            \begin{bmatrix}
+                a_{11} & a_{12} & \cdots & a_{1n} \\
+                \vdots & \vdots & \ddots &  \vdots \\
+                a_{p1} & a_{p2} & \cdots & a_{pn} \\
+                \vdots & \vdots & \ddots &  \vdots \\
+                a_{q1} & a_{q2} & \cdots & a_{qn} \\
+                \vdots & \vdots & \ddots &  \vdots \\
+                a_{m1} & a_{m2} & \cdots & a_{mn}
+            \end{bmatrix} =
+            \begin{bmatrix}
+                a_{11} & a_{12} & \cdots & a_{1n} \\
+                \vdots & \vdots & \ddots &  \vdots \\
+                a_{q1} & a_{q2} & \cdots & a_{qn} \\
+                \vdots & \vdots & \ddots &  \vdots \\
+                a_{p1} & a_{p2} & \cdots & a_{pn} \\
+                \vdots & \vdots & \ddots &  \vdots \\
+                a_{m1} & a_{m2} & \cdots & a_{mn}
+            \end{bmatrix}.
+        \] \end{comment}
+    
+    \textbf{(b)} Temos $\ds \mathrm{I}_{L_p \gets \lambda L_p} \cdot A = A_{L_p \gets \lambda L_p}$. \begin{comment} , isto é,
+        \[
+            \begin{bmatrix}
+                1   &        &         &        &          \\
+                    & \ddots &         &        &          \\
+                    &        & \lambda &        &          \\
+                    &        &         & \ddots &          \\
+                    &        &         &        & 1        \\
+            \end{bmatrix} \cdot
+            \begin{bmatrix}
+                    a_{11} & a_{12} & \cdots & a_{1n} \\
+                    \vdots & \vdots & \ddots &  \vdots \\
+                    a_{p1} & a_{p2} & \cdots & a_{pn} \\
+                    \vdots & \vdots & \ddots &  \vdots \\
+                    a_{m1} & a_{m2} & \cdots & a_{mn}
+            \end{bmatrix} =
+            \begin{bmatrix}
+                    a_{11} & a_{12} & \cdots & a_{1n} \\
+                    \vdots & \vdots & \ddots &  \vdots \\
+                    \lambda a_{p1} & \lambda a_{p2} & \cdots & \lambda a_{pn} \\
+                    \vdots & \vdots & \ddots &  \vdots \\
+                    a_{m1} & a_{m2} & \cdots & a_{mn}
+            \end{bmatrix}.
+        \] \end{comment}
+    
+    \textbf{(c)} Temos $\ds \mathrm{I}_{L_p \gets L_p + \lambda L_q} \cdot A = A_{L_p \gets L_p + \lambda L_q}$ e $\ds \mathrm{I}_{L_q \gets L_q + \lambda L_p} \cdot A = A_{L_q \gets L_q + \lambda L_p}$. \begin{comment}, isto é,
+        \[
+            \begin{bmatrix}
+                    1 &         &         &         &         &        &     \\
+                      & \ddots  &         &         &         &        &     \\
+                      &         & 1       & \cdots  & \lambda &        &     \\
+                      &         & \vdots  & \ddots  & \vdots  &        &     \\
+                      &         & 0       & \cdots  & 1       &        &     \\
+                      &         &         &         &         & \ddots &     \\
+                      &         &         &         &         &        &  1
+            \end{bmatrix} \cdot
+            \begin{bmatrix}
+                    a_{11} & \cdots & a_{1n} \\
+                    \vdots & \ddots &  \vdots \\
+                    a_{p1} & \cdots & a_{pn} \\
+                    \vdots & \ddots &  \vdots \\
+                    a_{q1} & \cdots & a_{qn} \\
+                    \vdots & \ddots &  \vdots \\
+                    a_{m1} & \cdots & a_{mn}
+            \end{bmatrix} =
+            \begin{bmatrix}
+                    a_{11} & \cdots & a_{1n} \\
+                    \vdots & \ddots &  \vdots \\
+                    a_{p1} + \lambda a_{q1} & \cdots & a_{pn} + \lambda a_{qn} \\
+                    \vdots & \ddots &  \vdots \\
+                    a_{q1} & \cdots & a_{qn} \\
+                    \vdots & \ddots &  \vdots \\
+                    a_{m1} & \cdots & a_{mn}
+                \end{bmatrix},
+        \]
+    e ainda, temos que $\ds \mathrm{I}_{L_q \gets L_q + \lambda L_p} \cdot A = A_{L_q \gets L_q + \lambda L_p}$, isto é,
+        \[
+            \begin{bmatrix}
+                    1 &         &          &         &        &      &      \\
+                      & \ddots  &          &         &        &      &     \\
+                      &         & 1        & \cdots  & 0      &      &     \\
+                      &         & \vdots   & \ddots  & \vdots &      &      \\
+                      &         & \lambda  & \cdots  & 1      &      &       \\
+                      &         &          &         &        &      \ddots &  \\
+                      &         &          &         &        &      &  1
+            \end{bmatrix} \cdot
+            \begin{bmatrix}
+                    a_{11} & \cdots & a_{1n} \\
+                    \vdots & \ddots &  \vdots \\
+                    a_{p1} & \cdots & a_{pn} \\
+                    \vdots & \ddots &  \vdots \\
+                    a_{q1} & \cdots & a_{qn} \\
+                    \vdots & \ddots &  \vdots \\
+                    a_{m1} & \cdots & a_{mn}
+            \end{bmatrix} =
+            \begin{bmatrix}
+                    a_{11} & \cdots & a_{1n} \\
+                    \vdots & \ddots &  \vdots \\
+                    a_{p1} & \cdots & a_{pn} \\
+                    \vdots & \ddots &  \vdots \\
+                    a_{q1} + \lambda a_{p1} & \cdots & a_{qn} + \lambda a_{pn} \\
+                    \vdots & \ddots &  \vdots \\
+                    a_{m1} & \cdots & a_{mn}
+            \end{bmatrix}.
+        \] \end{comment}
+\end{prop}
+
+\begin{proof}
+\end{proof}
+
+\begin{prop}
+    As operações (matrizes) elementares são invertíveis.
+\end{prop}
+
+\begin{proof}
+A demonstração é feita exibindo-se, explicitamente, as inversas.
+    \begin{itemize}
+        \item A inversa de $\mathrm{I}_{L_p \leftrightarrow L_q}$ é ela mesma, isto é, $\mathrm{I}_{L_p \leftrightarrow L_q} \cdot \mathrm{I}_{L_p \leftrightarrow L_q} = \mathrm{I}$.
+        \item A inversa de $\mathrm{I}_{L_p \gets \lambda L_p}$ é $\mathrm{I}_{L_p \gets \frac{1}{\lambda} L_p}$, isto é, \[\mathrm{I}_{L_p \gets \lambda L_p} \cdot \mathrm{I}_{L_p \gets \frac{1}{\lambda} L_p} = \mathrm{I}_{L_p \gets \frac{1}{\lambda} L_p} \cdot \mathrm{I}_{L_p \gets \lambda L_p} = \mathrm{I}.\]
+        \item A inversa de $\mathrm{I}_{L_q \gets L_q + \lambda L_p}$ é $\mathrm{I}_{L_q \gets L_q -\lambda L_p}$, isto é, \[\mathrm{I}_{L_q \gets L_q + \lambda L_p} \cdot \mathrm{I}_{L_q \gets L_q - \lambda L_p} = \mathrm{I}_{L_q \gets L_q - \lambda L_p} \cdot \mathrm{I}_{L_q \gets L_q + \lambda L_p} = \mathrm{I}.\]
+    \end{itemize}
+\end{proof}
+
+\begin{defi} \label{defi.III:eqporlinha}
+    \textbf{(a)} (Informal) Uma matriz $A$ é dita \textit{equivalente por linhas} a uma matriz $B$, de mesmo tamanho, se existir uma sequência finita de operações elementares que, quando aplicadas em $A$, tem $B$ como resultado. Denotamos isso por 
+        \[
+            E \cdot A = B, \text{ em que } E = E_k \cdot E_{k-1} \cdot \ldots \cdot E_2 \cdot E_1,
+        \]
+    em que $E_i$ é uma matriz elementar para cada $i \in [k]$.
+
+    \textbf{(b)} Diremos que uma matriz $A \in \mathcal{M}_{m \times n}(\R)$ é dita \textit{equivalente por linhas} a uma matriz $B \in \mathcal{M}_{m \times n}(\R)$, denotando isso por $A \sim B$, se existir uma sequência finita de matrizes elementares $E_1, \ldots, E_k \in \mathcal{M}_{m \times m}(\R)$ tais que 
+        \[
+            E_k \cdot E_{k-1} \cdot \ldots \cdot E_2 \cdot E_1 \cdot A = B.
+        \]
+\end{defi}
+
+\begin{prop}
+    A equivalência por linhas definida em \eqref{defi.III:eqporlinha} é uma relação de equivalência.
+\end{prop}
+
+\section{Eliminação Gaussiana e Decomposição LU}
+
+\begin{defi}
+    \textbf{(a)} (Intuitiva) Uma matriz será dita \textit{escalonada} se (i) o primeiro elemento não nulo de cada linha está à esquerda do primeiro elemento não nulo de cada uma das linhas seguintes e (ii) as linhas nulas (se houver) estão abaixo das demais.
+    
+    \textbf{(b)} Uma matriz $A = (a_{ij})_{m \times n}$ será dita \textit{escalonada} se existir uma sequência de índices $1 \leq b_1 < b_2 < \ldots < b_r \leq n$ tal que $a_{ib_i} \neq 0$ para todo $i = 1, 2, \ldots, r$ e $a_{ij} = 0$ para todo $1 \leq j < b_i$. Os termos $a_{ib_i}$ são chamados de \textit{pivôs}, enquanto o número de pivôs, $r$, é chamado de \textit{posto}.
+\end{defi}
+
+\begin{prop}
+    Toda matriz é equivalente por linhas a uma matriz escalonada.
+\end{prop}
+
+\begin{proof}
+    Hefez, 32 e 44.
+\end{proof}
+
+\begin{defi}
+    \textbf{(a)} (Intuitiva) Uma matriz escalonada será dita \textit{reduzida} se todo pivô for unitário e se todos os outros elementos da coluna de um pivô forem iguais a 0.
+
+    \textbf{(b)} Uma matriz $A = (a_{ij})_{m \times n}$ será dita \textit{escalonada reduzida} se existir uma sequência de índices $1 \leq b_1 < b_2 < \ldots < b_r \leq n$ tal que $a_{ib_i} = 1$ para todo $1 \leq i \leq r$, $a_{k b_i}$ = 0 para todo $k \neq i$ e $a_{ij} = 0$ para todo $1 \leq j < b_i$. 
+\end{defi}
+
+\begin{teo}
+    Toda matriz é equivalente por linhas a uma única matriz escalonada reduzida.
+\end{teo}
+
+\begin{proof}
+    Hefez, 32 e 44. Reginaldo, 68.
+\end{proof}
+
+\begin{prop}
+    Se $A \in \mathcal{M}_{n \times n}(\R)$ é uma matriz escalonada reduzida e $A \neq \mathrm{I}_n$, então $A$ possui pelo menos uma linha nula.
+\end{prop}
+
+\begin{proof}
+    Reginaldo, 47.
+\end{proof}
+
+
+\section{Sistemas Lineares}
+
+\begin{defi}
+    \textbf{(a)} Uma \textit{equação linear} nas incógnitas $x_1, x_2, \ldots, x_n$ é qualquer equação do tipo
+        \[
+            a_1 x_1 + a_2 x_2 + \cdots + a_n x_n = b,
+        \]
+    onde $a_1, a_2, \ldots , a_n, b \in \R$. Cada $a_{i}$ é chamado de \textit{coeficiente}, enquanto $b$ é chamado de \textit{termo independente}. 
+    
+    \textbf{(b)} O conjunto das soluções de uma equação linear é
+        \[
+            \{ (x_1, \ldots, x_n) \in \R^n : a_1 x_1 + \cdots + a_n x_n = b \}.
+        \]
+    
+    %Definimos \textit{equação linear} como toda equação do tipo \[ a_{11} x_1 + a_{12} x_2 + \cdots + a_{1n} x_n = b \] nas incógnitas $x_1, x_2, \ldots, x_n$. Os números $a_{11}, a_{12}, \ldots , a_{1n} \in \R$ são denominados \textit{coeficientes}, enquanto o número $b \in \R$ é denominado \textit{termo independente}.
+\end{defi}
+
+\begin{defi}
+    \textbf{(a)} Definimos \textit{sistema de equações lineares} como todo conjunto finito de equações lineares nas incógnitas $x_1, x_2, \ldots, x_n$. Com $m$ equações, a representação canônica é
+        \[
+            \left\{
+                \begin{matrix}
+                    a_{11} x_1 + a_{12} x_2 + \cdots + a_{1n} x_n = b_1 \\
+                    a_{21} x_1 + a_{22} x_2 + \cdots + a_{2n} x_n = b_2 \\
+                    \vdots \\
+                    a_{m1} x_1 + a_{m2} x_2 + \cdots + a_{mn} x_n = b_m
+                \end{matrix}
+            \right. .
+        \]
+    Por simplicidade, diremos apenas \textit{sistema linear}, ou ainda, apenas \textit{sistema}, em vez de sistema de equações lineares.
+
+    \textbf{(b)} O conjunto das soluções de um sistema linear é
+        \[
+            \bigcap_{i=1}^{m} \{ (x_1, \ldots, x_n) \in \R^n : a_{i1} x_1 + \cdots + a_{in} x_n = b_i \}.
+        \]    
+\end{defi}
+
+\begin{fato}
+    Todo sistema linear
+        \[
+            \left\{
+                \begin{matrix}
+                    a_{11} x_1 + a_{12} x_2 + \cdots + a_{1n} x_n = b_1 \\
+                    a_{21} x_1 + a_{22} x_2 + \cdots + a_{2n} x_n = b_2 \\
+                    \vdots \\
+                    a_{m1} x_1 + a_{m2} x_2 + \cdots + a_{mn} x_n = b_m
+                \end{matrix}
+            \right. .
+        \]
+    pode ser representado matricialmente como $Ax = b $, onde
+        \[
+            A := \begin{bmatrix}
+                a_{11} & a_{12} & \cdots & a_{1n} \\
+                    a_{21} & a_{22} & \cdots & a_{2n} \\
+                    \vdots & \vdots & \ddots &  \vdots \\
+                    a_{m1} & a_{m2} & \cdots & a_{mn}
+            \end{bmatrix}_{m \times n}
+                \qquad    
+            x := \begin{bmatrix}
+                x_1 \\ x_2 \\ \vdots \\ x_n
+            \end{bmatrix}_{n \times 1}
+                \qquad
+            b := \begin{bmatrix}
+                b_1 \\ b_2 \\ \vdots \\ b_m
+            \end{bmatrix}_{m \times 1}.
+        \]
+    Observe que $A \in \mathcal{M}_{m \times n}(\R)$, $x \in \mathcal{M}_{n \times 1}(\R)$ e $b \in \mathcal{M}_{n \times 1}(\R)$. Trabalharemos, preferencialmente, com a forma matricial dos sistemas lineares, tendo em mente que as abordagens são equivalentes.
+\end{fato}
+
+\begin{defi}
+    Seja $Ax = b$ um sistema linear como acima. 
+        
+        \textbf{(a)} Denominamos a matriz $A$ como a \textit{matriz incompleta}, ou ainda, a \textit{matriz}, desse sistema. Ela também é chamada de \textit{matriz de coeficientes}.
+
+        \textbf{(b)} Denominamos a matriz
+            \[
+                [A | b] := \begin{bmatrix}
+                    a_{11} & a_{12} & \cdots & a_{1n} & b_1\\
+                    a_{21} & a_{22} & \cdots & a_{2n} & b_2 \\
+                    \vdots & \vdots & \ddots &  \vdots & \vdots \\
+                    a_{m1} & a_{m2} & \cdots & a_{mn} & b_m
+                \end{bmatrix}_{m \times (n+1)}
+            \]
+        como a \textit{matriz completa}, ou a \textit{matriz aumentada}, desse sistema.
+\end{defi}
+
+\begin{defi}
+    Um sistema linear é dito \textit{possível} se ele tiver pelo menos uma solução. Se houver mais de uma solução, ele será dito \textit{possível e indeterminado}, no sentido do resultado a seguir; se a solução for única, então ele será dito \textit{possível e determinado}. Por fim, se não houver solução alguma, ele será dito \textit{impossível}.
+\end{defi}
+
+\begin{teo}
+    Se um sistema linear $Ax=b$ tem (pelo menos) duas soluções distintas, então, na verdade, ele tem infinitas soluções distintas.
+\end{teo}
+
+\begin{proof}
+    Se $x_1 \neq x_2$ são soluções, então $x_3 := \lambda x_1 + (1 - \lambda) x_2$, para qualquer $\lambda \in \R$, também é uma solução. De fato, basta observar que $Ax_3 = A [\lambda x_1 + (1 - \lambda)x_2] = b$.
+\end{proof}
+
+\begin{defi}
+    Diremos que dois sistemas de equações lineares são  equivalentes se eles têm o mesmo conjunto solução.
+\end{defi}
+
+\begin{prop}
+    Os sistemas lineares $Ax = b$ e $Cx=d$ são equivalentes se, e somente se, as matrizes $[A|b]$ e $[C|d]$ são equivalentes por linhas.
+\end{prop}
+
+\begin{proof}
+    Reginaldo, 32.
+\end{proof}
+
+\begin{defi}
+    Um sistema de equações lineares em que todos os termos independentes são nulos, isto é,
+        \[
+            \left\{
+                \begin{matrix}
+                    a_{11} x_1 + a_{12} x_2 + \cdots + a_{1n} x_n = 0 \\
+                    a_{21} x_1 + a_{22} x_2 + \cdots + a_{2n} x_n = 0 \\
+                    \vdots \\
+                    a_{m1} x_1 + a_{m2} x_2 + \cdots + a_{mn} x_n = 0
+                \end{matrix}
+            \right. ,
+        \]
+    ou ainda, em notação matricial,
+        \[
+            \begin{bmatrix}
+                a_{11} & a_{12} & \cdots & a_{1n} \\
+                a_{21} & a_{22} & \cdots & a_{2n} \\
+                \vdots & \vdots & \ddots &  \vdots \\
+                a_{m1} & a_{m2} & \cdots & a_{mn}
+            \end{bmatrix}
+                \cdot    
+            \begin{bmatrix}
+                x_1 \\ x_2 \\ \vdots \\ x_n
+            \end{bmatrix}
+            = \begin{bmatrix}
+                0 \\ 0 \\ \vdots \\ 0
+            \end{bmatrix},
+        \]
+    é dito \textit{homogêneo}.
+\end{defi}
+
+\begin{prop}
+    Todo sistema homogêneo é possível.
+\end{prop}
+
+\begin{proof}
+    Basta ver que $x = 0_{n \times 1}$ é uma solução, dita \textit{trivial}.
+\end{proof}
+
+\begin{teo} \label{teo:sislinhom}
+    Todo sistema linear homogêneo em que o número de incógnitas é maior que o número de equações possui uma solução não trivial (e, portanto, possui infinitas soluções).
+\end{teo}
+
+\begin{proof}
+    Elon, 27
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\chapter{Espaços Vetoriais}
+
+\section{Espaços e Subespaços Vetoriais}
+
+\begin{defi}
+    Uma tripla $(V,+,\cdot)$ é um \textit{espaço vetorial real} se no conjunto $V \neq \emptyset$ existem duas operações, $+ : V \times V \to V$ e $\cdot : \R \times V \to V$, para as quais
+        \begin{itemize}
+            \item A1: $u + (v + w) = (u + v) + w$ para quaisquer $u,v,w \in V$;
+            \item A2: $u + v = v + u$ para quaisquer $u,v \in V$;
+            \item A3: existe $0_V \in V$ tal que $u + 0_V = u$ para todo $u \in V$;
+            \item A4: para cada $u \in V$ existe $v \in V$ tal que $u+v=0_V$;
+            \item M1: $\lambda_1 \cdot (\lambda_2 \cdot u) = (\lambda_1 \cdot \lambda_2) \cdot u$ para quaisquer $u \in V$ e $\lambda_1,\lambda_2 \in \R$;
+            \item M2: $(\lambda_1 + \lambda_2) \cdot u = \lambda_1 \cdot u + \lambda_2 \cdot u$ para quaisquer $u \in V$ e $\lambda_1,\lambda_2 \in \R$;
+            \item M3: $\lambda_1 \cdot (u + v) = \lambda_1 \cdot u + \lambda_1 \cdot v$ para quaisquer $u,v \in V$ e $\lambda_1 \in \R$;
+            \item M4: $1 \cdot u = u$ para todo $u \in V$.
+        \end{itemize}
+    Os elementos de $V$ são chamados de \textit{vetores}. Para simplificar a notação, e quando não houver perigo de confusão, pomos $0 := 0_V$, $\lambda v := \lambda \cdot v =$ e $-v := w$ se $v + w = 0$. Vamos nos referir ao espaço vetorial $(V, +, \cdot)$ simplesmente como o conjunto $V$.
+\end{defi}
+
+\begin{ex}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item O espaço $\R^n$, com soma e produto por escalar usuais, é um espaço vetorial.
+            \item O conjunto $\R^X$ de todas as funções reais $f:X \subseteq \R \to \R$, com soma e produto por escalar usuais, é um espaço vetorial.
+            \item O conjunto $\mathcal{P}(\R)$ de todos os polinômios em $x$, com soma e multiplicação por escalar usuais, é um espaço vetorial.
+            \item O conjunto $\R_{>0}$ dos números reais positivos, com as operações $x\oplus y:=x \cdot y$ e $\alpha \odot x := x^{\alpha}$, é um espaço vetorial.
+        \end{enumerate}
+\end{ex}
+
+\begin{proof}
+\end{proof}
+
+\begin{prop} \label{prop:basicas}
+    Seja $(V, +, \cdot)$ um espaço vetorial. Valem as seguintes afirmações.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item (Unicidade)
+            \item (Integridade) Para quaisquer $u \in V$ e $\lambda \in \R$, temos
+                \begin{enumerate}[label=\roman*.]
+                    \item $\lambda \cdot 0_V = 0_V$;
+                    \item $0 \cdot u = 0_V$;
+                    \item se $\lambda \cdot u = 0_V$, então $\lambda = 0$ ou $u = 0_V$.
+                \end{enumerate}
+            \item (Sinais) Para quaisquer $u \in V$ e $\lambda \in \R$, temos
+                \begin{enumerate}[label=\roman*.]
+                    \item $(-1) \cdot u = -u$;
+                    \item $-(-u) = u$;
+                    \item $(- \lambda) \cdot u = \lambda (-u) = -(\lambda \cdot u)$.
+                \end{enumerate}
+            \item (Lei do Corte) Para quaisquer $u,v,w \in V$ e $\lambda, \lambda_1, \lambda_2 \in \R$, vale
+                \begin{enumerate}[label=\roman*.]
+                    \item $u + w = v + w \Rightarrow u = v$;
+                    \item $\lambda \neq 0 \land \lambda \cdot u = \lambda \cdot v \Rightarrow u = v$; 
+                    \item $v \neq 0_V \land \lambda_1 u = \lambda_2 u \Rightarrow \lambda_1 = \lambda_2$.
+                \end{enumerate}
+            \item Se $V \neq \{0 \}$, então $V$ é infinito.
+        \end{enumerate}
+\end{prop}
+
+\begin{proof}
+\end{proof}
+
+\begin{defi}
+    Um espaço vetorial $(W, +, \cdot)$ é um \textit{subespaço vetorial} de um espaço vetorial $(V, +, \cdot)$ se $W \subseteq V$.
+\end{defi}
+
+\begin{teo}
+    Uma tripla $(W, +, \cdot)$ é um subespaço vetorial de $(V,+,\cdot)$ se $W \subseteq V$ e $u+v, \lambda \cdot v \in W$ para quaisquer $u,v \in W$ e $\lambda \in \R$.
+\end{teo}
+
+\begin{defi} 
+    Seja $V$ um espaço vetorial. Um subconjunto $W \subseteq V$ é um \textit{subespaço vetorial} de $V$ se $u + v \in W$ e $\lambda u \in W$ para quaisquer $u, v \in W$ e $\lambda \in \R$.
+\end{defi}
+
+\begin{cor} \label{cor:1}
+    Sejam $V$ um espaço vetorial. Se $u + \lambda \cdot v \in W$ para quaisquer $u, v \in W \subseteq V$ e $\lambda \in \R$, então $W$ é um subespaço vetorial de $V$.
+\end{cor}
+
+\begin{proof}
+    Particularmente para $\lambda = 1$, temos $u + v \in W$. Particularmente para $v = 0_V$, temos $\lambda u \in W$. \itemproof
+\end{proof}
+
+\begin{prop}
+    Se $V$ é um espaço vetorial e $W \subseteq V$ é um subespaço, então $W$ é um espaço vetorial.
+\end{prop}
+
+\begin{proof}
+    Para provar que $W$ é um espaço vetorial, precisamos verificar que (i) existem operações $+$ e $\cdot$ bem definidas em $W$ e que (ii) essas operações satisfazem as propriedades A1--A4 e M1--M4 de um espaço vetorial.
+        \begin{enumerate}[label=\roman*.]
+            \item Como esperado, as operações $+$ e $\cdot$ de $W$ serão as mesmas de $V$: como $V$ é um espaço vetorial, as operações $+$ e $\cdot$, bem definidas em $V$, também estão bem definidas em qualquer subconjunto não vazio de $V$; em particular, também em $W$. Por exemplo, podemos tomar $w_1, w_2 \in W$ e considerar sua soma, $w_1 + w_2$, porque $W \subset V \Rightarrow w_1, w_2 \in V$ e, em $V$, a operação $+$ está bem definida.
+            \item O fechamento das operações $+$ e $\cdot$ em $W$ garantem, de cara, A1--A2 e M1--M4. Falta, então, provar A3 e A4. Dado $w \in W$, temos que $0_V = 0 \cdot w \in W$; com isso, tomando $0_W := 0_V$, teremos um elemento neutro de $+$ em $W$ porque $w + 0_W = w + 0_V = w$. Por fim, dado $w \in W$, $-w = (-1) \cdot w \in W$, e então o oposto aditivo de $w \in W$ está em $W$. 
+        \end{enumerate}
+    Logo, $W$ é um espaço vetorial, como queríamos.
+\end{proof}
+
+\begin{ex}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Todo espaço vetorial $V$ tem pelo menos dois subespaços vetoriais, dito \textit{triviais}: $\{0_V\}$ e o próprio $V$.
+            \item O conjunto $\mathcal{P}_n(\R)$ dos polinômios de grau menor ou igual a $n$, juntamente com o polinômio nulo, é um subespaço de $\mathcal{P}(\R)$.
+        \end{enumerate}
+\end{ex}
+
+\begin{proof}
+    \textbf{(a)} Elon, 10. Reginaldo, 26.
+\end{proof}
+
+\begin{prop}[Interseção de subespaços]
+    Se $W_1$ e $W_2$ são dois subespaços vetoriais de um espaço vetorial $V$, então
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $W_1 \cap W_2$ é um subespaço vetorial;
+            \item $W_1 \cup W_2$ é um subespaço vetorial se, e somente se, $W_1 \subset W_2$ ou $W_2 \subset W_1$.
+        \end{enumerate}
+\end{prop}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Para quaisquer $u,v \in W_1 \cap W_2$, temos, em particular, $u,v \in W_1$ e $u,v \in W_2$. Como $W_1$ e $W_2$ são espaços vetoriais, temos que $u+\lambda v \in W_1$ e $u+ \lambda v \in W_2$ para todo $\lambda \in \R$, donde $u+\lambda v \in W_1 \cap W_2$. Logo $W_1 \cap W_2$ é um subespaço vetorial de $V$. \itemproof
+            \item Por contradição, suponha que existam $w_1 \in W_1$ e $w_2 \in W_2$ tais que $w_1 \notin W_2$ e $w_2 \notin W_1$. Como, por hipótese, $W_1 \cup W_2$ é um subespaço vetorial, $ w: =w_1+w_2 \in W_1 \cup W_2$, isto é, $w \in W_1$ ou $w \in W_2$. 
+                \begin{itemize} 
+                    \item Se $w \in W_1$, então $w + (- w_1) = w_2 \in W_1$, absurdo!
+                    \item Se $w \in W_2$, então $w + (- w_2) = w_1 \in W_2$, absurdo!
+                \end{itemize}
+            Logo, a prova da ida está completa. A volta é evidente. Logo, a prova está completa. 
+        \end{enumerate} 
+\end{proof}
+
+\begin{cor} \label{prop:intsub}
+    Seja $V$ um espaço vetorial e $I$ um conjunto de índices. Se para cada $\lambda \in I$ o conjunto $W_\lambda \subseteq V$ for um subespaço vetorial de $V$, então $\bigcap_{\lambda \in I} W_{\lambda}$ é ainda um subespaço vetorial de $V$.
+\end{cor}
+
+\begin{proof}
+    Elon, 10.
+\end{proof}
+
+\begin{defi}
+    Sejam $W_1$ e $W_2$ subespaços vetoriais de um espaço vetorial $V$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item (Soma de subespaços) Definimos $W_1 + W_2$ como sendo o conjunto de todos os vetores de $V$ que são soma de um elemento de $W_1$ com um elemento de $W_2$, isto é, 
+                \[ 
+                    W_1 + W_2 := \{v \in V : \exists w_1 \exists w_2 (w_1 \in W_1 \land w_2 \in W_2 \land v = w_1 + w_2\}.
+                \]
+            \item (Soma direta) Diremos que $W_1 \oplus W_2 := W_1 + W_2$ é a \textit{soma direta} de $W_1$ e $W_2$ se $W_1 \cap W_2 = \left\{0_V\right\}$.
+        \end{enumerate}
+\end{defi}
+
+\begin{prop} 
+    Nos termos da definição acima, $W_1 + W_2$ é um subespaço vetorial de $V$.
+\end{prop}
+
+\begin{proof}
+    Veja inicialmente que $W_1, W_2 \subset W_1 + W_2$.
+        \begin{enumerate}[label=\roman*.]
+            \item Se $u,v \in W_1 + W_2$, então existem $u_1, v_1 \in W_1$ e $u_2, v_2 \in W_2$ tais que $u = u_1 + u_2$ e $v = v_1 + v_2$. Com isso,
+                \[ 
+                    u + v = (u_1 + u_2) + (v_1 + v_2) = \underbrace{(u_1 + v_1)}_{\in W_1} + \underbrace{(u_2+v_2)}_{\in W_2},
+                \]
+            de modo que $u+v$ é a soma de um vetor de $W_1$ com um vetor de $W_2$, isto é, $u + v \in W_1 + W_2$.
+            \item Se $u \in W_1 + W_2$, então existem $u_1 \in W_1$ e $u_2 \in W_2$ tais que $u=u_1+u_2$. Com isso, para qualquer $\lambda \in \R$,
+                \[
+                    \lambda u = \lambda (u_1 + u_2) = \underbrace{\lambda u_1}_{\in W_1} + \underbrace{\lambda u_2}_{\in W_2},
+                \]
+             de modo que $\lambda u$ é a soma de um vetor de $W_1$ com um vetor de $W_2$, isto é, $\lambda u \in W_1 + W_2$.
+        \end{enumerate}
+        Assim,  $W_1 + W_2$ é um subespaço vetorial de $V$.
+\end{proof}
+
+\begin{teo}
+    Sejam $W_1$ e $W_2$ dois subespaços vetoriais de um espaço vetorial $V$. Teremos $V = W_1 \oplus W_2$ se, e somente se, para cada $v \in V$ existirem únicos $w_1 \in W_1$ e $w_2 \in W_2$ tais que $v = w_1 + w_2$.
+\end{teo}
+
+\begin{proof}
+    ($\Rightarrow$) Se $V = W_1 \oplus W_2$, então temos a existência da decomposição. Provemos, então, sua unicidade. Dado $v \in V$, sejam $v_1,w_1 \in W_1$ e $v_2, w_2 \in W_2$ tais que $v = v_1 + v_2 = w_1 + w_2$. Somando $[(- w_1) + (- v_2)]$, vem
+            \begin{align*} 
+                v = v_1 + v_2 &= w_1 + w_2 \\
+                v_1 + v_2 + [(-w_1) + (-v_2)] &= w_1 + w_2 + [(-w_1) + (-v_2)] \\  
+                \underbrace{v_1 + \left(-w_1\right)}_{\in W_1} &= \underbrace{w_2 + \left(-v_2\right)}_{\in W_2}. 
+            \end{align*}
+    Como $W_1 \cap W_2 = \{0\}$, temos então que $v_1=w_1$ e $v_2=w_2$, como queríamos.
+
+    ($\Leftarrow$) Segue da hipótese que $V = W_1 + W_2$; provemos, então, que $W_1 \cap W_2 = \{0\}$. Como $W_1 \cap W_2 \neq \emptyset$ (pelo menos $0 \in W_1 \cap W_2$), tome $v \in W_1 \cap W_2$, para o qual, por hipótese, existem únicos $w_1 \in W_1$ e $w_2 \in W_2$. Com isso, temos
+        \[
+            v = \underbrace{w_1}_{\in W_1} + \underbrace{w_2}_{\in W_2} = \underbrace{(w_1 + v)}_{\in W_1} + \underbrace{(w_2 + (-v))}_{\in W_2},
+        \]
+    e como a decomposição é única, temos $w_1 = w_1 + v$ e $w_2 = w_2 - v$, donde $v=0$. Logo, $W_1 \cap W_2 = \{0\}$, como queríamos.
+\end{proof}
+
+\begin{ex}
+    O conjunto das funções reais pares, 
+        \[ 
+            W_1 = \{f \in \R^{\mathcal{X}} : \forall x (x \in \mathcal{X}  \subseteq \R \rightarrow f(-x) = f(x) ) \},
+        \]
+    bem como o conjunto das funções reais ímpares,
+        \[
+            W_2 = \{f \in \R^{\mathcal{X}}:  \forall x (x \in \mathcal{X}  \subseteq \R \rightarrow f(-x) = - f(x) ) \}
+        \]
+    são subespaços de $\R^{\mathcal{X}}$. E ainda, temos que $\R^{\mathcal{X}} = W_1 \oplus W_2$.
+\end{ex}
+
+\begin{proof}
+    Reginaldo, 35.
+\end{proof}
+
+\section{Combinações Lineares e Geradores}
+
+\begin{defi}
+    Seja $(V, +, \cdot)$ um espaço vetorial. Um vetor $u \in V$ é uma \textit{combinação linear} dos vetores $u_1, u_2 , \ldots, u_n \in V$ se existem escalares $\lambda_1, \lambda_2, \ldots, \lambda_n \in \R$ para os quais 
+        \[
+            u = \lambda_1 u_1 + \lambda_2 u_2 + \cdots + \lambda_n u_n = \sum_{i=1}^{n} \lambda_i u_i.
+        \]
+\end{defi}
+
+\begin{teo}
+    Seja $V$ um espaço vetorial e $\emptyset \neq S \subseteq V$ um subconjunto de vetores de $V$. O conjunto de todas as combinações lineares dos vetores de $S$, que denotaremos por $[S]$, é um subespaço vetorial de $V$.
+\end{teo}
+
+\begin{proof}
+    Se $u, v \in [S]$, então, por definição, existem vetores e escalares
+        \begin{align*}
+            u_1, u_2, \ldots, u_n, v_1, v_2, \ldots, v_m \in S \\
+            \lambda_1, \lambda_2, \ldots, \lambda_n, \alpha_1, \alpha_2, \ldots, \alpha_m \in \R
+        \end{align*}
+    para os quais $\ds u = \sum_{i=1}^{n} \lambda_i u_i$ e $\ds  v = \sum_{i=1}^{m} \alpha_i v _i$. Com isso, para qualquer $\lambda \in \R$,
+        \[
+            u + \lambda v = \sum_{i=1}^{n} \lambda_i  u_i + \sum_{i=1}^{m} (\lambda \alpha_i) v_i,  
+        \]
+    de modo que $u+\lambda v$ é uma combinação linear de vetores de $S$, isto é, $u + \lambda v \in [S]$. Logo, pelo resultado \eqref{cor:1}, $[S]$ é um subespaço vetorial de $V$.
+\end{proof}
+
+\begin{defi}
+    Sejam $V$ um espaço vetorial e $\emptyset \neq S \subseteq V$ um subconjunto de vetores de $V$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Diremos que $[S]$ é o \textit{subespaço gerado} por $S$, ou que $S$ \textit{gera} $[S]$. Diremos, ainda, que os elementos de $S$ são \textit{geradores} de $[S]$.
+            \item Se $S$ é finito e $[S] = V$, diremos que $V$ é \textit{finitamente gerado} e que $S$ é um \textit{conjunto de geradores} para (ou de) $V$.
+            \item Convenciona-se pôr $[\emptyset]= \{0\}$.
+        \end{enumerate}
+\end{defi}
+
+\begin{prop}
+    Sejam $V$ um espaço vetorial e $\emptyset \neq S,T \subseteq V$ subconjuntos de vetores de $V$. Valem as seguintes afirmações.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $S \subseteq [S]$.
+            \item $[[S]] = [S]$.
+            \item Se $S$ é um subespaço vetorial, então $[S]=S$.
+            \item $S \subset T \Rightarrow [S] \subset [T]$.
+            \item $[S \cup T ] = [S] + [T]$.
+        \end{enumerate}
+\end{prop}  
+        
+\begin{proof}
+    \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+        \item Se $u \in S$, então $u = 1 u \in [S]$. \itemproof
+
+        \item Pelo item anterior, $[S] \subseteq [[S]]$. Agora, se $u \in [[S]]$, então $u$ é uma combinação linear de vetores de $[S]$, que por sua vez são combinações lineares de vetores de $[S]$, de modo que $u \in [S]$. Assim, $[[S]] \subseteq [S]$, de modo que $[[S]] = [S]$. \itemproof
+
+        \item Se $u \in [S]$, então $u$ é uma combinação linear de elementos de $S$; como $S$ é um subespaço vetorial, temos então $u \in S$, de modo que $[S] \subseteq S$. Como $S \subseteq [S]$, temos então $[S] = S$. \itemproof
+        
+        \item Se $u \in S$, então existem vetores $u_1, \ldots, u_n \in S$ e escalares $\lambda_1, \ldots, \lambda_n \in \R$ tais que $u = \lambda_1 u_1 + \cdots + \lambda_n u_n$. Como $u_1, \ldots, u_n \in S$, por ser $S \subseteq T$ vem $u_1, \ldots, u_n \in T$, de modo que $\lambda_1 u_1 + \cdots + \lambda_n u_n \in T$. \itemproof
+
+        \item 
+    \end{enumerate}
+\end{proof}
+
+\section{Dependência e Independência Linear}
+
+\begin{defi}
+    Seja $(V, +, \cdot)$ um espaço vetorial.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Os vetores $u_1, u_2, \ldots, u_n \in V$ são \textit{linearmente independentes} (L.I.) se a equação
+                \[
+                    \lambda_1 u_1 + \lambda_2 u_2 + \cdots + \lambda_n u_n = 0
+                \]
+            possuir somente a solução trivial $\lambda_1 = \lambda_2 = \cdots = \lambda_n = 0$. Caso contrário, ou seja, se existir pelo menos uma solução com pelo menos um $\lambda_i \neq 0$, diremos que os vetores $u_1, u_2, \ldots, u_n \in V$ são \textit{linearmente dependentes} (L.D.).
+
+            \item Um subconjunto finito $S \subseteq V$\footnote{Sendo $S$ finito, só pode ser $S = V$ se for $V = \{ 0\}$.} é L.D. (L.I.) se os vetores de $S$ são L.D. (L.I.).
+                \begin{enumerate}[label=\roman*.]
+                    \item Um subconjunto infinito infinito $S \subseteq V$ é L.D. se pelo menos um subconjunto finito de $S$ é L.D..
+                    \item Um subconjunto infinito $S \subseteq V$ é L.I. se todo subconjunto finito de $S$ é L.I..
+                \end{enumerate}
+        \end{enumerate}
+\end{defi}
+
+\begin{prop} \label{prop:deplin}
+    Sejam $(V,+,\cdot)$ um espaço vetorial e $S \subseteq V$ não vazio. Valem as seguintes afirmações.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se $|S| = 1$ e $0_V \notin S$, então $S$ é L.I..
+            
+            \item $S$ é L.D. se, e somente se, pelo menos um vetor de $S$ é combinação linear de outros vetores de $S$. 
+            
+            Equivalentemente, pela contrapositiva, $S$ é L.I. se, e somente se, nenhum vetor de $S$ é combinação linear de outros vetores de $S$.
+            
+            \item Se $0_V \in S$, então $S$ é L.D.. 
+            
+            Equivalentemente, pela contrapositiva, se $S$ é L.I., então $0_V \notin S$.
+            
+            \item Suponha $S$ L.I. e seja $u \in V$. Se $S \cup \{ u\}$ é L.D., então $u \in [S]$.
+            
+            Equivalentemente, pela contrapositiva, se $u \notin [S]$, então $S \cup \{ u\}$ é L.I..
+            
+            \item Sejam $S_1,S_2 \neq \emptyset$ subconjuntos de $V$ tais que $S_1 \subseteq S_2$. Temos que
+                \begin{enumerate}[label=\roman*.]
+                    \item se $S_1$ é L.D., então $S_2$ também é L.D..
+                    \item se $S_2$ é L.I., então $S_1$ também é L.I.. 
+                \end{enumerate}
+                
+            \item Se $S$ é finito e L.I., então cada vetor $u \in [S]$ se escreve de maneira única como combinação linear de vetores de $S$. %Mais especificamente, se $S$ tem, digamos, $n$ vetores, então, indexando os vetores de $S$ em $[n]$ de modo que $S = \{ v_1, v_2, \ldots, v_n \}$, para cada $v \in [S]$ são únicos os $\lambda_i \in \R$, com $i \in [n]$, de modo que $v = \lambda_1 v_1 + \lambda_2 v_2 + \cdots + \lambda_n v_n$.
+
+            \item  Se $u \in S$ é tal que $u \in [S \setminus \{u \}]$, então $[S] = [S \setminus \{u \}]$.
+        \end{enumerate}
+\end{prop}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Sendo $S = \{u\}$, se $\lambda \cdot u = 0_V$ então $\lambda \neq 0$ já que $u \neq 0_V$. Logo $S$ é L.I.. \itemproof
+            
+            \item ($\Rightarrow$) Se $S$ é L.D., então existem $v_1, v_2, \ldots, v_n \in S$ para os quais vale
+                \[
+                    \lambda_1 v_1 + \lambda_2 v_2 + \cdots + \lambda_n v_n = 0
+                \]
+            com $\lambda_i \neq 0$ para pelo menos um $i \in [n]$. Suponha, sem perda de generalidade, que $i=1$, isto é, que $\lambda_1 \neq 0$; com isso,
+                \[
+                    v_1 = \left( \dfrac{-\lambda_2}{\lambda_1} \right) v_2 + \left( \dfrac{-\lambda_3}{\lambda_1} \right) v_3 + \cdots + \left( \dfrac{-\lambda_n}{\lambda_1} \right) v_n,
+                \]
+            de modo que $v_1 \in S$ é combinação linear de $v_2, v_3, \ldots, v_n \in S$.
+
+            ($\Leftarrow$) Se $v = \lambda_1 v_1 + \cdots + \lambda_n v_n$, com $v_1, \ldots, v_n \in V$ e $\lambda_1, \ldots, \lambda_n \in \R$, então
+                \[
+                    \lambda_1 v_1 + \cdots + \lambda_n v_n + (-1)v = 0;
+                \]
+            como $-1 \neq 0$, temos, por definição, que $S$ é L.D.. \itemproof
+        \end{enumerate}
+    
+    \textbf{(c)} Basta ver que $0_V$ é combinação linear de quaisquer $v_1, v_2, \ldots, v_n \in V$: temos $0_V = 0v_1 + 0v_2 + \cdots + 0v_n$. Assim, pelo item anterior, $S$ é L.D.. \itemproof
+
+    \textbf{(d)}
+
+    \textbf{(e)}
+
+    \textbf{(f)}
+
+    \textbf{(g)} Esta afirmação nos diz que se um vetor de $S$ é combinação linear de outros vetores de $S$, então ele pode ser removido do subespaço gerado por $S$ sem alterá-lo.
+\end{proof}
+
+\section{Base e Dimensão}
+
+\begin{lem} \label{alr.lem:fundamental}
+    Seja $(V,+,\cdot)$ um espaço vetorial. Se um subconjunto finito $S \subseteq V$ é L.I., então todo subconjunto $T \subseteq [S]$ tal que $|T| = |S|+1$ é L.D..
+\end{lem}
+
+\begin{proof}
+    Façamos indução em $|S|$. Se $|S| = 1$, então $S = \{u_1\}$, com $u_1 \neq 0_V$ já que $S$ é L.I.. Tomando $v_1, v_2 \in [S]$ distintos, existem escalares $\lambda_1, \lambda_2 \in \R$ tais que $v_1 = \lambda_1 u_1$ e $v_2 = \lambda_2 u_1$. Multiplicando $v_1$ por $\lambda_2$ e $v_2$ por $\lambda_1$, obtemos
+        \[
+            \lambda_2 v_1 - \lambda_1 v_2 = 0_V,
+        \]
+    isto é, uma combinação linear não trivial dos vetores de $T = \{v_1, v_2\}$, de modo que eles são L.D.. Isso completa a base de indução. Suponha então, por hipótese de indução, que o resultado vale para subconjuntos de $V$ de $n-1$ vetores. Agora, sejam $S = \{u_1, \ldots, u_n\} \subsetneq V$ e $T = \{v_1, \ldots, v_n, v_{n+1}\} \subseteq [S]$. Provemos que $T$ é L.D.. Como $v_i \in [S]$ para todo $i \in [n+1]$, existem escalares $a_{ij} \in \R$, com $i \in [n+1]$ e $j \in [n]$, tais que
+        \[
+            v_i = a_{i1} u_1 + \cdots + a_{in} u_n
+        \]
+    para todo $i \in [n+1]$.
+        \begin{itemize}
+            \item $a_{i1} = 0$ para todo $i \in [n+1]$. Nesse caso, temos
+                \[
+                    v_i = a_{i2} u_2 + \cdots + a_{in} u_n
+                \]
+            para todo $i \in [n+1]$, donde $T \subsetneq [S \setminus \{u_1\}]$, e como $|S \setminus \{u_1\}| = n-1$, segue da hipótese de indução que todo subconjunto de $T$ com $n$ vetores é L.D., de modo que $T$ é L.D..
+            \item $a_{i1} \neq 0$ para algum $i \in [n+1]$. Nesse caso, suponha, sem perda de generalidade, que $a_{11} \neq 0$. Definindo
+                \[
+                    w_i := \dfrac{a_{i1}}{a_{11}} \cdot v_1 - v_i
+                \]
+            para cada $i \in [n+1] \setminus \{1\}$, fazendo as contas obtemos
+                \[
+                    w_i = \sum_{j=2}^n \left[ \left( \dfrac{a_{i1}}{a_{11}} a_{1j} - a_{ij} \right) u_j \right].
+                \]
+            Com isso, vemos que cada $w_i$ é uma combinação linear dos vetores $u_2, \ldots, u_n$, de modo que $T' := \{ w_2, \ldots, w_n, w_{n+1} \} \subsetneq [S \setminus \{u_1\}]$. Como $|S \setminus \{u_1\}| = n-1$ e $|T'| = n$, pela hipótese de indução temos que $T'$ é L.D., de modo que existem $n$ escalares, $\lambda_2, \ldots, \lambda_{n+1} \in \R$, com algum $\lambda_i \neq 0$, tais que
+                \[
+                    \sum_{i=2}^{n+1} \lambda_i w_i = 0_V.
+                \]
+            Daí, obtemos
+                \[
+                     \sum_{i=2}^{n+1} \left( \lambda_i \dfrac{a_{i1}}{a_{11}} \right) v_1 - \sum_{i=2}^{n+1} \lambda_i v_i = 0_V,
+                \]
+            uma combinação linear não trivial de $T$, de modo que $T$ é L.D..
+        \end{itemize}
+    Com isso, vemos que se o resultado vale para subconjuntos de $V$ com $n-1$ vetores, então ele também vale para subconjuntos de $V$ com $n$ vetores. Isso completa o passo indutivo e, portanto, completa a prova. \itemproof
+\end{proof}
+
+\begin{cor}
+    Seja $(V,+,\cdot)$ um espaço vetorial. Se um subconjunto finito $S \subseteq V$ é L.I., então todo subconjunto $T \subseteq [S]$ tal que $|T| \geq |S|+1$ é L.D..
+\end{cor}
+
+\begin{defi}
+    Seja $(V, +, \cdot)$ um espaço vetorial. Um subconjunto $\mathcal{B} \subsetneq V$ é uma \textit{base} de $V$ se $\mathcal{B}$ é L.I. e $[\mathcal{B}] = V$.
+\end{defi}
+
+\begin{teo}[Completamento]
+     Todo espaço vetorial finitamente gerado possui uma base. 
+\end{teo}
+
+\begin{proof}
+    Seja $(V,+,\cdot)$ um espaço vetorial finitamente gerado. Se $V = \{0\}$, então $\emptyset$ é uma base de $V$, já que os vetores de $\emptyset$ são L.I. por vacuidade e convencionamos pôr $[\emptyset] = \{0\}$. Suponha, então, $V \neq \{ 0\}$. Como $V$ é finitamente gerado, existe um subconjunto finito $S := \{v_1, v_2, \ldots, v_n\} \subsetneq V$ que gera $V$. Se $S$ for L.I., então $S$ será uma base de $V$. Se $S$ for L.D., então vale
+        \[
+            \lambda_1 v_1 + \lambda_2 v_2 + \cdots + \lambda_n v_n = 0,
+        \]
+    sendo $\lambda_i \neq 0$ para pelo menos um $i \in [n]$. Suponha, sem perda de generalidade, que $i=n$, isto é, que $\lambda_n \neq 0$; com isso,
+        \[
+            v_n = \left( \dfrac{-\lambda_1}{\lambda_n} \right) v_1 + \left( \dfrac{-\lambda_2}{\lambda_n} \right) v_2 + \cdots + \left( \dfrac{-\lambda_{n-1}}{\lambda_n} \right) v_{n-1},
+        \]
+    de modo que $v_n$ é uma combinação linear de $v_1, v_2, \ldots, v_{n-1} \in S$. Pelo item (g) de \eqref{prop:deplin}, removemos $v_n$ e obtemos $[S \setminus \{v_n\}] = [S] = V$. Repetindo esse processo (em um número finito de vezes, digamos, $m$, já que $V$ é finitamente gerado) eventualmente obteremos um subconjunto $L.I.$ de $S$ com $n-m$ vetores que continua gerando $V$; esse subconjunto vem a ser, então, a base de $V$. \itemproof
+\end{proof}
+
+\begin{proof}
+    Alternativamente, suponha que $S$ é L.D.. Como $V \neq \{0\}$, existe $i \in [n]$ tal que $v_i \neq 0$. Suponha, sem perda de generalidade, que $i=1$, isto é, que $v_1 \neq 0$; se todo $v_i$, com $i \in [n] \setminus \{1\}$, puder ser escrito como combinação linear de $v_1$, então $V = [v_1]$ e $\{ v_1\}$ é uma base de $V$. Se isso não ocorre, então existe algum $v_i$, com $i \in [n] \setminus \{1\}$, que não pode ser escrito como combinação linear de $v_1$. Suponha, sem perda de generalidade, que $i=2$; se todo $v_i$, com $i \in [n] \setminus \{1,2\}$, puder ser escrito como combinação linear de $v_1$ e $v_2$, então $V = [v_1, v_2]$ e $\{ v_1, v_2\}$ é uma base de $V$. Repetindo esse processo (em um número finito de vezes, já que $V$ é finitamente gerado) eventualmente obteremos um subconjunto $L.I.$ de $S$ que gera $V$; esse subconjunto vem a ser, então, a base de $V$. \itemproof
+\end{proof}
+
+\begin{teo}[Invariância] \label{alr.teo:bases}
+    Seja $V$ um espaço vetorial finitamente gerado. Se $\mathcal{B}_1$ e $\mathcal{B}_2$ são bases de $V$, então $|\mathcal{B}_1| = |\mathcal{B}_2|$.
+\end{teo}
+
+\begin{proof}
+    Como $\mathcal{B}_1$ é L.I. e $[\mathcal{B}_1] = V$, pelo lema \eqref{alr.lem:fundamental} temos que $|\mathcal{B}_2| \leq |\mathcal{B}_1|$ já que $\mathcal{B}_2 \subsetneq V = [\mathcal{B}_1]$. De fato, se fosse $|\mathcal{B}_2| > |\mathcal{B}_1|$, pelo lema \eqref{alr.lem:fundamental} $\mathcal{B}_2$ seria L.D., o que contradiz a hipótese. Analogamente, como $\mathcal{B}_2$ é L.I. e $[\mathcal{B}_2] = V$, temos que $|\mathcal{B}_1| \leq |\mathcal{B}_2|$. Sendo $|\mathcal{B}_2| \leq |\mathcal{B}_1|$ e $|\mathcal{B}_1| \leq |\mathcal{B}_2|$, temos que $|\mathcal{B}_1| = |\mathcal{B}_2|$, conforme afirmado. \itemproof
+\end{proof}
+
+\begin{defi}
+    A \textit{dimensão} de um espaço vetorial finitamente gerado $(V, +, \cdot)$ é o número de vetores de qualquer uma de suas bases. Mais especificamente, se $\mathcal{B}$ é uma base de $V$, a dimensão de $V$ é definida como $\dim V := |\mathcal{B}|$.
+\end{defi}
+
+\begin{teo}
+    Seja $(V,+,\cdot)$ um espaço vetorial de dimensão finita $n>0$.
+
+    \textbf{(a)} Todo subconjunto de $V$ com $n$ vetores L.I. é uma base de $V$.
+
+    \textbf{(b)} Todo subconjunto de $V$ com $n$ vetores que gera $V$ é uma base de $V$.
+
+    \textbf{(c)} Todo subconjunto de $V$ que gera $V$ tem pelo menos $n$ elementos.
+
+    \textbf{(d)} Todo subconjunto de $V$ com $m < n$ vetores não é uma base de $V$.
+
+    \textbf{(e)} Todo subconjunto de $V$ com $m < n$ vetores L.I. pode ser completado para formar uma base de $V$.
+
+    \textbf{(f)} Se $W$ é um subespaço vetorial de $V$, então $W$ tem dimensão finita e $\dim W \leq \dim V$. Em particular, se $\dim W = \dim V$, então $W = V$.
+
+    \textbf{(g)} Se $W_1$ e $W_2$ são subespaços vetoriais de $V$, então
+        \[
+            \dim{(W_1 + W_2)} = \dim{W_1} + \dim{W_2} - \dim{(W_1 \cap W_2)}.
+        \]
+\end{teo}
+
+\begin{proof}
+    \textbf{(a)} Reginaldo, 88.
+
+    \textbf{(b)} Reginaldo, 88.
+
+    \textbf{(c)} Reginaldo, 88.
+
+    \textbf{(d)} Zani, 44.
+
+    \textbf{(e)} Reginaldo, 88. Zani, 48.
+
+    \textbf{(f)} Reginaldo, 87.
+
+    \textbf{(g)} Reginaldo, 93. Zani, 49.
+\end{proof}
+
+\begin{defi}
+    Seja $V$ um espaço vetorial de dimensão finita $n>0$ e $\mathcal{B} := \{v_1, v_2, \ldots, v_n\} $ uma base ordenada (indexada) de $V$. Para cada $v \in V$, diremos que os únicos $\lambda_1, \lambda_2, \cdots, \lambda_n \in \R$ tais que $v = \lambda_1 v_1 + \lambda_2 v_2 + \cdots + \lambda_n v_n$ são as \textit{coordenadas} de $v$ com relação à base $\mathcal{B}$ e denotamos isso por
+        \[
+            v:= 
+                \begin{bmatrix}
+                    \lambda_1 \\
+                    \lambda_2 \\
+                    \vdots \\
+                    \lambda_n
+                \end{bmatrix}_{\mathcal{B}} :=
+                \begin{bmatrix}
+                    \lambda_1 \\
+                    \lambda_2 \\
+                    \vdots \\
+                    \lambda_n
+                \end{bmatrix}_{v_1, v_2, \ldots, v_n}.
+        \]
+\end{defi}
+
+\begin{teo}
+    (Mudança de Base) Seja $(V, +, \cdot)$ um espaço vetorial de dimensão finita $n>0$ e $v \in V$. Sejam $\mathcal{B}$ e $\mathcal{C}$ duas bases de um espaço vetorial de dimensão finita $(V,+, \cdot)$ e $v \in V$. 
+\end{teo}
+
+
+
+
+
+
+
+
+
+
+
+\chapter{Transformações Lineares}
+
+\begin{defi}
+    Sejam $(V, +, \cdot)$ e $(W, +, \cdot)$ espaços vetoriais.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Uma \textit{transformação linear} de $(V, +, \cdot)$ em $(W,+,\cdot)$ é uma função $T : V \to W$ tal que $T(u + v) = T(u) + T(v)$ e $T(\lambda \cdot u) = \lambda \cdot T(u)$ para quaisquer $u, v \in V$ e $\lambda \in \R$.
+            \item Um \textit{operador linear} é uma transformação linear $T : V \to V$.
+        \end{enumerate}
+\end{defi}
+
+\begin{ex}
+    Sejam $(V, +, \cdot)$ e $(W, +, \cdot)$ espaços vetoriais.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item A função $0 : V \to W$ definida por $0(v) = 0_W$ para todo $v \in V$ é uma transformação linear, chamada de \textit{transformação nula}.
+            \item A função $I_V : V \to V$ definida por $I_V(v) = v$ para todo $v \in V$ é um operador linear, chamada de \textit{transformação identidade}. 
+        \end{enumerate}
+\end{ex}
+
+\begin{prop}
+    Uma função $T : V \to W$ é uma transformação linear se, e somente se,
+        \[
+            T\left(\sum_{i=1}^{n} \lambda_i v_i \right) = \sum_{i=1}^{n} \lambda_i T(v_i)
+        \]
+    para quaisquer $n \in \N$, $v_1, \ldots, v_n \in V$ e $\lambda_1, \ldots, \lambda_n \in \R$.
+\end{prop}
+
+\begin{proof}
+    
+\end{proof}
+
+\begin{prop}
+    Seja $T : V \to W$ uma transformação linear. Valem as seguintes afirmações.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $T(0_V) = 0_W$.
+        \end{enumerate}
+\end{prop}
+
+\begin{defi}
+    Sejam $V$ e $W$ espaços vetoriais. O conjunto de todas as transformações lineares de $V$ em $W$ é denotado por $\mathcal{L}(V,W)$
+\end{defi}
+
+\begin{defi}
+    Seja $T : V \to W$ uma transformação linear.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item O \textit{núcleo} de $T$ é definido como
+                \[
+                    \ker{T} := \{ v \in V : T(v) = 0_W \}.
+                \]
+            \item A \textit{imagem} de $T$ é definida como
+                \[
+                    \Im{T} := \{ w \in W : \exists v(v \in V \land T(v) = w) \}.
+                \]
+        \end{enumerate}
+\end{defi}
+
+\begin{teo}
+    Seja $T : V \to W$ uma transformação linear.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $\ker{T}$ é um subespaço vetorial de $V$.
+            \item $\Im{T}$ é um subespaço vetorial de $W$.
+        \end{enumerate}
+\end{teo}
+
+\section{Matrizes}
+
+O conjunto $\mathcal{M}_{m \times n} \left(\R \right)$ de todas as matrizes $m \times n$ com entradas reais, com soma e produto por escalar usuais (vistas no capítulo 1), é um espaço vetorial.
+
+\begin{ex}
+    \textbf{(a)} Dado $(a_1, a_2, \ldots, a_n) \in \R^n$, temos que 
+        \[
+            W := \left\{(x_1, x_2, \ldots, x_n ) \in \R^n : a_1 x_1 + a_2 x_2 + \cdots + a_n x_n = 0 \right\}
+        \] 
+    é um subespaço de $\R^n$. No caso desinteressante em que $a_i = 0$ para todo $i \in [n]$, o subespaço $W$ é todo o $\R^n$. Se, por outro lado, existe pelo menos um $i \in [n]$ tal que $a_i \neq 0$, diremos que $W$ é um \textit{hiperplano} que passa pela origem.
+
+    \textbf{(b)} Seja $m \in \N$. Para cada $i \in [m]$, sendo $(a_{i1}, a_{i2}, \ldots, a_{in}) \in \R^n$, pelo item anterior temos que cada
+        \[
+            W_i := \left\{(x_1, x_2, \ldots, x_n ) \in \R^n : a_{i1} x_1 + a_{i2} x_2 + \cdots + a_{in} x_n = 0 \right\}
+        \]
+    é um subespaço vetorial de $V$. Pela proposição \eqref{prop:intsub}, temos que $W := W_1 \cap W_2 \cap \cdots \cap W_m$ é ainda um subespaço vetorial de $V$, que é exatamente o conjunto das soluções do sistema linear homogêneo
+        \[
+            \left\{
+                \begin{matrix}
+                    a_{11} x_1 + a_{12} x_2 + \cdots + a_{1n} x_n = 0 \\
+                    a_{21} x_1 + a_{22} x_2 + \cdots + a_{2n} x_n = 0 \\
+                    \vdots \\
+                    a_{m1} x_1 + a_{m2} x_2 + \cdots + a_{mn} x_n = 0
+                \end{matrix}
+            \right. .
+        \]
+    Outra maneira de verificar que o conjunto das soluções de um sistema linear homogêneo é um espaço vetorial é a seguinte.
+\end{ex}
+
+ O conjunto das matrizes simétricas, 
+        \[
+            W_1 = \{A \in \mathcal{M}_{n \times n}: A^T= A\},
+        \]
+    bem como o conjunto das matrizes antissimétricas, 
+        \[
+            W_2 = \{A \in \mathcal{M}_{n \times n}: A^T= -A \},
+        \]
+    são subespaços de $\mathcal{M}_{n \times n}$. E ainda, temos que $\mathcal{M}_{n \times n} = W_1 \oplus W_2$.
+
+
+
+
+
+\chapter{Geometria Analítica}  
+
+% \label{teo:importante} ~\ref{teo:importante}

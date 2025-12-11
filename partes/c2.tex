@@ -1,0 +1,758 @@
+%!TEX root = main.tex
+
+\chapter{Topologia do Espaço Euclidiano}
+
+\begin{defi}
+    A \textit{projeção} de $A \in \R^n$ em $B \in \R^n_{\neq 0}$ é definida como
+        \[
+            \op{proj}_{B}{A} := \left(\dfrac{A \cdot B}{\| B\|^2}\right) B.
+        \]
+\end{defi}
+
+
+\begin{defi}
+    Uma \textit{reta} no $\R^n$ que passa pelo ponto $P \in \R^n$ e é paralela ao vetor $A \in \R^n_{\neq 0}$ é a imagem da função $L : \R \to \R^n$ definida por $L(t) = P + t A$. Denota-se $L(P,A):= \Im{L}$, isto é,
+        \[
+            L(P,A) := \{ X \in \R^n : \exists t (t \in \R \land X = P + t A) \}.
+        \]
+\end{defi}
+
+\begin{prop} \label{c2.prop:retas}
+    Sejam $P, Q, A, B \in \R^n$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $L(P,A) = L(P,B) \Leftrightarrow A \parallel B$.
+            \item $L(P,A) = L(Q,B) \Leftrightarrow Q \in L(P,A) \lor P \in L(Q,B)$.
+            \item Se $P \neq Q$, então existe uma única reta $L \subsetneq \R^n$ tal que $P,Q \in L$.
+        \end{enumerate}
+\end{prop}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item 
+            \item 
+            \item Pois tome $L = L(P, Q-P)$. Temos $P \in L$ pois $P = P + 0 \cdot (Q-P)$ e temos $Q \in L$ pois $Q = P + 1 \cdot (Q-P)$. Agora, seja $L'$ uma reta tal que $P, Q \in L'$. Como $P \in L'$, temos por definição $L' = L(P,A)$ para algum vetor $A \in \R^n_{\neq 0}$. Como $Q \in L' = L(P,A)$, existe $t \in \R$ tal que $Q = P + t A$. Daí, $Q-P = t A$, e como $Q - P \neq 0$, temos $t \neq 0$ e $Q-P \parallel A$, donde $L' = L$ pelo primeiro item. \itemproof
+        \end{enumerate}
+\end{proof}
+
+
+
+\begin{defi}
+    Duas retas $L(P,A)$ e $L(Q,B)$ são \textit{paralelas} se $A \parallel B$. Isso é denotado por $L(P,A) \parallel L(Q,B)$.
+\end{defi}
+
+\begin{teo}[Paralelas]
+    Seja $L \subsetneq \R^n$ uma reta. Para todo ponto $Q \notin L$ existe uma única reta $L' \subsetneq \R^n$ tal que $Q \in L'$ e $L' \parallel L$. 
+\end{teo}
+
+\begin{proof}
+    Seja $L = L(P,A)$ e tome $L' = L(Q,A)$. De cara, $Q \in L'$ e $L' \parallel L$. A unicidade segue imediatamente da proposição \eqref{c2.prop:retas}. \itemproof
+\end{proof}
+
+\begin{teo}
+    Sejam $P, A \in \R^2$. Se $N \in \R^2$ é tal que $N \cdot A = 0$, então
+        \begin{enumerate}[label=\roman*.]
+            \item $\{ X \in \R^2 : (X-P) \cdot N = 0 \} = L(P,A)$;
+            \item vale
+                \[
+                    \| X \| \geq \dfrac{|P \cdot N|}{\| N\|}
+                \]
+            para todo $X \in L(P,A)$, com igualdade somente se $X = \op{proj}_{N}{P}$;
+            \item Se $Q \notin L(P,A)$, então
+                \[
+                    \| X-Q \| \geq \dfrac{|(P-Q)\cdot N|}{\|N\|}
+                \]
+            para todo $X \in L(P,A)$, com igualdade somente se $Q = \op{proj}_{N}{(P-Q)}$;
+        \end{enumerate}
+\end{teo}
+
+\begin{proof}
+    Comecemos com um lema: se $(a,b), (c,d) \in \R^2$ são tais que $(a,b) \cdot (c,d) = 0$, então $(c,d) = t \cdot (b,-a)$ para algum $t \in \R$.
+\end{proof}
+
+\begin{defi}
+    Seja $n \in \N_{\geq 2}$. Um \textit{plano} no $\R^n$ que passa por um ponto $P \in \R^n$ e é gerado por vetores $u,v \in \R^n$, linearmente independentes, é a imagem da função $\alpha : \R^2 \to \R^n$ definida por $\alpha(s,t) = P + su + tv$. Denota-se $\{P + su + tv\} := \Im{\alpha}$, isto é,
+        \[
+             \{P + su + tv\} = \{ X \in \R^n : \exists s \exists t (s,t \in \R \land X = P + su + tv) \}.
+        \]
+\end{defi}
+
+\begin{teo}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se $M = \{P + sA + tB\}$ e $M' = \{P + sC + tD\}$ são planos, então $M = M'$ se, e somente se, $[A,B] = [C,D]$.
+            \item Se $\alpha = \{P + su + tv\}$ e $\beta = \{Q + su + tv\}$ são planos, então $\alpha = \beta$ se, e somente se, $Q \in \alpha$ ou $P \in \beta$.
+            \item Se $P, Q, R \in \R^n$ não são colineares, então existe um único plano $\alpha \subsetneq \R^n$ tal que $P, Q, R \in \alpha$.
+        \end{enumerate}
+\end{teo}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item ($\Rightarrow$) bla bla
+
+            ($\Leftarrow$)
+            \item ($\Rightarrow$) bla bla
+
+            ($\Leftarrow$)
+            \item 
+        \end{enumerate}
+\end{proof}
+
+\begin{defi}
+    Sejam $\alpha = \{P + sA + tB\}$ e $\beta = \{Q + sC + tD\}$ planos no $\R^n$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Um vetor $v \in \R^n$ é \textit{paralelo ao plano} $\alpha$ se $v \in [A,B]$.
+            \item Os planos $\alpha$ e $\beta$ são \textit{paralelos} se $[A,B] = [C,D]$.
+        \end{enumerate}
+\end{defi}
+
+\begin{teo}[Paralelas]
+    Seja $\alpha \subsetneq \R^n$ um plano. Para todo ponto $Q \notin \alpha$ existe um único plano $\beta \subsetneq \R^n$ tal que $Q \in \beta$ e $\beta \parallel \alpha$.
+\end{teo}
+
+\begin{proof}
+    \itemproof
+\end{proof}
+
+
+\begin{teo}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Dois vetores $u, v \in \R^n$ são L.I. se, e somente se, existe uma reta $r \subsetneq \R^n$ tal que $u,v,0 \in r$.
+            \item Três vetores $u, v, w \in \R^n$ são L.I. se, e somente se, existe um plano $\alpha \subsetneq \R^n$ tal que $u,v,w,0 \in \alpha$.
+        \end{enumerate}
+\end{teo}
+
+\begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item 
+            \item 
+        \end{enumerate}
+\end{proof}
+
+\begin{defi}
+    Uma \textit{bola aberta de raio $r \in \R_{>0}$ e centro $a \in \R^n$} é definida como
+        \[
+            B_r(a) := \{ x \in \R^n : \|x - a\| < r \}.
+        \]
+\end{defi}
+
+\begin{defi}
+    \leavevmode 
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Um ponto $a \in \R^n$ é um \textit{ponto interior} de $A \subseteq \R^n$ se existe $r \in \R_{>0}$ tal que $B_r(a) \subseteq A$.
+            \item O \textit{interior} de $A \subseteq \R^n$, denotado por $\op{int}{A}$, é definido como o conjunto de todos os pontos interiores de $A$, isto é,
+                \[
+                    \op{int}{A} = \{ x \in A : \exists r (r \in \R_{>0} \land B_r(x) \subseteq A ) \}.
+                \]
+            \item Um subconjunto $A \subseteq \R^n$ é \textit{aberto} se $\op{int}{A} = A$.
+        \end{enumerate}
+\end{defi}
+
+\begin{cor}
+    Toda bola aberta é um conjunto aberto.
+\end{cor}
+
+\begin{proof}
+    Ver \cite{guidorizzi2}, página 113. \itemproof
+\end{proof}
+
+\begin{defi}
+    Um ponto $a \in \R^n$ é um \textit{ponto de acumulação} de $A \subseteq \R^n$ se
+        $
+            B_r(a) \cap A_{\neq a} \neq \emptyset
+        $
+    para todo $r \in \R_{>0}$.
+\end{defi}
+
+\begin{defi}
+    \leavevmode 
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Um ponto $a \in \R^n$ é um \textit{ponto exterior} de $A \subseteq \R^n$ se existe $r \in \R_{>0}$ tal que $B_r(a) \cap A = \emptyset $.
+            \item O \textit{exterior} de $A \subseteq \R^n$, denotado por $\op{ext}{A}$, é definido como o conjunto de todos os pontos exteriores de $A$, isto é,
+                \[
+                    \op{ext}{A} = \{ x \in \R^n : \exists r (r \in \R_{>0} \land B_r(x) \cap A = \emptyset ) \}.
+                \]
+        \end{enumerate}
+\end{defi}
+
+\begin{defi}
+    Um ponto $a \in \R^n$ é um \textit{ponto da fronteira} de $A \subseteq \R^n$ se $a \notin \op{int}{A}$ e $a \notin \op{ext}{A}$. O conjunto de todos os pontos da fronteira de $A$ é denotado por $\partial A$.
+\end{defi}
+
+
+
+
+
+\chapter{Caminhos}
+
+\begin{defi}
+    Uma \textit{função vetorial de variável real} é uma função $f : X \subseteq \R \to \R^n$.
+\end{defi}
+
+As funções vetoriais de variável real que nos interessam, nesse momento, são aquelas cujo domínio é um intervalo ou uma união de intervalos.
+
+\begin{prop}
+    Seja $f : X \subseteq \R \to \R^n$ uma função. Existem e são únicas as funções $f_i : X \to \R$, com $i \in [n]$, tais que
+        \[
+            f(t) = (f_1(t), f_2(t), \ldots, f_n(t))
+        \]
+    para todo $t \in X$. Isso é denotado por $f = (f_1, f_2, \ldots, f_n)$.
+\end{prop}
+
+\begin{proof}
+    Trivial. \itemproof
+\end{proof}
+
+\begin{defi}
+    Uma função $f : X \subseteq \R \to \R^n$ tem limite $L \in \R^n$ quando $t$ tende ao ponto $t_0 \in X'$ se para todo $\epsilon \in \R_{>0}$ existe $\delta = \delta(\epsilon, t_0) \in \R_{>0}$ tal que
+        \[
+            0 < |t - t_0| < \delta \rightarrow \| f(t) - L \| < \epsilon
+        \]
+    para todo $t \in X$. Isso é denotado por
+        \[
+            \lim_{t \to t_0} f(t) = L.
+        \]
+\end{defi}
+
+\begin{prop}[Unicidade do limite]
+    Se uma função $f : X \subseteq \R \to \R^n$ tem limites $L_1, L_2 \in \R^n$, então $L_1 = L_2$.
+\end{prop}
+
+\begin{proof}
+\end{proof}
+
+\begin{prop}
+    Sejam $F : X \subseteq \R \to \R^n$, $t_0 \in X'$ e $L \in \R^n$. Vale
+        \[
+            \lim_{t \to t_0} F(t) = L \Leftrightarrow \lim_{t \to t_0} \|F(t) - L\| = 0.
+        \]
+\end{prop}
+
+\begin{proof}
+    Ver \cite{guidorizzi2}, p. 124. \itemproof
+\end{proof}
+
+\begin{teo}
+    Sejam $f : X \subseteq \R \to \R^n$, $t_0 \in X'$ e $L \in \R^n$, com $f = (f_1, f_2, \ldots, f_n)$ e $L = (L_1, L_2, \ldots, L_n)$. Para todo $i \in [n]$, vale
+        \[
+            \lim_{t \to t_0} f(t) = L \Leftrightarrow \lim_{t \to t_0} f_i (t) = L_i.
+        \]
+\end{teo}
+
+\begin{proof}
+    Ver \cite{guidorizzi2}, p. 124. \itemproof
+\end{proof}
+
+\begin{prop}[Propriedades operatórias]
+    Oi
+\end{prop}
+
+\begin{proof}
+\end{proof}
+
+\begin{defi}[Continuidade]
+    Sejam $f : X \subseteq \R \to \R^n$ e $t_0 \in X \cap X'$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $f$ é \textit{contínua em $t_0$} se
+                \[
+                    \lim_{t \to t_0} f(t) = f(t_0).
+                \]
+            \item $f$ é \textit{contínua em $Y \subseteq X$} se $f$ for contínua em todo $t_0 \in Y$.
+            \item $f$ é \textit{contínua} se $f$ for contínua em $X$.
+        \end{enumerate}
+\end{defi}
+
+\begin{cor}
+    Sejam $f : X \subseteq \R \to \R^n$ uma função, com $f = (f_1, f_2, \ldots, f_n$), e $t_0 \in X \cap X'$. $f$ é contínua em $t_0$ se, e somente se, $f_i$ é contínua em $t_0$, para todo $i \in [n]$.
+\end{cor}
+
+\begin{defi}
+    Sejam $f : X \subseteq \R \to \R^n$ e $t_0 \in X \cap X'$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $f$ é \textit{derivável}, ou \textit{diferenciável}, em $t_0$, se existir o limite
+                \[
+                    f'(t_0) := \lim_{t \to t_0} \dfrac{f(t) - f(t_0)}{t - t_0}.
+                \]
+            Mais precisamente, $f$ é derivável em $t_0$ se existir o limite $\ds \lim_{t \to t_0} g(t)$, onde $g : X \setminus \{ t_0\} \to \R^n$ é a função definida por
+                \[
+                    g(t) := \dfrac{f(t) - f(t_0)}{t-t_0}.
+                \]
+            Sendo $F$ derivável em $t_0$, ou ainda, \textit{diferenciável} em $t_0$, dizemos que o limite $F'(t_0)$ é a \textit{derivada} de $F$ em $t_0$.
+            
+            \item Diremos que $F$ é derivável em $Y \subseteq X$ se $F$ for derivável em todo $t \in Y$; se for $Y = X$, diremos que $F$ é derivável.
+        \end{enumerate}
+\end{defi}
+
+\begin{prop}
+    Sejam $F : X \subseteq \R \to \R^n$ e $t_0 \in X$. Sendo $F = (f_1, f_2, \ldots, f_n$), temos que $F$ é derivável em $t_0$ se, e somente se, $f_i$ é derivável em $t_0$ para todo $i \in [n]$. Sendo $F$ derivável em $t_0$, temos que
+        \[
+            F'(t) = (f_1' (t), f_2'(t), \ldots, f_n'(t) ).
+        \]
+\end{prop}
+
+\begin{proof}
+\end{proof}
+
+\begin{defi} %vetor e reta tangentes
+    Seja $F : X \subseteq \R \to \R^n$ derivável em $t_0 \in X$, com $F'(t_0) \neq 0$.
+    
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item 
+        \end{enumerate}
+\end{defi}
+
+\begin{prop}[Propriedades operatórias]
+\end{prop}
+
+\begin{proof}
+\end{proof}
+
+\begin{prop}[Regra da cadeia]
+\end{prop}
+
+\begin{prop}
+    Se $F : X \subseteq \R \to \R^n$ uma função vetorial derivável em $X$ tal que $\| F(t) \| = k \in \R$ para todo $t \in X$, então $F(t) \cdot F'(t) = 0$ para todo $t \in X$.
+\end{prop}
+
+\begin{proof}
+\end{proof}
+
+\begin{defi}
+    Seja $f : [a,b] \to \R^n$ uma função. A soma de Riemann $S(F, P, \xi)$ tem limite $L \in \R^n$ quando $\| P \|$ tende a $0$ se para todo $\epsilon \in \R_{>0}$ existir $\delta = \delta (\epsilon) \in \R_{>0}$ tal que
+        \[
+            \|S(f, P, \xi) - L\| < \epsilon
+        \]
+    para toda partição marcada $(P, \xi)$ de $[a,b]$ com $\| P \| < \delta$. Isso é denotado por
+        \[
+            \lim_{\| P \| \to 0} S(f, P, \xi) = L.
+        \] 
+\end{defi}
+
+\begin{prop}
+    Seja $f : [a,b] \to \R^n$ uma função. O limite das somas de Riemann, quando existe, é único, isto é, se
+        \[ \ds
+            \lim_{\| P \| \to 0} S(f, P, \xi) = L_1 \quad \text{e} \quad \lim_{\| P \| \to 0} S(f, P, \xi) = L_2,
+        \]
+    então $L_1 = L_2$.
+\end{prop}
+
+\begin{proof}
+\end{proof}
+
+\begin{defi}
+    Uma função $f : [a,b] \to \R^n$ é \textit{integrável em $[a,b]$ segundo Riemann} se
+        $ \ds
+            \lim_{\| P \| \to 0} S(f, P, \xi)
+        $
+    existe. Nesse caso, esse número real é chamado de \textit{integral de $f$ em $[a,b]$ segundo Riemann} e é denotado por
+        \[
+            \int_{a}^{b} F(x) \, dx,
+        \]
+    isto é,
+        \[
+            \int_{a}^{b} f(x) \, dx := \lim_{\| P \| \to 0} S(f, P, \xi).
+        \]
+\end{defi}
+
+\begin{prop}
+    Seja $f : X \subseteq \R \to \R^n$ uma função com $F = (f_1, f_2, \ldots, f_n$). $f$ é integrável em $[a,b]$ se, e somente se, $f_i$ é integrável em $[a,b]$ para todo $i \in [n]$, sendo nesse caso
+        \[
+            \int_{a}^{b} F(t) \, dt = \left( \int_{a}^{b} f_1 (t) \, dt, \int_{a}^{b} f_2 (t) \, dt, \ldots, \int_{a}^{b} f_n (t) \, dt \right).
+        \]
+\end{prop}
+
+\begin{proof}
+\end{proof}
+
+\begin{prop}[Propriedades operatórias]
+\end{prop}
+
+\begin{teo}(Fundamental do Cálculo, parte I) \label{teo:TFC1}
+     Seja $f: [a,b] \to \R^n$ uma função integrável.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item  A função $F: [a,b] \to \R^n$ definida por
+                \[
+                    F(x) := \int_{a}^{x} f(t) \, dt
+                \]
+            é uniformemente contínua em $[a,b]$.
+            
+            \item Se $f$ é contínua em $x_0 \in [a,b]$, então $F$ é derivável em $x_0$ e $F'(x_0) = f(x_0)$.
+        \end{enumerate} 
+\end{teo}
+
+\begin{proof}
+\end{proof}
+
+\begin{cor}
+    Seja $f : [a,b] \to \R^n$ uma função contínua em $[a,b]$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item A função $F: [a,b] \to \R^n$ definida por
+                \[
+                    F(x) := \int_{a}^{x} f(t) \, dt
+                \]
+            é uma primitiva de $f$ em $[a,b]$.
+            
+            \item Se $G: [a,b] \to \R^n$ é qualquer outra primitiva de $f$, então
+                \[
+                    G(x) = G(a) + \int_{a}^{x} f(t) \, dt
+                \]
+            para todo $x \in [a,b]$. Particularmente para $x = b$, temos
+                \[
+                    \int_{a}^{b} f(t) \, dt = G(b) - G(a).
+                \]
+        \end{enumerate}
+\end{cor}
+
+\begin{proof}
+\end{proof}
+
+\begin{teo}[Fundamental do Cálculo, parte II]
+    Se $f : [a,b] \to \R^n $ é uma função integrável e $F : [a,b] \to \R^n$ é uma primitiva qualquer de $f$, então
+        \[
+            F(x) = F(a) + \int_{a}^{x} f(t) \, dt
+        \]
+    para todo $x \in [a,b] $. Particularmente para $x=b$, temos
+        \[
+            \int_{a}^{b} f(t) \, dt = F(b) - F(a).
+        \]
+\end{teo}
+
+\begin{proof}
+\end{proof}
+
+\begin{prop}
+    Seja $C \in \R^n$. Se $f : [a,b] \to \R^n$ é uma função integrável, então a função $C \cdot f : [a,b] \to \R$ é integrável e
+        \[
+            C \cdot \left[ \int_{a}^{b} f(t) \, dt \right] = \int_{a}^{b} [C \cdot f(t)] \, dt.
+        \]
+\end{prop}
+
+\begin{proof}
+\end{proof}
+
+\begin{prop}
+    Se $f : [a,b] \to \R^n$ e $\| f \| : [a,b] \to \R$ são funções integráveis em $[a,b]$, então
+        \[
+            \left\| \int_{a}^{b} f(t) \, dt \right\| \leq \int_{a}^{b} \| f(t) \| \, dt.
+        \]
+\end{prop}
+
+\section{Curvas}
+
+No que segue, $I, J \subseteq \R$ são intervalos.
+
+\begin{defi}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Uma \textit{curva} no $\R^n$ é uma função vetorial de variável real $\alpha : I \to \R^n$.
+            \item Uma \textit{curva paramétrica} é uma curva $\alpha : I \to \R^n$ contínua. O \textit{traço} da curva é a imagem de $I$ por $\alpha$, isto é, o conjunto $\alpha(I)$.
+            \item Uma curva paramétrica $\alpha : I \to \R^n$ é \textit{regular} se $\alpha$ é derivável em $I$ com  $\alpha'(t) \neq 0$ para todo $t \in I$.
+        \end{enumerate}
+\end{defi}
+
+\begin{defi}
+    Seja $\alpha : I \to \R^n$ uma curva paramétrica regular. Uma curva paramétrica $\beta : J \to \R^n$ é uma \textit{reparametrização} de $\alpha$  se $\beta(J) = \alpha(I)$ e se existe uma \textit{função de reparametrização} $\varphi : J \to I$ bijetora, derivável em $J$, com $\varphi'(t) \neq 0$, tal que $\beta(t) = \alpha(\varphi(t))$.
+\end{defi}
+
+\begin{prop}[Reparametrização conserva regularidade]
+    Se uma curva paramétrica $\beta : J \to \R^n$ é uma reparametrização de uma curva paramétrica regular $\alpha : I \to \R^n$, então é $\beta$ regular.
+\end{prop}
+
+\begin{proof}
+    \itemproof
+\end{proof}
+
+\begin{defi}
+    Sejam $\alpha : I \to \R^n$ uma curva paramétrica regular e $\beta : J \to \R^n$ uma reparametrização de $\alpha$ por meio de uma função de reparametrização $\varphi : J \to I$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $\beta$ é uma reparametrização \textit{positiva} se $\varphi'(t) > 0$ para todo $t \in J$.
+            \item $\beta$ é uma reparametrização \textit{negativa} se $\varphi'(t) < 0$ para todo $t \in J$.
+        \end{enumerate}
+\end{defi}
+
+\begin{defi}
+    Seja $\alpha : I \to \R^n$ uma curva paramétrica derivável e com derivada integrável.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item O \textit{comprimento do arco} de $a \in I$ até $b \in I$ é definido como
+                \[
+                    L_a^b(\alpha) := \int_{a}^{b} \| \alpha'(t) \| \, dt.
+                \]
+            \item Seja $t_0 \in I$. A \textit{função comprimento de arco} de $\alpha$ é definida como
+                \[
+                    L(t) := \int_{t_0}^{t} \| \alpha'(u) \| \, du.
+                \]
+        \end{enumerate}
+\end{defi}
+
+\begin{prop}
+    Se $\alpha : [a,b] \to \R^n$ é uma curva paramétrica regular e $\beta : [c,d] \to \R^n$ é uma reparametrização de $\alpha$, então $L_{c}^{d}(\beta) = L_{a}^{b}(\alpha)$.
+\end{prop}
+
+\begin{prop}
+    A função comprimento de arco de uma curva paramétrica $\alpha : I \to \R^n$ é uma função de reparametrização.
+\end{prop}
+
+\begin{defi}
+    Uma curva paramétrica $\alpha : I \to \R^n$ é \textit{reparametrizada por comprimento de arco} se $\| \alpha'(t) \| = 1$ para todo $t \in I$.
+\end{defi}
+
+\begin{defi}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Um caminho $\alpha : [a,b] \to \R^n$ é \textit{retificável} se existe $M \in \R$ tal que
+                \[
+                    L_{a}^{b}(\alpha, P) \leq M
+                \]
+            para toda partição $P : a = t_0 < \cdots < t_k = b$ de $[a,b]$, onde
+                \[
+                    L_{a}^{b}(\alpha, P) := \sum_{i=1}^{k} \| \alpha(t_i) - \alpha(t_{i-1}) \|.
+                \]
+            \item Seja $\alpha : [a,b] \to \R^n$ um caminho retificável. O \textit{comprimento da curva} descrita por $\alpha$ é definido como
+                \[
+                    L_{a}^{b}(\alpha) := \sup{\{L_{a}^{b}(\alpha, P) : P \in \mathcal{P}[a,b]\}}.
+                \]
+        \end{enumerate}
+\end{defi}
+
+\begin{teo}
+    Se um caminho $\alpha :[a,b] \to \R^n$ é de classe $C^1$ em $[a,b]$, então
+        \[
+            L_{a}^{b}(\alpha) = \int_{a}^{b} \| \alpha'(t) \| \, dt.
+        \]
+\end{teo}
+
+\begin{proof}
+    \itemproof
+\end{proof}
+
+\chapter{Campos Escalares e Vetoriais}
+
+\begin{defi}
+    Sejam $m, n \in \N$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Um \textit{campo} é uma função $f : X \subseteq \R^n \to \R^m$.
+            \item Um campo $f : X \subseteq \R^n \to \R^m$ é um \textit{campo escalar} se $m=1$. Ou seja, um \textit{campo escalar} é uma função $f : X \subseteq \R^n \to \R$.
+            \item Um campo $f : X \subseteq \R^n \to \R^m$ é um \textit{campo vetorial} se $m \geq 2$.
+        \end{enumerate}
+\end{defi}
+
+\begin{teo}
+    Se $f : X \subseteq \R^n \to \R^m$ é um campo, então existem e são únicas as funções $f_i : X \to \R$, com $i \in [m]$, tais que
+        \[
+            f(x) = (f_1(x), f_2(x), \ldots, f_m(x))
+        \]
+    para todo $x \in X$. Isso é denotado por $f = (f_1, f_2, \ldots, f_m)$.
+\end{teo}
+
+\begin{proof}
+    \itemproof
+\end{proof}
+
+\begin{defi}
+    Uma função $f : X \subseteq \R^n \to \R^m$ tem limite $L \in \R^m$ quando $x$ tende a $a \in X'$ se para todo $\epsilon \in \R_{>0}$ existe $\delta = \delta(\epsilon, a) \in \R_{>0}$ tal que
+        \[
+            0 < \| x -a \| < \delta \Rightarrow \| f(x) - L \| < \epsilon
+        \]
+    para todo $x \in X$. Isso é denotado por 
+        \[ \ds
+            \lim_{x \to a} f(x) = L.
+        \]
+\end{defi}
+
+\begin{prop}
+    Sejam $f : X \subseteq \R^n \to \R^m$, $L \in \R^m$ e $a \in X'$. Vale
+        \[
+            \lim_{x \to a} f(x) = L \Leftrightarrow \lim_{\| x-a \| \to 0} \|f(x) - L \| = 0.
+        \]
+\end{prop}
+
+\begin{proof}
+    \itemproof
+\end{proof}
+
+\begin{prop}[Propriedades operatórias]
+    %Sejam $f,g : A \subseteq \R^n \to \R^m$ e $a \in A'$. Se $\ds \lim_{x \to a} f(x) = L_1 \in \R^m$ e $\ds \lim_{x \to a} g(x) = L_2 \in \R^m$, então propriedades operatórias
+\end{prop}
+
+\begin{defi}[Continuidade]
+    Seja $f : A \subseteq \R^n \to \R^m$ um campo.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Dizemos que $f$ é \textit{contínua em $a \in A$} se para todo $\epsilon \in \R_{>0}$ existe $\delta = \delta(\epsilon, a) \in \R_{>0}$ tal que
+                \[
+                    \| x - a \| < \delta \Rightarrow \| f(x) - f(a) \| < \epsilon
+                \]
+            para todo $x \in A$.
+            \item Dizemos que $f$ é \textit{contínua em $X \subseteq A$} se $f$ é contínua em todo ponto $a \in X$. Mais especificamente, $f$ é contínua em $X$ se para cada $a \in X$ e cada $\epsilon \in \R_{>0}$ existe $\delta = \delta(\epsilon, a) \in \R_{>0}$ tal que
+                \[
+                    \| x - a \| < \delta \Rightarrow \| f(x) - f(a) \| < \epsilon
+                \]
+            para todo $x \in A$.
+        \end{enumerate}
+\end{defi}
+
+\begin{teo}
+    Uma função $f : A \subseteq \R^n \to \R^m$ é contínua em $a \in A \cap A'$ se, e somente se, $\ds \lim_{x \to a} f(x) = f(a)$.
+\end{teo}
+
+\begin{proof}
+    \itemproof
+\end{proof}
+
+\begin{teo}
+    Sejam $f : A \subseteq \R^n \to \R^m$ e $g : B \subseteq \R^m \to \R^k$ funções tais que $f(A) \subseteq B$. Se $f$ é contínua em $a \in A$ e se $g$ é contínua em $f(a) \in B$, então a função composta $g \circ f : X \subseteq \R^n \to \R^k$ é contínua em $a$.
+\end{teo}
+
+\begin{proof}
+    
+\end{proof}
+
+
+
+\begin{prop}
+    Sejam $f: X \subseteq \R^n \to \R$ e $a \in X \cap X'$ tais que $\ds \lim_{x \to a} f(x)$ existe. Se $\alpha : I \subseteq \R \to \R^n$ é contínua em $t_0 \in I$, com $\alpha(t_0) = a$, e $\alpha(t) \in X$ para todo $t \in I$, com $t \neq t_0 \Rightarrow \alpha(t) \neq \alpha(t_0)$, então
+        \[
+            \lim_{t \to t_0} f(\alpha(t)) = \lim_{x \to a} f(x).
+        \]
+\end{prop}
+
+\begin{proof}
+    Ver \cite{guidorizzi2}, p. 165, exemplo 4. \itemproof
+\end{proof}
+
+\begin{teo}[Compostas]
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Sejam $f : X \subseteq \R^n \to \R$ e $g : Y \subseteq \R \to \R$ funções tais que $f(X) \subseteq Y$. Se $f$ é contínua em $a \in X$ e $g$ é contínua em $f(a) \in Y$, então a função composta $g \circ f : \R^n \to \R$ é contínua em $a$.
+            \item Sejam $f : X \subseteq \R^n \to \R$ uma função e $\alpha : I \subseteq \R \to \R^n$ uma curva tais que $\alpha(t) \in X$ para todo $t \in I$. Se $\alpha$ é contínua em $a \in I$ e $f$ é contínua em $\alpha(a) \in X$, então a função composta $f \circ \alpha : \R \to \R$ é contínua em $a$.
+            \item Sejam $f : X \subseteq \R^n \to \R$ e $f_1, \ldots, f_n : Y \subseteq \R^n \to \R$ funções tais que $(f_1(x),\ldots, f_n(x)) \in X$ para todo $x \in Y$. Se $f_1, \ldots, f_n$ são contínuas em $a \in Y$, e se $f$ é contínua em $(f_1(a),\ldots, f_n(a))$, então a função composta $f((f_1(x),\ldots, f_n(x)))$ é contínua em $a$.
+        \end{enumerate}
+\end{teo}
+
+\begin{proof}
+    Ver \cite{guidorizzi2}, pg. 170, Teorema 1. \itemproof
+\end{proof}
+
+\begin{teo}
+    Sejam $f : X \subseteq \R^n \to \R$ e $\alpha : I \subseteq \R \to \R^n$ tais que $\alpha(t) \in X$ para todo $t \in I$. Se $\alpha$ é contínua em $a \in I$ e $f$ é contínua em $\alpha(a) \in X$, então a função composta $f \circ \alpha : \R \to \R$ é contínua em $a$.
+\end{teo}
+
+\begin{proof}
+    
+\end{proof}
+
+\begin{defi}
+    Sejam $A \subseteq \R^n$ aberto, $a \in A$ e $y \in \R^n$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Um campo escalar $f: A \to \R$ é \textit{derivável} em $a$ com respeito a $y$ se existe o limite
+                \[
+                    f_y'(a) := \lim_{h \to 0} g(h),
+                \]
+            onde $g:\{h \in \R_{\neq 0} : a+hy \in A\} \to \R$ é definida por
+                \[
+                    g(h) := \dfrac{f(a+hy)-f(a)}{h}.
+                \]
+            \item Seja $f : A \to \R$ \textit{derivável} em $a$ com respeito a $y$.
+                \begin{enumerate}[label=\roman*.]
+                    \item Se $\| y\| = 1$, então dizemos que $f_y'(a)$ é a \textit{derivada direcional} de $f$ na \textit{direção} de $y$.
+                    \item Se $y = e_k$ para algum $k \in [n]$, então dizemos que $f_{e_k}'(a)$ é a \textit{derivada parcial} de $f$ com respeito a $e_k$. Outras notações para $f_{e_k}'(a)$ são 
+                        \[
+                            \dfrac{\partial f}{\partial x_k} (a), \quad D_k f(a) \quad \text{e} \quad f_{x_k}'(a).
+                        \]
+                \end{enumerate}
+        \end{enumerate}
+\end{defi}
+
+\begin{defi}
+    Sejam $A \subseteq \R^n$ aberto e $f : A \to \R$ derivável em $a \in A$ com respeito a $e_k$ para todo $k \in [n]$. O \textit{gradiente} de $f$ em $a$ é definido como
+        \[
+            \nabla f(a) := \left(\dfrac{\partial f}{\partial x_1} (a), \dfrac{\partial f}{\partial x_2} (a), \ldots, \dfrac{\partial f}{\partial x_n} (a)  \right).
+        \]
+\end{defi}
+
+\begin{defi}
+    Seja $A \subseteq \R^n$ aberto. Um campo escalar $f: A \to \R$ é \textit{diferenciável} em $a \in A$ se existe uma transformação linear $T_a : \R^n \to \R$ para a qual a função $r_a : \{h \in \R^n : a+h \in A\} \to \R$ definida por
+        \[
+            r_a(h) := f(a+h) - f(a) - T_a(h)
+        \]
+    satisfaz
+        $ \ds
+            \lim_{h \to 0} \dfrac{|r_a(h)|}{\|h \|} = 0.
+        $
+    A transformação linear $T_a$ é a \textit{derivada total} de $f$ em $a$.
+\end{defi}
+
+\chapter{Integrais de Linha}
+
+\begin{defi}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Um \textit{caminho} é uma função contínua $\gamma : [a,b] \to \R^n$.
+            \item Um caminho $\gamma : [a,b] \to \R^n$ é \textit{suave} se $\gamma$ é de classe $C^1$ em $]a,b[$.
+            \item Um caminho $\gamma : [a,b] \to \R^n$ é \textit{suave por partes} se existe uma partição
+                \[
+                    P : a = x_0 < x_1 < \cdots < x_k = b
+                \]
+            tal que $\gamma_i := \gamma |_{[x_{i-1}, x_i]}$ é suave para todo $i \in [k]$.
+        \end{enumerate}
+\end{defi}
+
+\begin{defi}
+    Sejam $\gamma : [a,b] \to \R^n$ um caminho suave por partes e $f: \gamma([a,b]) \subseteq \R^n \to \R^n$ um campo vetorial limitado. A \textit{integral de linha} de $f$ com respeito a $\gamma$ em $C := \gamma([a,b])$ é definida como
+        \[
+            \int_C f \cdot d\gamma := \int_{a}^{b} f[\gamma(t)] \cdot \gamma'(t) \, dt.
+        \]
+\end{defi}
+
+\begin{defi}
+    Seja $\alpha : [a,b] \to \R^n$ um caminho. Um caminho $\beta : [c,d] \to \R^n$ é uma \textit{reparametrização} de $\alpha$ se existe uma bijeção $\varphi : [c,d] \to [a,b]$, derivável em $[c,d]$, com $\varphi'(t) \neq 0$ para todo $t \in [c,d]$, tal que $\beta(t) = \alpha(\varphi(t))$ para todo $t \in [c,d]$. Os caminhos $\alpha$ e $\beta$ são \textit{equivalentes}, enquanto a bijeção $\varphi$ é uma \textit{mudança de parâmetro}.
+\end{defi}
+
+\begin{prop}
+    Dois caminhos equivalentes descrevem a mesma curva.
+\end{prop}
+
+\begin{defi}
+    Sejam $\alpha : [a,b] \to \R^n$ um caminho e $\beta : [c,d] \to \R^n$ uma reparametrização de $\alpha$ por meio de uma mudança de parâmetro $\varphi : [c,d] \to [a,b]$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item $\beta$ é uma reparametrização \textit{positiva} se $\varphi'(t) > 0$ para todo $t \in [c,d]$. Dizemos que os caminhos $\alpha$ e $\beta$ têm o \textit{mesmo sentido} e que a mudança de parâmetro \textit{conserva a orientação} do traço.
+            \item $\beta$ é uma reparametrização \textit{negativa} se $\varphi'(t) < 0$ para todo $t \in [c,d]$. Dizemos que os caminhos $\alpha$ e $\beta$ têm \textit{sentidos opostos} e que a mudança de parâmetro \textit{inverte a orientação} do traço.
+        \end{enumerate}
+\end{defi}
+
+
+\begin{teo}
+    Sejam $\gamma_1 : [a,b] \to \R^n$ e $\gamma_2  : [c,d] \to \R^n$ caminhos suaves por partes equivalentes. Seja $f : C \subseteq \R^n \to \R^n$ um campo vetorial limitado, onde $C$ é o traço dos caminhos $\gamma_1$ e $\gamma_2$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Se $\gamma_1$ e $\gamma_2$ têm o mesmo sentido, então
+                \[
+                    \int_{C} f \cdot d \gamma_1 = \int_{C} f \cdot d \gamma_2.
+                \]
+            \item Se $\gamma_1$ e $\gamma_2$ têm sentidos opostos, então
+                \[
+                    \int_{C} f \cdot d \gamma_1 = - \int_{C} f \cdot d \gamma_2.
+                \]
+        \end{enumerate}
+\end{teo}
+
+\begin{proof}
+    \itemproof
+\end{proof}
+
+\begin{defi}
+    Sejam $\gamma : [a,b] \to \R^n$ um caminho de classe $C^1$ em $[a,b]$ e $f: \gamma([a,b]) \subseteq \R^n \to \R$ um campo escalar limitado. A \textit{integral de linha} de $f$ com respeito a $\gamma$ em $C := \gamma([a,b])$ é definida como
+        \[
+            \int_C f \cdot ds := \int_{a}^{b} f[\gamma(t)] \cdot \|\gamma'(t) \| \, dt.
+        \]
+\end{defi}
+
+
+
+
+
+
+
+
+
