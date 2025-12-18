@@ -707,5 +707,20 @@ O axioma do vazio nos diz que existe um conjunto $x$ que cumpre $\forall y (y \n
                     B^A := \{ f \in \mathcal{P}{(A \times B)} : \operatorname{Fun}{(f,A,B)}\}.
                 \]
 
+\begin{defi}
+    Sejam $(\F, +, \cdot, \leq)$ um corpo ordenado e $S \in \mathcal{P}(\F)_{\neq \emptyset}$.
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Dizemos que $x \in S$ é uma
+                \begin{enumerate}[label=\roman*.]
+                    \item \textit{cota superior} de $S$ se $y \leq x$ para todo $y \in X$;
+                    \item \textit{limitado inferiormente}, ou \textit{minorado}, se existir $a \in \F$ tal que $x \geq a$ para todo $x \in A$. Diremos que $a$ é uma \textit{cota inferior}, ou um \textit{minorante}, de $A$.
+                \end{enumerate}
+            \item Se $A$ é 
+                \begin{enumerate}[label=\roman*.]
+                    \item majorado, a menor das cotas superiores de $A$, quando existe, é chamada de \textit{supremo} de $A$ e é denotada por $\sup{A}$.
+                    \item minorado, a maior das cotas inferiores de $A$, quando existe, chama-se \textit{ínfimo} de $A$ e é denotada por $\inf{A}$.
+                \end{enumerate}
+        \end{enumerate}
+\end{defi}
 
 

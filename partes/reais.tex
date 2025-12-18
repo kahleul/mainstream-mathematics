@@ -117,50 +117,77 @@
 \end{proof}
 
 \begin{defi}
-    Seja $\emptyset \neq A \subseteq \F$ um subconjunto de um corpo ordenado $\F$.
+    Sejam $(\F, +, \cdot, \leq)$ um corpo ordenado e $S \in \mathcal{P}(\F)_{\neq \emptyset}$.
         \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
-            \item Diremos que $A$ é
+            \item Dizemos que $S$ é
                 \begin{enumerate}[label=\roman*.]
-                    \item \textit{limitado superiormente}, ou \textit{majorado}, se existir $a \in \F$ tal que $x \leq a$ para todo $x \in A$. Diremos que $a$ é uma \textit{cota superior}, ou um \textit{majorante}, de $A$.
-                    \item \textit{limitado inferiormente}, ou \textit{minorado}, se existir $a \in \F$ tal que $x \geq a$ para todo $x \in A$. Diremos que $a$ é uma \textit{cota inferior}, ou um \textit{minorante}, de $A$.
+                    \item \textit{limitado superiormente} se existe $M \in \F$ tal que $x \leq M$ para todo $x \in S$. Nesse caso, dizemos que $M$ é uma \textit{cota superior} de $S$.
+                    \item \textit{limitado inferiormente} se existe $m \in \F$ tal que $m \leq x$ para todo $x \in S$. Nesse caso, dizemos que $m$ é uma \textit{cota inferior} de $S$.
                 \end{enumerate}
-            \item Se $A$ é 
+            \item Dizemos que $\alpha \in \F$ é o 
                 \begin{enumerate}[label=\roman*.]
-                    \item majorado, a menor das cotas superiores de $A$, quando existe, é chamada de \textit{supremo} de $A$ e é denotada por $\sup{A}$.
-                    \item minorado, a maior das cotas inferiores de $A$, quando existe, chama-se \textit{ínfimo} de $A$ e é denotada por $\inf{A}$.
+                    \item \textit{supremo} de $S$ se $\alpha$ é uma cota superior de $S$ e $\alpha \leq x$ para toda cota superior $x \in \F$ de $S$. Denotamos $\alpha$ por $\sup{S}$.
+                    \item \textit{ínfimo} de $S$ se $\alpha$ é uma cota inferior de $S$ e $x \leq \alpha$ para toda cota inferior $x \in \F$ de $S$. Denotamos $\alpha$ por $\inf{S}$.
                 \end{enumerate}
         \end{enumerate}
 \end{defi}
 
 \begin{prop}
-    Seja $\emptyset \neq A \subseteq \F$ um subconjunto de um corpo ordenado $\F$.
+    Sejam $\F$ um corpo ordenado e $S \in \mathcal{P}(\F)_{\neq \emptyset}$.
         \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
-            \item O supremo de $A$, quando existe, é único.
-            \item O ínfimo de $A$, quando existe, é único.
+            \item O supremo de $S$, quando existe, é único.
+            \item O ínfimo de $S$, quando existe, é único.
         \end{enumerate}
 \end{prop}
 
 \begin{proof}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item oi
+            \item Segue analogamente. \itemproof
+        \end{enumerate}
 \end{proof}
 
 \begin{defi}
-    Um corpo ordenado $\F$ é \textit{completo} se todo subconjunto não vazio de $\F$ limitado superiormente possui supremo em $\F$.
+    Um corpo ordenado $(\F,+,\cdot, \leq)$ é \textit{completo} se todo subconjunto não vazio de $\F$ limitado superiormente possui supremo em $\F$.
 \end{defi}
 
 \begin{teo}
-    Existe um corpo ordenado completo. Diremos que seus elementos são \textit{números reais} e o denotaremos por $\R$.
+    Existe um corpo ordenado completo.
 \end{teo}
 
+\begin{obs}
+    Veremos mais a frente que, a menos de isomorfismos, existe um único corpo ordenado completo. Ele é denotado por $\R$ e seus elementos são chamados de \textit{números reais}.
+\end{obs}
+
+\subsection*{Propriedades do Supremo e do Ínfimo}
+
 \begin{cor}
-    Todo subconjunto não vazio de $\R$ limitado inferiormente admite ínfimo em $\R$.
+    Todo subconjunto não vazio de $\R$ limitado inferiormente possui ínfimo em $\R$.
 \end{cor}
 
 \begin{proof} 
 \end{proof}
 
+\begin{teo}
+    \leavevmode
+        \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
+            \item Seja $S \in \mathcal{P}(\R)_{\neq \emptyset}$ limitado superiormente.
+                \begin{enumerate}[label=\roman*.]
+                    \item Se $\beta \in \R$ e  $\beta < \sup{S}$, então existe $x \in S$ tal que $x > \beta$.
+                    \item Para todo $\epsilon \in \R_{>0}$ existe $x \in S$ tal que $\sup{S} - \epsilon < x$.
+                \end{enumerate}
+            \item Seja $S \in \mathcal{P}(\R)_{\neq \emptyset}$ limitado inferiormente.
+                \begin{enumerate}[label=\roman*.]
+                    \item Se $\beta \in \R$ e  $\inf{S} < \beta$, então existe $x \in S$ tal que $x < \beta$.
+                    \item Para todo $\epsilon \in \R_{>0}$ existe $x \in S$ tal que $x < \inf{S} + \epsilon$.
+                \end{enumerate}
+        \end{enumerate}
+\end{teo}
 
-
-
+\begin{proof}
+    
+\end{proof}
 
 
 
@@ -218,11 +245,11 @@
 \begin{prop}
     \leavevmode
         \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
-            \item Para quaisquer $m,n \in \N$, temos $m+n \in \N$ e $m \cdot n \in \N$.
-            \item Para qualquer $n \in \N$, temos $n \geq 1$. Isso significa, em particular, que $\N$ é limitado inferiormente.
+            \item Para quaisquer $m,n \in \N$, tem-se $m+n \in \N$ e $m \cdot n \in \N$.
+            \item Para qualquer $n \in \N$, tem-se $n \geq 1$. Isso significa, em particular, que $\N$ é limitado inferiormente.
             \item $\N$ não é limitado superiormente.
-            \item (Propriedade arquimediana de $\R$) Para quaisquer $a \in \R_{>0}$ e $b \in \R$, existe $n \in \N$ tal que $na > b$.
-            \item Para todo $\epsilon \in \R_{>0}$, existe $n \in \N$ tal que $\dfrac{1}{n} < \epsilon$.
+            \item (Propriedade arquimediana de $\R$) Para quaisquer $a \in \R_{>0}$ e $b \in \R$ existe $n \in \N$ tal que $na > b$.
+            \item Para todo $\epsilon \in \R_{>0}$ existe $n \in \N$ tal que $\dfrac{1}{n} < \epsilon$.
             \item Se $a,x,y \in \R$ cumprem $a \leq x \leq a + \dfrac{y}{n}$ para todo $n \in \N$, então $x=a$.
         \end{enumerate}
 \end{prop}
@@ -231,8 +258,8 @@
     \leavevmode
         \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
             \item Definindo $G := \{ m \in \N : \forall n (n \in \N \Rightarrow n+m \in \N )\}$, temos $G \subseteq \N$. Temos que $1 \in G$ pois, para todo $n \in \N$, vale $n \in \N \Rightarrow n+1 \in \N$, já que $\N$ é indutivo. Agora, se $n+m \in \N$, então, como $\N$ é indutivo, vale $(n+m)+1 \in \N$, isto é, $n+(m+1) \in \N$. Assim, $m \in G \Rightarrow m+1 \in G$, isto é, $G$ é indutivo e, portanto, cumpre $\N \subseteq G$, donde $G = \N$. Agora, definindo $H := \{ m \in \N : \forall n (n \in \N \Rightarrow n \cdot m \in \N )\}$, temos $H \subseteq \N$. Temos que $1 \in H$ pois, para todo $n \in \N$, vale $n \cdot 1 = n \in \N$. Agora, se $n \cdot m \in H$, então $n \cdot (m+1) \in H$ pois $n \cdot (m+1) = n \cdot m + n \cdot 1$ e, como vimos, a soma de dois naturais é um natural. Com isso, $H$ é indutivo e, portanto, cumpre $\N \subseteq H$, donde $H = \N$. \itemproof
-            \item Definindo $A := \{ n \in \N : n \geq 1\}$, temos $A \subseteq \N$. Claramente $1 \in A$ pois $1 \geq 1$. Agora, se $n \in A$, então $1>0 \Rightarrow n+1 > n \geq 1 \Rightarrow n+1 \geq 1$, de modo que $n+1 \in A$. Com isso, $A$ é indutivo e, portanto, cumpre $\N \subseteq A$, donde $A = \N$. \itemproof
-            \item Suponha que $\N$ seja limitado superiormente. Como $\N \subsetneq \R$, existe $a := \sup{\N}$. Como $a-1$ não é cota superior de $\N$, existe $n \in \N$ tal que $a-1 < n$. Mas, daí, $a < n+1 \in \N$, absurdo! Em particular, concluímos que para todo $x \in \R$ existe $n \in \N$ tal que $n > x$. \itemproof
+            \item Definindo $A := \{ n \in \N : n \geq 1\}$, temos $A \subseteq \N$. Claramente $1 \in A$ pois $1 \geq 1$. Agora, se $n \in A$, então $1>0 \Rightarrow n+1 > n \geq 1 \Rightarrow n+1 \geq 1$, de modo que $n+1 \in A$. Com isso $\N \subseteq A$, donde $A = \N$. \itemproof
+            \item Suponha que $\N$ seja limitado superiormente. Como $\N \subsetneq \R$, existe $a := \sup{\N}$. Como $a-1$ não é cota superior de $\N$, existe $n \in \N$ tal que $a-1 < n$, donde $a < n+1 \in \N$, absurdo! Em particular, concluímos que para todo $x \in \R$ existe $n \in \N$ tal que $n > x$. \itemproof
             \item Pelo item anterior, para o número $\frac{b}{a}$ existe $n \in \N$ tal que $n > \frac{b}{a}$, e sendo $a>0$, temos $na>b$. \itemproof
             \item Basta colocar $b=1$ e $a= \epsilon$ no item anterior: existe $n \in \N$ tal que $n \cdot \epsilon > 1$, donde $\frac{1}{n} < \epsilon$. \itemproof
             \item Se fosse $x > a$, então a propriedade arquimediana nos diz que existe $n \in \N$ tal que $n \cdot (x-a) > y$, donde $x > a + \frac{y}{n}$, o que contraria a hipótese. Logo, só pode ser $x=a$. \itemproof
@@ -244,7 +271,7 @@
         \begin{enumerate}[leftmargin=*, align=left, label=\textbf{(\alph*)}]
             \item Para qualquer $n \in \N$, ou $n-1=0$ ou $n-1 \in \N$.
             \item Para quaisquer $m,n \in \N$, com $m<n$, temos $n-m \in \N$.
-            \item Para qualquer $n \in \N$, não existe um $m \in \N$ para o qual $n < m < n+1$.
+            \item Para todo $n \in \N$ não existe $m \in \N$ para o qual $n < m < n+1$.
         \end{enumerate}
 \end{lem}
 
